@@ -1,6 +1,14 @@
 package ru.sfedu.nanicky.getpetshome.db.protocol.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy= InheritanceType.JOINED)
 public class IdEntity {
+    @Id
     protected long id;
 
     public long getId() {

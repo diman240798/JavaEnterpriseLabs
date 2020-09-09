@@ -56,3 +56,4 @@ lint/tmp/
 /app/schemas/
 /target
 /tmpTests
+/ru.sfedu.nanicky.getpetshome__test.db.mv.db

@@ -2,6 +2,7 @@ package ru.sfedu.nanicky.getpetshome;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.sfedu.nanicky.getpetshome.db.sql.dao.JdbcDao;
 
 public class Main {
 

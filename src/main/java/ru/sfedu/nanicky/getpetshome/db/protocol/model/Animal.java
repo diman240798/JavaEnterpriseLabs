@@ -1,9 +1,17 @@
 package ru.sfedu.nanicky.getpetshome.db.protocol.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.List;
 
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Animal extends IdEntity {
+
     private String name;
+
+    @ElementCollection
     private List<Long> photoIds;
 
     public Animal() {
@@ -39,9 +47,9 @@ public class Animal extends IdEntity {
 
         Animal animal = (Animal) o;
 
-        if (getId() != animal.getId()) return false;
-        if (!getName().equals(animal.getName())) return false;
-        return getPhotoIds().equals(animal.getPhotoIds());
+        return (getId() == animal.getId()) &&
+                (getName().equals(animal.getName())) &&
+                animal.getPhotoIds().containsAll(getPhotoIds());
     }
 
     @Override

@@ -38,14 +38,4 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
         return insertAll(items);
     }
 
-    @Override
-    public boolean upsert(V v) {
-        boolean alredyInDb = getAll().stream()
-                .anyMatch(it -> it.getId() == v.getId());
-        if (alredyInDb) {
-            return update(v);
-        } else {
-            return insert(v);
-        }
-    }
 }
