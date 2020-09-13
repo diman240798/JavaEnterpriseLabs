@@ -1,4 +1,6 @@
-package ru.sfedu.nanicky.getpetshome.db.protocol.model;
+package ru.sfedu.nanicky.getpetshome.db.protocol.model.adress;
+
+import ru.sfedu.nanicky.getpetshome.db.protocol.model.IdEntity;
 
 public class GeoAddress extends IdEntity {
     private double latitude;

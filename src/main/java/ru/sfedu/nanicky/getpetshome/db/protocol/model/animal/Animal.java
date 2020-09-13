@@ -1,4 +1,6 @@
-package ru.sfedu.nanicky.getpetshome.db.protocol.model;
+package ru.sfedu.nanicky.getpetshome.db.protocol.model.animal;
+
+import ru.sfedu.nanicky.getpetshome.db.protocol.model.IdEntity;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;

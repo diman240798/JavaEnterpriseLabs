@@ -1,4 +1,6 @@
-package ru.sfedu.nanicky.getpetshome.db.protocol.model;
+package ru.sfedu.nanicky.getpetshome.db.protocol.model.photo;
+
+import ru.sfedu.nanicky.getpetshome.db.protocol.model.IdEntity;
 
 public class Photo extends IdEntity {
     private String path;

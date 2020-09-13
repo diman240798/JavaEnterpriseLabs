@@ -3,7 +3,7 @@ package ru.sfedu.nanicky.getpetshome.db.sql.dao;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ru.sfedu.nanicky.getpetshome.db.protocol.model.Animal;
+import ru.sfedu.nanicky.getpetshome.db.protocol.model.animal.Animal;
 
 import java.util.Arrays;
 import java.util.List;

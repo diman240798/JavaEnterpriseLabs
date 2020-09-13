@@ -1,4 +1,6 @@
-package ru.sfedu.nanicky.getpetshome.db.protocol.model;
+package ru.sfedu.nanicky.getpetshome.db.protocol.model.user;
+
+import ru.sfedu.nanicky.getpetshome.db.protocol.model.IdEntity;
 
 import java.util.List;
 
