@@ -9,7 +9,7 @@ public class ConfigurationUtil {
 
     private String defaultConfigPath;
 
-    private volatile Properties configuration = new Properties();
+    private Properties configuration = new Properties();
 
 
     public ConfigurationUtil(String configPath) throws IllegalArgumentException {
