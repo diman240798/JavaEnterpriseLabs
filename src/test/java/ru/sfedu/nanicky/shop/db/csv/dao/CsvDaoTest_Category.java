@@ -39,9 +39,10 @@ public class CsvDaoTest_Category {
     @Test
     public void getAll() throws IOException {
         Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category pyke = new Category(1, Constants.CATEGORY_FOOD);
 
         dao.insert(mike);
-        dao.insert(mike);
+        dao.insert(pyke);
         List<Category> all = dao.getAll();
 
         Assert.assertEquals(2, all.size());
@@ -87,7 +88,7 @@ public class CsvDaoTest_Category {
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(mike, fromDb.get(0));
 
-        Category newMike = new Category(0, Constants.CATEGORY_FOOD);
+        Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
 
         dao.update(newMike);
 

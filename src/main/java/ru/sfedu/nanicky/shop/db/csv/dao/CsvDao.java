@@ -19,6 +19,7 @@ public class CsvDao<V extends IdEntity> extends TextDao<V> {
     }
 
     public List<V> getAll() {
+        if (!dbFile.exists()) return new ArrayList<>();
         try (Reader reader = new FileReader(dbFile)) {
             HeaderColumnNameMappingStrategy<V> ms = new HeaderColumnNameMappingStrategy<V>();
             ms.setType(clazz);

@@ -35,7 +35,7 @@ public class HibernateDao<V extends IdEntity> implements BaseDao<V> {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<V> query = session.createQuery("from " + clazzName + " where id=" + id);
             V item = query.uniqueResult();
-            return Optional.of(item);
+            return Optional.ofNullable(item);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
