@@ -2,7 +2,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.sfedu.nanicky.getpetshome.Main;
+import ru.sfedu.nanicky.shop.Main;
 
 
 public class DummyTest {

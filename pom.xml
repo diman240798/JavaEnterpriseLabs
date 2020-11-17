@@ -49,7 +49,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.sfedu.nanicky.getpetshome.Main</mainClass>
+                            <mainClass>ru.sfedu.nanicky.shop.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
