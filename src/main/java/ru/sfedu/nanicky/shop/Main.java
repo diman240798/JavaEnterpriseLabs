@@ -1,6 +1,7 @@
 package ru.sfedu.nanicky.shop;
 
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.sfedu.nanicky.shop.api.cli.CliManager;
@@ -13,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.INFO);
         LOG.debug("Init");
 
         ConfigurationUtil configurationUtil = new ConfigurationUtil("/en/strings.properties");

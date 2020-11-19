@@ -2,6 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -31,5 +32,29 @@ public class Receipt extends IdEntity {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Receipt)) return false;
+        if (!super.equals(o)) return false;
+        Receipt receipt = (Receipt) o;
+        return Double.compare(receipt.getTotalPrice(), getTotalPrice()) == 0 &&
+                Objects.equals(getProductsAndPrices(), receipt.getProductsAndPrices());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getProductsAndPrices(), getTotalPrice());
+    }
+
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "productsAndPrices='" + productsAndPrices + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", id=" + id +
+                '}';
     }
 }

@@ -35,8 +35,6 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
         return insertAll(items);
     }
 
-    protected abstract boolean insertAll(List<V> items);
-
     public boolean update(V v) {
         List<V> items = getAll().stream()
                 .filter(it -> it.getId() != v.getId())

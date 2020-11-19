@@ -109,4 +109,21 @@ public class HibernateDao<V extends IdEntity> implements BaseDao<V> {
             session.close();
         }
     }
+
+    @Override
+    public boolean insertAll(List<V> items) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(items);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
 }

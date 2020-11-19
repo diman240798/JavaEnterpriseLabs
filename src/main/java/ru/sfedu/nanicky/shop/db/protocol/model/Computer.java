@@ -2,6 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -15,13 +16,13 @@ public class Computer extends Product {
 
     public Computer() {}
 
-    public Computer(long id, String name, double weight, double price, String processorName, int processorPower, String graphicsName, int graphicsVolume, boolean integratedWifi, boolean integratedBluetooth) {
-        this(id, name, weight, price, processorName, processorPower, graphicsName, graphicsVolume);
+    public Computer(long id, String name, double weight, double price, String category, String processorName, int processorPower, String graphicsName, int graphicsVolume, boolean integratedWifi, boolean integratedBluetooth) {
+        this(id, name, weight, price, category, processorName, processorPower, graphicsName, graphicsVolume);
         this.integratedWifi = integratedWifi;
         this.integratedBluetooth = integratedBluetooth;
     }
-    public Computer(long id, String name, double weight, double price, String processorName, int processorPower, String graphicsName, int graphicsVolume) {
-        super(id, name, weight, price);
+    public Computer(long id, String name, double weight, double price, String category, String processorName, int processorPower, String graphicsName, int graphicsVolume) {
+        super(id, name, weight, price, category);
         this.processorName = processorName;
         this.processorPower = processorPower;
         this.graphicsName = graphicsName;
@@ -74,5 +75,41 @@ public class Computer extends Product {
 
     public void setIntegratedBluetooth(boolean integratedBluetooth) {
         this.integratedBluetooth = integratedBluetooth;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Computer)) return false;
+        if (!super.equals(o)) return false;
+        Computer computer = (Computer) o;
+        return getProcessorPower() == computer.getProcessorPower() &&
+                getGraphicsVolume() == computer.getGraphicsVolume() &&
+                isIntegratedWifi() == computer.isIntegratedWifi() &&
+                isIntegratedBluetooth() == computer.isIntegratedBluetooth() &&
+                Objects.equals(getProcessorName(), computer.getProcessorName()) &&
+                Objects.equals(getGraphicsName(), computer.getGraphicsName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getProcessorName(), getProcessorPower(), getGraphicsName(), getGraphicsVolume(), isIntegratedWifi(), isIntegratedBluetooth());
+    }
+
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "processorName='" + processorName + '\'' +
+                ", processorPower=" + processorPower +
+                ", graphicsName='" + graphicsName + '\'' +
+                ", graphicsVolume=" + graphicsVolume +
+                ", integratedWifi=" + integratedWifi +
+                ", integratedBluetooth=" + integratedBluetooth +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

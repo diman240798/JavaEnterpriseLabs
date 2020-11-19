@@ -2,8 +2,11 @@ package ru.sfedu.nanicky.shop.app;
 
 import ru.sfedu.nanicky.shop.db.csv.dao.CsvDao;
 import ru.sfedu.nanicky.shop.db.hibernate.dao.HibernateDao;
+import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 import ru.sfedu.nanicky.shop.db.xml.dao.XmlDao;
+
+import java.util.List;
 
 public class Reposotiries {
     public final CsvDao<Category> categoryCsvDao = new CsvDao<>(Category.class, Constants.CATEGORY_CSV_FILE);

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -42,5 +43,26 @@ public class Bucket extends IdEntity {
         return false;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bucket)) return false;
+        Bucket bucket = (Bucket) o;
+        return Objects.equals(getSession(), bucket.getSession()) &&
+                Objects.equals(getProducts(), bucket.getProducts());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSession(), getProducts());
+    }
+
+    @Override
+    public String toString() {
+        return "Bucket{" +
+                "session='" + session + '\'' +
+                ", products='" + products + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

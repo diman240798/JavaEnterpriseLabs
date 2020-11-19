@@ -49,7 +49,7 @@ public class Constants {
     public static final List<String> GET_DELETE_ACTIONS = Arrays.asList(Constants.GET_ALL, Constants.GET, Constants.DELETE);
 
     public static final String GET = "get";
-    public static final String GET_ALL = "getAll";
+    public static final String GET_ALL = "get_all";
     public static final String INSERT = "insert";
     public static final String UPDATE = "update";
     public static final String DELETE = "delete";

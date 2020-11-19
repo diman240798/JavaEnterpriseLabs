@@ -2,6 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -13,12 +14,12 @@ public class Fridge extends Product {
 
     public Fridge() {}
 
-    public Fridge(long id, String name, double weight, double price, int volume, String color, int power, boolean noFrost) {
-        this(id, name, weight, price, volume, color, power);
+    public Fridge(long id, String name, double weight, double price, String category, int volume, String color, int power, boolean noFrost) {
+        this(id, name, weight, price, category, volume, color, power);
         this.noFrost = noFrost;
     }
-    public Fridge(long id, String name, double weight, double price, int volume, String color, int power) {
-        super(id, name, weight, price);
+    public Fridge(long id, String name, double weight, double price, String category, int volume, String color, int power) {
+        super(id, name, weight, price, category);
         this.volume = volume;
         this.color = color;
         this.power = power;
@@ -54,5 +55,37 @@ public class Fridge extends Product {
 
     public void setNoFrost(boolean noFrost) {
         this.noFrost = noFrost;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fridge)) return false;
+        if (!super.equals(o)) return false;
+        Fridge fridge = (Fridge) o;
+        return getVolume() == fridge.getVolume() &&
+                getPower() == fridge.getPower() &&
+                isNoFrost() == fridge.isNoFrost() &&
+                Objects.equals(getColor(), fridge.getColor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getVolume(), getColor(), getPower(), isNoFrost());
+    }
+
+    @Override
+    public String toString() {
+        return "Fridge{" +
+                "volume=" + volume +
+                ", color='" + color + '\'' +
+                ", power=" + power +
+                ", noFrost=" + noFrost +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

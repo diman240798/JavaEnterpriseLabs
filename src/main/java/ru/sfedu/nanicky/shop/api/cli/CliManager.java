@@ -2,6 +2,7 @@ package ru.sfedu.nanicky.shop.api.cli;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.sfedu.nanicky.shop.api.initializer.Initializer;
 import ru.sfedu.nanicky.shop.api.processor.*;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Reposotiries;
@@ -30,9 +31,9 @@ public class CliManager {
         String dataProvider = args[0];
 
         if (args[0].equals(Constants.INIT_ALL)) {
-            initAll();
+            Initializer.initAll(reposotiries);
         } else if (args[1].equals(Constants.INIT)) {
-            initForProvider(dataProvider);
+            Initializer.initFor(dataProvider, reposotiries);
         }
 
 
@@ -171,11 +172,4 @@ public class CliManager {
         return sessionDao;
     }
 
-    private void initForProvider(String dataProvider) {
-
-    }
-
-    private void initAll() {
-        LOG.info("Init all");
-    }
 }

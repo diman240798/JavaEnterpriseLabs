@@ -36,4 +36,9 @@ public class Category extends IdEntity {
     public int hashCode() {
         return Objects.hash(getName());
     }
+
+    @Override
+    public String toString() {
+        return "{ id: " + id + ",name: " + name +"}";
+    }
 }
