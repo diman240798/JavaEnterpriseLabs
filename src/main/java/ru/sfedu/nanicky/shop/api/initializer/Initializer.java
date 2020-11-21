@@ -23,17 +23,17 @@ public class Initializer {
 
 
     private final static List<Category> CATEGORIES = Arrays.asList(
-            new Category(0, Constants.CATEGORY_FOOD),
+            new Category(0, Constants.CATEGORY_SODA),
             new Category(1, Constants.CATEGORY_COMPUTER),
-            new Category(2, Constants.CATEGORY_APPLIANCES)
+            new Category(2, Constants.CATEGORY_FRIDGE)
     );
 
     private final static List<Fridge> FRIDGES = Arrays.asList(
-            new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_APPLIANCES, 50, "white", 300),
-            new Fridge(1, "Toshiba a52", 50, 60650, Constants.CATEGORY_APPLIANCES, 100, "gray", 600, true),
-            new Fridge(2, "Samsung wqe123", 30, 45300, Constants.CATEGORY_APPLIANCES, 60, "pink", 500, true),
-            new Fridge(3, "Beko tr44", 30, 42300, Constants.CATEGORY_APPLIANCES, 60, "black", 450),
-            new Fridge(4, "Atlant xm435", 30, 50300, Constants.CATEGORY_APPLIANCES, 70, "yellow", 600)
+            new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300),
+            new Fridge(1, "Toshiba a52", 50, 60650, Constants.CATEGORY_FRIDGE, 100, "gray", 600, true),
+            new Fridge(2, "Samsung wqe123", 30, 45300, Constants.CATEGORY_FRIDGE, 60, "pink", 500, true),
+            new Fridge(3, "Beko tr44", 30, 42300, Constants.CATEGORY_FRIDGE, 60, "black", 450),
+            new Fridge(4, "Atlant xm435", 30, 50300, Constants.CATEGORY_FRIDGE, 70, "yellow", 600)
     );
 
     private final static List<Computer> COMPUTERS = Arrays.asList(
@@ -45,19 +45,19 @@ public class Initializer {
     );
 
     private final static List<Soda> SODA = Arrays.asList(
-            new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_FOOD, "orange", true),
-            new Soda(1, "Kind Juice", 1, 70, Constants.CATEGORY_FOOD, "apple"),
-            new Soda(2, "Rich Juice", 1, 110, Constants.CATEGORY_FOOD, "strawberry"),
-            new Soda(3, "Limonella", 2.2, 52500, Constants.CATEGORY_FOOD, "lemon", true),
-            new Soda(4, "Mirinda Blue", 2.2, 52500, Constants.CATEGORY_FOOD, "blueberry-lemon", true)
+            new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true),
+            new Soda(1, "Kind Juice", 1, 70, Constants.CATEGORY_SODA, "apple"),
+            new Soda(2, "Rich Juice", 1, 110, Constants.CATEGORY_SODA, "strawberry"),
+            new Soda(3, "Limonella", 2.2, 52500, Constants.CATEGORY_SODA, "lemon", true),
+            new Soda(4, "Mirinda Blue", 2.2, 52500, Constants.CATEGORY_SODA, "blueberry-lemon", true)
     );
 
     public static void initFor(String dataProvider, Reposotiries reposotiries) {
         LOG.info("Init for {}", dataProvider);
-        BaseDao<Category> categoryDao = new CategoryProcessor(reposotiries).processDataProvider(dataProvider);
-        BaseDao<Fridge> fridgeDao = new FridgeProcessor(reposotiries).processDataProvider(dataProvider);
-        BaseDao<Computer> computerDao = new ComputerProcessor(reposotiries).processDataProvider(dataProvider);
-        BaseDao<Soda> sodaDao = new SodaProcessor(reposotiries).processDataProvider(dataProvider);
+        BaseDao<Category> categoryDao = new CategoryProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+        BaseDao<Fridge> fridgeDao = new FridgeProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+        BaseDao<Computer> computerDao = new ComputerProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+        BaseDao<Soda> sodaDao = new SodaProcessor(reposotiries).getDaoForDataProvider(dataProvider);
 
         categoryDao.insertAll(CATEGORIES);
         fridgeDao.insertAll(FRIDGES);
@@ -72,7 +72,7 @@ public class Initializer {
         initFor(Constants.XML, reposotiries);
         initFor(Constants.CSV, reposotiries);
 //        initFor(Constants.JDBC, reposotiries);
-        initFor(Constants.HIBERNATE, reposotiries);
+//        initFor(Constants.HIBERNATE, reposotiries);
 
     }
 }

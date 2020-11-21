@@ -14,7 +14,7 @@ public class ComputerProcessor extends Processor<Computer> {
     }
 
     @Override
-    public BaseDao<Computer> processDataProvider(String dataProvider) {
+    public BaseDao<Computer> getDaoForDataProvider(String dataProvider) {
         BaseDao<Computer> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.computerXmlDao;
@@ -45,9 +45,9 @@ public class ComputerProcessor extends Processor<Computer> {
         if (split.length > 8) {
             boolean wifiEnabled = Boolean.parseBoolean(split[8]);
             boolean bluetoothEnabled = Boolean.parseBoolean(split[9]);
-            return new Computer(id, name, weight, price, processorName, processorPower, graphicsName, graphicsVolume, wifiEnabled, bluetoothEnabled);
+            return new Computer(id, name, weight, price, Constants.CATEGORY_COMPUTER, processorName, processorPower, graphicsName, graphicsVolume, wifiEnabled, bluetoothEnabled);
         }
 
-        return new Computer(id, name, weight, price, processorName, processorPower, graphicsName, graphicsVolume);
+        return new Computer(id, name, weight, price, Constants.CATEGORY_COMPUTER, processorName, processorPower, graphicsName, graphicsVolume);
     }
 }

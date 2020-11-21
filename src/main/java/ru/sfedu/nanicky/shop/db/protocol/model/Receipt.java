@@ -51,10 +51,9 @@ public class Receipt extends IdEntity {
 
     @Override
     public String toString() {
-        return "Receipt{" +
-                "productsAndPrices='" + productsAndPrices + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", id=" + id +
-                '}';
+        return "Receipt: \n"  +
+                "id=" + id + "\n" +
+                "productsAndPrices:\n" + productsAndPrices + "\n" +
+                "totalPrice=" + totalPrice + "\n";
     }
 }

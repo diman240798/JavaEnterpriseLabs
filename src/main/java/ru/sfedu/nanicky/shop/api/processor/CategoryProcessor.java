@@ -14,7 +14,7 @@ public class CategoryProcessor extends Processor<Category> {
     }
 
     @Override
-    public BaseDao<Category> processDataProvider(String dataProvider) {
+    public BaseDao<Category> getDaoForDataProvider(String dataProvider) {
         BaseDao<Category> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.categoryXmlDao;

@@ -60,3 +60,8 @@ lint/tmp/
 /target
 /tmpTests
 /ru.sfedu.nanicky.getpetshome__test.db.mv.db
+/category.csv
+/check.csv
+/computer.csv
+/fridge.csv
+/soda.csv

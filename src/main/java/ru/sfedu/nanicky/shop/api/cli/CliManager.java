@@ -9,6 +9,7 @@ import ru.sfedu.nanicky.shop.app.Reposotiries;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -34,9 +35,13 @@ public class CliManager {
             Initializer.initAll(reposotiries);
         } else if (args[1].equals(Constants.INIT)) {
             Initializer.initFor(dataProvider, reposotiries);
+        } else {
+            workoutModel(dataProvider, args);
         }
 
+    }
 
+    private void workoutModel(String dataProvider, String[] args) {
         String model = args[1];
 
         if (model.equals(Constants.CATEGORY)) {
@@ -57,8 +62,62 @@ public class CliManager {
         } else if (model.equals(Constants.START)) {
             startSession(dataProvider);
         } else if (model.equals(Constants.FINISH)) {
-            finishSession(dataProvider, args[3]);
-        } else if (model.equals(Constants.BUCKET)) {
+            finishSession(dataProvider, args[2]);
+        } else if (model.equals(Constants.ADD_PRODUCT_TO_BUCKET)) {
+            BaseDao<Bucket> bucketDao = getBucketDao(dataProvider);
+            String userSession = args[2];
+            BaseDao<Session> sessionDao = getSessionDao(dataProvider);
+            Optional<Session> sessionOption = sessionDao.getAll().stream()
+                    .filter(it -> it.getSession().equals(userSession))
+                    .findFirst();
+            if (sessionOption.isPresent()) {
+                LOG.info("Found session");
+                long productId = Long.parseLong(args[3]);
+                String userCategory = args[4];
+
+                BaseDao<Category> categoryBaseDao = new CategoryProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+                Optional<Category> categoryOption = categoryBaseDao.getAll().stream().filter(it -> it.getName().equals(userCategory)).findFirst();
+                if (!categoryOption.isPresent()) {
+                    LOG.info("No such category: {}", userCategory);
+                    return;
+                }
+                Category category = categoryOption.get();
+
+                BaseDao productDao;
+                if (userCategory.equals(Constants.CATEGORY_SODA)) {
+                    productDao = new SodaProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+                } else if (userCategory.equals(Constants.CATEGORY_FRIDGE)) {
+                    productDao = new FridgeProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+                } else if (userCategory.equals(Constants.COMPUTER)) {
+                    productDao = new ComputerProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+                } else {
+                    LOG.info("Unknown category: {}", userCategory);
+                    return;
+                }
+                Optional productOptional = productDao.getById(productId);
+                if (productOptional.isPresent()) {
+                    Object product = productOptional.get();
+                    LOG.info("Found product: {}", product);
+                    List<Bucket> buckets = bucketDao.getAll();
+                    Optional<Bucket> bucketOption = buckets.stream()
+                            .filter(it -> it.getSession().equals(userSession))
+                            .findFirst();
+                    Bucket bucket = bucketOption.orElseGet(() -> {
+                        long bucketId = buckets.stream().sorted(Comparator.comparingLong(IdEntity::getId)).map(IdEntity::getId).findFirst().orElse(-1L) + 1L;
+                        return new Bucket(bucketId, userSession);
+                    });
+
+                    bucket.addProduct(productId, category);
+                    bucketDao.upsert(bucket);
+                    LOG.info("Product added succesfully");
+
+                } else {
+                    LOG.info("Product with such id was not found: {}", userSession);
+                }
+
+            } else {
+                LOG.info("Could not find session with key: {}", userSession);
+            }
 
         } else {
             throw new RuntimeException("Incorrect model: " + model);
@@ -81,7 +140,7 @@ public class CliManager {
             if (bucketOption.isPresent()) {
                 LOG.info("Found bucket");
                 Bucket bucket = bucketOption.get();
-                List<String> products = bucket.getProducts();
+                List<String> products = bucket.getProductsList();
 
                 LOG.info("Got bucket products. Counting check.");
 
@@ -89,7 +148,7 @@ public class CliManager {
                 AtomicReference<Double> totalPrice = new AtomicReference<>(0.0);
 
                 products.forEach(productStr -> {
-                    String[] split = productStr.split(Bucket.PRODUCTS_SEPARATOR);
+                    String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
                     String category = split[0];
                     long productId = Long.parseLong(split[1]);
                     BaseDao<Product> prodDao =  getProductDaoByCategory(category, dataProvider, reposotiries);
@@ -105,6 +164,15 @@ public class CliManager {
                 Receipt receipt = new Receipt(checkId, checkTextSb.toString(), totalPrice.get());
                 receiptDao.insert(receipt);
                 LOG.info("Your receipt is: \n{}", receipt);
+
+                bucketDao.delete(bucket);
+                sessionDao.delete(sessionOption.get());
+
+            }
+            else {
+                LOG.info("You have not added single product to bucket. No check will be printed.");
+                sessionDao.delete(sessionOption.get());
+                LOG.info("Session closed");
             }
         } else {
             LOG.info("Could not find session with key: {}", userSession);
@@ -113,19 +181,19 @@ public class CliManager {
     }
 
     private BaseDao<Receipt> getReceiptDao(String dataProvider, Reposotiries reposotiries) {
-        BaseDao<Receipt> receiptBaseDao = new CheckProcessor(reposotiries).processDataProvider(dataProvider);
+        BaseDao<Receipt> receiptBaseDao = new CheckProcessor(reposotiries).getDaoForDataProvider(dataProvider);
         return receiptBaseDao;
     }
 
     private BaseDao<Product> getProductDaoByCategory(String category, String dataProvider, Reposotiries reposotiries) {
         if (category.equals(Constants.FRIDGE)) {
-            BaseDao dao = new FridgeProcessor(reposotiries).processDataProvider(dataProvider);
+            BaseDao dao = new FridgeProcessor(reposotiries).getDaoForDataProvider(dataProvider);
             return dao;
         } else if (category.equals(Constants.SODA)) {
-            BaseDao dao = new SodaProcessor(reposotiries).processDataProvider(dataProvider);
+            BaseDao dao = new SodaProcessor(reposotiries).getDaoForDataProvider(dataProvider);
             return dao;
         } else if (category.equals(Constants.COMPUTER)) {
-            BaseDao dao = new ComputerProcessor(reposotiries).processDataProvider(dataProvider);
+            BaseDao dao = new ComputerProcessor(reposotiries).getDaoForDataProvider(dataProvider);
             return dao;
         } else {
             throw new RuntimeException("Unknown category: " + category);

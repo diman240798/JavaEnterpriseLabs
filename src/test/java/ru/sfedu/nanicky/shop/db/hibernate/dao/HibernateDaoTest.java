@@ -20,7 +20,7 @@ public class HibernateDaoTest {
     public void upsert() {
         HibernateDao<Category> dao = new HibernateDao<>(Category.class.getName());
 
-        Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category mike = new Category(0, Constants.CATEGORY_SODA);
         Category pyke = new Category(0, Constants.CATEGORY_COMPUTER);
 
         dao.upsert(mike);
@@ -39,7 +39,7 @@ public class HibernateDaoTest {
     public void getAll() {
         HibernateDao<Category> dao = new HibernateDao<>(Category.class.getName());
 
-        Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category mike = new Category(0, Constants.CATEGORY_SODA);
         Category mike1 = new Category(0, Constants.CATEGORY_COMPUTER);
 
         dao.insert(mike);
@@ -53,7 +53,7 @@ public class HibernateDaoTest {
     public void delete() {
         HibernateDao<Category> dao = new HibernateDao<>(Category.class.getName());
 
-        Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category mike = new Category(0, Constants.CATEGORY_SODA);
 
         dao.insert(mike);
 
@@ -79,7 +79,7 @@ public class HibernateDaoTest {
     public void update() {
         HibernateDao<Category> dao = new HibernateDao<>(Category.class.getName());
 
-        Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category mike = new Category(0, Constants.CATEGORY_SODA);
         Category pyke = new Category(0, Constants.CATEGORY_COMPUTER);
 
         dao.insert(mike);
@@ -98,7 +98,7 @@ public class HibernateDaoTest {
     public void insert() {
         HibernateDao<Category> dao = new HibernateDao<>(Category.class.getName());
 
-        Category mike = new Category(0, Constants.CATEGORY_FOOD);
+        Category mike = new Category(0, Constants.CATEGORY_SODA);
 
         dao.insert(mike);
 

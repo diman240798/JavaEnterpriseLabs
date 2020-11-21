@@ -13,7 +13,7 @@ public class FridgeProcessor extends Processor<Fridge> {
     }
 
     @Override
-    public BaseDao<Fridge> processDataProvider(String dataProvider) {
+    public BaseDao<Fridge> getDaoForDataProvider(String dataProvider) {
         BaseDao<Fridge> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.fridgeXmlDao;
@@ -42,9 +42,9 @@ public class FridgeProcessor extends Processor<Fridge> {
 
         if (split.length > 7) {
             boolean noFrost = Boolean.parseBoolean(split[7]);
-            return new Fridge(id, name, weight, price, volume, color, power, noFrost);
+            return new Fridge(id, name, weight, price, Constants.CATEGORY_FRIDGE, volume, color, power, noFrost);
         }
 
-        return new Fridge(id, name, weight, price, volume, color, power);
+        return new Fridge(id, name, weight, price, Constants.CATEGORY_FRIDGE, volume, color, power);
     }
 }

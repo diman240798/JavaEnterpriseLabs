@@ -14,7 +14,7 @@ public abstract class Processor<M extends IdEntity> {
 
     public void processBaseApi(String[] args, List<String> actions) {
         String dataProvider = args[0];
-        BaseDao<M> categoryDao = processDataProvider(dataProvider);
+        BaseDao<M> categoryDao = getDaoForDataProvider(dataProvider);
         String method = args[2];
 
 
@@ -66,7 +66,7 @@ public abstract class Processor<M extends IdEntity> {
     }
 
 
-    public abstract BaseDao<M> processDataProvider(String dataProvider);
+    public abstract BaseDao<M> getDaoForDataProvider(String dataProvider);
 
     protected abstract M getModel(String modelStr);
 }

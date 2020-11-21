@@ -1,6 +1,6 @@
 package ru.sfedu.nanicky.shop.db.protocol.model;
 
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
+import ru.sfedu.nanicky.shop.app.Constants;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -14,11 +14,9 @@ public class Bucket extends IdEntity {
     private String session;
     private String products = "";
 
-    public static final String PRODUCTS_SEPARATOR = ":";
-    private static final String PRODUCT_SEPATOR = ", ";
+    public Bucket() {}
 
-
-    public Bucket(int id, String session) {
+    public Bucket(long id, String session) {
         setId(id);
         this.session = session;
     }
@@ -27,20 +25,21 @@ public class Bucket extends IdEntity {
         return session;
     }
 
-    public List<String> getProducts() {
-        return Arrays.asList(products.split(PRODUCT_SEPATOR));
+    public List<String> getProductsList() {
+        return Arrays.asList(products.split(Constants.PRODUCTS_SEPATOR));
     }
 
-    public boolean addProduct(int productId, Category category, BaseDao productDao) {
-        if (productDao.getById(productId) != null) {
-            if (products.length() > 0) {
-                products += PRODUCT_SEPATOR + category + PRODUCTS_SEPARATOR + productId;
-            } else {
-                products = category + PRODUCTS_SEPARATOR + productId;
-            }
-            return true;
+    public String getProducts() {
+        return products;
+    }
+
+    public void addProduct(long productId, Category category) {
+        String categoryName = category.getName();
+        if (products.length() > 0) {
+            products = products + Constants.PRODUCTS_SEPATOR + categoryName + Constants.PRODUCT_CATEGORY_SEPARATOR + productId;
+        } else {
+            products = categoryName + Constants.PRODUCT_CATEGORY_SEPARATOR + productId;
         }
-        return false;
     }
 
     @Override
@@ -49,12 +48,12 @@ public class Bucket extends IdEntity {
         if (!(o instanceof Bucket)) return false;
         Bucket bucket = (Bucket) o;
         return Objects.equals(getSession(), bucket.getSession()) &&
-                Objects.equals(getProducts(), bucket.getProducts());
+                Objects.equals(products, bucket.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSession(), getProducts());
+        return Objects.hash(getSession(), products, id);
     }
 
     @Override

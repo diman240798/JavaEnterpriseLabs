@@ -14,7 +14,7 @@ public class SodaProcessor extends Processor<Soda> {
     }
 
     @Override
-    public BaseDao<Soda> processDataProvider(String dataProvider) {
+    public BaseDao<Soda> getDaoForDataProvider(String dataProvider) {
         BaseDao<Soda> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.sodaXmlDao;
@@ -40,9 +40,9 @@ public class SodaProcessor extends Processor<Soda> {
         String flavour = split[4];
         if (split.length > 5) {
             boolean sparkled = Boolean.parseBoolean(split[5]);
-            return new Soda(id, name, weight, price, flavour, sparkled);
+            return new Soda(id, name, weight, price, Constants.CATEGORY_SODA, flavour, sparkled);
         } else {
-            return new Soda(id, name, weight, price, flavour);
+            return new Soda(id, name, weight, price, Constants.CATEGORY_SODA, flavour);
         }
     }
 }

@@ -56,9 +56,13 @@ public class Constants {
 
     public static final String START = "start";
     public static final String FINISH = "finish";
+    public static final String ADD_PRODUCT_TO_BUCKET = "add_product";
 
-    public static final String CATEGORY_APPLIANCES = "appliances";
-    public static final String CATEGORY_FOOD = "food";
+    public static final String CATEGORY_FRIDGE = "fridge";
+    public static final String CATEGORY_SODA = "soda";
     public static final String CATEGORY_COMPUTER = "computer";
+
+    public static final String PRODUCT_CATEGORY_SEPARATOR = ":";
+    public static final String PRODUCTS_SEPATOR = "-";
 
 }

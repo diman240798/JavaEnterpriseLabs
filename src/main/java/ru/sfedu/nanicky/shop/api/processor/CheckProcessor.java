@@ -14,7 +14,7 @@ public class CheckProcessor extends Processor<Receipt> {
     }
 
     @Override
-    public BaseDao<Receipt> processDataProvider(String dataProvider) {
+    public BaseDao<Receipt> getDaoForDataProvider(String dataProvider) {
         BaseDao<Receipt> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.checkXmlDao;
