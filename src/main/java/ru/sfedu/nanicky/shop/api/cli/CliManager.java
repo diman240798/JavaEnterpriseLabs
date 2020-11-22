@@ -220,8 +220,11 @@ public class CliManager {
         BaseDao<Session> sessionDao = getSessionDao(dataProvider);
         long id = new Random().nextLong();
         Session session = new Session(id);
-        sessionDao.insert(session);
-        LOG.info("Your session key:  {}", session.getSession());
+        if (sessionDao.insert(session)) {
+            LOG.info("Your session key:  {}", session.getSession());
+        } else {
+            LOG.info("Error creating session!");
+        }
     }
 
     private BaseDao<Session> getSessionDao(String dataProvider) {

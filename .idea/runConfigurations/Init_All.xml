@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Init All" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
+    <module name="Javaarchitechurestudy" />
+    <option name="PROGRAM_PARAMETERS" value="init_all" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

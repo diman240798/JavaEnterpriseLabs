@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="XML get fridges" type="Application" factoryName="Application">
+  <configuration default="false" name="CSV Add Product" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
     <module name="Javaarchitechurestudy" />
-    <option name="PROGRAM_PARAMETERS" value="xml fridge get_all" />
+    <option name="PROGRAM_PARAMETERS" value="csv add_product 388fb7dd-3377-4ce9-9e79-e6675b7be412 1 food" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

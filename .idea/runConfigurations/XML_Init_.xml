@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="XML Init " type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
+    <module name="Javaarchitechurestudy" />
+    <option name="PROGRAM_PARAMETERS" value="xml init" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -8,10 +8,15 @@ import java.util.UUID;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class Session extends IdEntity {
-    private final String session = UUID.randomUUID().toString();
-    private final long date = System.currentTimeMillis();
+    private String session = UUID.randomUUID().toString();
+    private long date = System.currentTimeMillis();
 
     public Session() {}
+
+    public Session(long id, String session) {
+        setId(id);
+        setSession(session);
+    }
 
     public Session(long id) {
         setId(id);
@@ -19,6 +24,14 @@ public class Session extends IdEntity {
 
     public String getSession() {
         return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public long getDate() {
