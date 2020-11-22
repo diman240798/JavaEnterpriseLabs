@@ -5,11 +5,11 @@ import ru.sfedu.nanicky.shop.app.Reposotiries;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Receipt;
 
-public class CheckProcessor extends Processor<Receipt> {
+public class ReceiptProcessor extends Processor<Receipt> {
 
     private Reposotiries reposotiries;
 
-    public CheckProcessor(Reposotiries reposotiries) {
+    public ReceiptProcessor(Reposotiries reposotiries) {
         this.reposotiries = reposotiries;
     }
 
@@ -17,13 +17,13 @@ public class CheckProcessor extends Processor<Receipt> {
     public BaseDao<Receipt> getDaoForDataProvider(String dataProvider) {
         BaseDao<Receipt> baseDao;
         if (dataProvider.equals(Constants.XML)) {
-            baseDao = reposotiries.checkXmlDao;
+            baseDao = reposotiries.receiptXmlDao;
         } else if (dataProvider.equals(Constants.CSV)) {
-            baseDao = reposotiries.checkCsvDao;
+            baseDao = reposotiries.receiptCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.checkHibernateDao;
+            baseDao = reposotiries.receiptHibernateDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
-            baseDao = reposotiries.checkHibernateDao;
+            baseDao = reposotiries.receiptHibernateDao;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProvider);
         }
@@ -32,6 +32,6 @@ public class CheckProcessor extends Processor<Receipt> {
 
     @Override
     protected Receipt getModel(String modelStr) {
-        throw new RuntimeException("Checks should not be insrted by user!");
+        throw new RuntimeException("Receipts should not be inserted by user!");
     }
 }

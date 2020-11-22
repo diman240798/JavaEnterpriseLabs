@@ -43,9 +43,9 @@ public class ComputerProcessor extends Processor<Computer> {
         int graphicsVolume = Integer.parseInt(split[7]);
 
         if (split.length > 8) {
-            boolean wifiEnabled = Boolean.parseBoolean(split[8]);
-            boolean bluetoothEnabled = Boolean.parseBoolean(split[9]);
-            return new Computer(id, name, weight, price, Constants.CATEGORY_COMPUTER, processorName, processorPower, graphicsName, graphicsVolume, wifiEnabled, bluetoothEnabled);
+            boolean wifiIntegrated = Boolean.parseBoolean(split[8]);
+            boolean bluetoothIntegrated = Boolean.parseBoolean(split[9]);
+            return new Computer(id, name, weight, price, Constants.CATEGORY_COMPUTER, processorName, processorPower, graphicsName, graphicsVolume, wifiIntegrated, bluetoothIntegrated);
         }
 
         return new Computer(id, name, weight, price, Constants.CATEGORY_COMPUTER, processorName, processorPower, graphicsName, graphicsVolume);

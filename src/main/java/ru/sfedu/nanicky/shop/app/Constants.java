@@ -24,8 +24,8 @@ public class Constants {
     public static final File SESSION_XML_FILE = new File("./session.xml");
     public static File SESSION_CSV_FILE = new File("./session.csv");
 
-    public static final File CHECK_XML_FILE = new File("./check.xml");
-    public static File CHECK_CSV_FILE = new File("./check.csv");
+    public static final File RECEIPT_XML_FILE = new File("./receipt.xml");
+    public static File RECEIPT_CSV_FILE = new File("./receipt.csv");
 
 
 
@@ -35,7 +35,7 @@ public class Constants {
     public static final String FRIDGE = "fridge";
     public static final String SODA = "soda";
     public static final String COMPUTER = "computer";
-    public static final String CHECK = "check";
+    public static final String RECEIPT = "receipt";
     public static final String SESSION = "session";
     public static final String BUCKET = "add";
 

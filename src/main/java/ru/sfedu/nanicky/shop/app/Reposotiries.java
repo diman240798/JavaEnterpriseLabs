@@ -2,11 +2,8 @@ package ru.sfedu.nanicky.shop.app;
 
 import ru.sfedu.nanicky.shop.db.csv.dao.CsvDao;
 import ru.sfedu.nanicky.shop.db.hibernate.dao.HibernateDao;
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 import ru.sfedu.nanicky.shop.db.xml.dao.XmlDao;
-
-import java.util.List;
 
 public class Reposotiries {
     public final CsvDao<Category> categoryCsvDao = new CsvDao<>(Category.class, Constants.CATEGORY_CSV_FILE);
@@ -33,8 +30,8 @@ public class Reposotiries {
     public final XmlDao<Session> sessionXmlDao = new XmlDao<>(Constants.SESSION_XML_FILE);
     public final HibernateDao<Session> sessionHibernateDao = new HibernateDao<>(Session.class.getName());
 
-    public final CsvDao<Receipt> checkCsvDao = new CsvDao<>(Receipt.class, Constants.CHECK_CSV_FILE);
-    public final XmlDao<Receipt> checkXmlDao = new XmlDao<>(Constants.CHECK_XML_FILE);
-    public final HibernateDao<Receipt> checkHibernateDao = new HibernateDao<>(Receipt.class.getName());
+    public final CsvDao<Receipt> receiptCsvDao = new CsvDao<>(Receipt.class, Constants.RECEIPT_CSV_FILE);
+    public final XmlDao<Receipt> receiptXmlDao = new XmlDao<>(Constants.RECEIPT_XML_FILE);
+    public final HibernateDao<Receipt> receiptHibernateDao = new HibernateDao<>(Receipt.class.getName());
 
 }

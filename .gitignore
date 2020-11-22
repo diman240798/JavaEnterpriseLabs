@@ -61,12 +61,12 @@ lint/tmp/
 /tmpTests
 /ru.sfedu.nanicky.getpetshome__test.db.mv.db
 /category.csv
-/check.csv
+/receipt.csv
 /computer.csv
 /fridge.csv
 /soda.csv
 /category.xml
-/check.xml
+/receipt.xml
 /computer.xml
 /fridge.xml
 /soda.xml
