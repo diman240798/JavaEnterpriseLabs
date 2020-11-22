@@ -27,6 +27,16 @@ public class Constants {
     public static final File RECEIPT_XML_FILE = new File("./receipt.xml");
     public static File RECEIPT_CSV_FILE = new File("./receipt.csv");
 
+    public static final List<File> DB_FILES = Arrays.asList(
+            CATEGORY_CSV_FILE, CATEGORY_XML_FILE,
+            SODA_CSV_FILE, SODA_XML_FILE,
+            COMPUTER_CSV_FILE, COMPUTER_XML_FILE,
+            FRIDGE_CSV_FILE, FRIDGE_XML_FILE,
+            BUCKET_CSV_FILE, BUCKET_XML_FILE,
+            SESSION_CSV_FILE, SESSION_XML_FILE,
+            RECEIPT_CSV_FILE, RECEIPT_XML_FILE
+    );
+
 
 
     public static final String INIT = "init";
