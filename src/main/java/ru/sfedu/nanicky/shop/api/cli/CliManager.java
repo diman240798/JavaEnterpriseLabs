@@ -9,10 +9,7 @@ import ru.sfedu.nanicky.shop.app.Reposotiries;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CliManager {
@@ -46,7 +43,7 @@ public class CliManager {
 
         if (model.equals(Constants.CATEGORY)) {
             Processor processor = new CategoryProcessor(reposotiries);
-            processor.processBaseApi(args, Constants.ALL_ACTIONS);
+            processor.processBaseApi(args, Arrays.asList(Constants.GET_ALL));
         } else if (model.equals(Constants.FRIDGE)) {
             Processor processor = new FridgeProcessor(reposotiries);
             processor.processBaseApi(args, Constants.ALL_ACTIONS);

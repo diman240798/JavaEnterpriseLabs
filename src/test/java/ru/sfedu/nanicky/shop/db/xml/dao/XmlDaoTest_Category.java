@@ -106,6 +106,9 @@ public class XmlDaoTest_Category {
         dao.insert(mike);
         Category fromDb = dao.getById(mike.getId()).get();
         Assert.assertEquals(mike, fromDb);
+
+        Assert.assertFalse(dao.insert(mike));
+        Assert.assertEquals(1, dao.getAll().size());
     }
 
     @Test
