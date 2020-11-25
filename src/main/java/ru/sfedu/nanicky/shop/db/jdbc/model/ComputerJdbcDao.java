@@ -57,12 +57,34 @@ public class ComputerJdbcDao extends JdbcDao<Computer> {
     }
 
     @Override
+    protected String getUpdateValues(Computer computer) {
+        String baseString =
+                "NAME='%s', WEIGHT='%s', " +
+                        "PRICE='%s', ProcessorName='%s', " +
+                        "ProcessorPower=%d, GraphicsName='%s', GraphicsVolume=%d, " +
+                        "IntegratedWifi=%b, IntegratedBluetooth=%b";
+        String result = String.format(
+                baseString,
+                computer.getName(),
+                computer.getWeight(),
+                computer.getPrice(),
+                computer.getProcessorName(),
+                computer.getProcessorPower(),
+                computer.getGraphicsName(),
+                computer.getGraphicsVolume(),
+                computer.isIntegratedWifi(),
+                computer.isIntegratedBluetooth()
+        );
+        return result;
+    }
+
+    @Override
     public String getValues(Computer computer) {
         String baseString =
                         "%d, '%s', '%s', " +
                         "'%s', '%s', '%s', " +
                         "%d, '%s', %d, " +
-                        "'%s', %b";
+                        "%b, %b";
         String result = String.format(
                 baseString,
                 computer.getId(),

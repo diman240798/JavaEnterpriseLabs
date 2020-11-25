@@ -25,7 +25,12 @@ public class CategoryJdbcDao extends JdbcDao<Category> {
     }
 
     @Override
+    protected String getUpdateValues(Category category) {
+        return String.format("name='%s'", category.getName());
+    }
+
+    @Override
     public String getValues(Category category) {
-        return category.getId() + ", '" + category.getName() + "'";
+        return String.format("%d, '%s'", category.getId(), category.getName());
     }
 }

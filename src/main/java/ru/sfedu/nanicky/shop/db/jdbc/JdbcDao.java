@@ -48,7 +48,7 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
         QUERY_GET_ALL = "SELECT * FROM " + this.entity;
         QUERY_GET_BY_ID = "SELECT * FROM " + this.entity + " WHERE id = %d";
         QUERY_DELETE_BY_ID = "DELETE FROM " + this.entity + " WHERE id = %d";
-        QUERY_UPDATE = "UPDATE " + this.entity + "SET %s where id = %d";
+        QUERY_UPDATE = "UPDATE " + this.entity + " SET %s where id = %d";
         QUERY_INSERT = "INSERT INTO " + this.entity + " VALUES (%s)";
         createTable();
     }
@@ -73,7 +73,7 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             Statement statement = conn.createStatement();
             return consumer.apply(statement);
         } catch (Exception ex) {
-            LOG.info("Error creating jdbc statement for entity: {}", entity, ex);
+            LOG.error("Error creating jdbc statement for entity: {}", entity, ex);
             return null;
         }
     }
@@ -102,12 +102,13 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
     @Override
     public Optional<V> getById(long id) {
         try {
-            return runOn(statemnt -> {
+            Optional<V> runOn = runOn(statemnt -> {
                 ResultSet resultSet = statemnt.executeQuery(String.format(QUERY_GET_BY_ID, id));
                 resultSet.next();
                 V model = getModel(resultSet);
                 return Optional.ofNullable(model);
             });
+            return runOn == null ? Optional.empty() : runOn;
         } catch (Exception ex) {
             LOG.info("Error getting entity {} from jdbc", entity, ex);
             return Optional.empty();
@@ -131,8 +132,17 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
 
     @Override
     public boolean update(V v) {
-        throw new UnsupportedOperationException();
+        try {
+            String values = getUpdateValues(v);
+            String query = String.format(QUERY_UPDATE, values, v.getId());
+            return runOn(statement -> statement.executeUpdate(query) != 0);
+        } catch (Exception ex) {
+            LOG.info("Error updating entity {} from jdbc", entity, ex);
+            return false;
+        }
     }
+
+    protected abstract String getUpdateValues(V v);
 
     @Override
     public boolean insert(V v) {

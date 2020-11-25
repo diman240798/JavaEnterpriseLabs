@@ -41,6 +41,23 @@ public class FridgeJdbcDao extends JdbcDao<Fridge> {
     }
 
     @Override
+    protected String getUpdateValues(Fridge fridge) {
+        String baseString = "Name='%s', Weight='%s', Price='%s', Volume='%s', Color='%s', Power=%d, NoFrost=%b";
+
+        String result = String.format(
+                baseString,
+                fridge.getName(),
+                fridge.getWeight(),
+                fridge.getPrice(),
+                fridge.getVolume(),
+                fridge.getColor(),
+                fridge.getPower(),
+                fridge.isNoFrost()
+        );
+        return result;
+    }
+
+    @Override
     public String getValues(Fridge fridge) {
         String baseString =
                 "%d, '%s', '%s', '%s', '%s'," +

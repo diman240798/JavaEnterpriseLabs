@@ -71,7 +71,7 @@ public class Initializer {
         LOG.info("Init all");
         initFor(Constants.XML, reposotiries);
         initFor(Constants.CSV, reposotiries);
-//        initFor(Constants.JDBC, reposotiries);
+        initFor(Constants.JDBC, reposotiries);
 //        initFor(Constants.HIBERNATE, reposotiries);
 
     }

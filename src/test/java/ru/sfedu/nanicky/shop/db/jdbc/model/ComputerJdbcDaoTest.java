@@ -50,4 +50,21 @@ public class ComputerJdbcDaoTest {
         Assert.assertTrue(computerFromDb.isPresent());
         Assert.assertEquals(computer, computerFromDb.get());
     }
+
+    @Test
+    public void testUpdate() {
+        ComputerJdbcDao computerJdbcDao = new ComputerJdbcDao();
+        Computer computer = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
+        Computer computerUpdate = new Computer(15, "Hp pavillion MH 5", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
+
+        Assert.assertTrue(computerJdbcDao.insert(computer));
+        Assert.assertTrue(computerJdbcDao.update(computerUpdate));
+
+        Optional<Computer> computerFromDb = computerJdbcDao.getById(computer.getId());
+
+        Assert.assertTrue(computerFromDb.isPresent());
+        Assert.assertEquals(computerUpdate, computerFromDb.get());
+
+
+    }
 }

@@ -70,3 +70,4 @@ lint/tmp/
 /computer.xml
 /fridge.xml
 /soda.xml
+/hibernate.db.mv.db
