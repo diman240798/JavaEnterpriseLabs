@@ -2,7 +2,7 @@
   <configuration default="false" name="JDBC Add Fridge" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
     <module name="Javaarchitechurestudy" />
-    <option name="PROGRAM_PARAMETERS" value="jdbc add_product 64a1afee-e45d-46c2-9a16-aceca3e30027 1 fridge" />
+    <option name="PROGRAM_PARAMETERS" value="jdbc add_product d55b88b7-cc9c-43d5-9b1f-6d58869c9380 1 fridge" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

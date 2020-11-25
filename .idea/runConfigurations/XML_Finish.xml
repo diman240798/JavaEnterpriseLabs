@@ -2,7 +2,7 @@
   <configuration default="false" name="XML Finish" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
     <module name="Javaarchitechurestudy" />
-    <option name="PROGRAM_PARAMETERS" value="xml finish 9395dc1c-febb-4a75-8fd5-df60b3ced7fb" />
+    <option name="PROGRAM_PARAMETERS" value="xml finish e0b7d7e4-32ca-45f8-aed2-63423b5b4388" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

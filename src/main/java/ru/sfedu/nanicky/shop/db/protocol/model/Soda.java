@@ -57,12 +57,12 @@ public class Soda extends Product {
     @Override
     public String toString() {
         return "Soda{" +
-                "flavour='" + flavour + '\'' +
+                "flavour=" + flavour +
                 ", sparkled=" + sparkled +
-                ", name='" + name + '\'' +
+                ", name=" + name +
                 ", weight=" + weight +
                 ", price=" + price +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", id=" + id +
                 '}';
     }

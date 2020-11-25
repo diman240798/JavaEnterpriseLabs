@@ -63,7 +63,7 @@ public class Product extends IdEntity {
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
+                "name=" + name +
                 ", weight=" + weight +
                 ", price=" + price +
                 ", id=" + id +

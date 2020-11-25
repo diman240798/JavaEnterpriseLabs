@@ -64,8 +64,8 @@ public class Bucket extends IdEntity {
     @Override
     public String toString() {
         return "Bucket{" +
-                "session='" + session + '\'' +
-                ", products='" + products + '\'' +
+                "session=" + session +
+                ", products=" + products +
                 ", id=" + id +
                 '}';
     }

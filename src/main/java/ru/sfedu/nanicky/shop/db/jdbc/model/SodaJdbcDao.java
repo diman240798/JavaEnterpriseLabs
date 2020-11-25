@@ -38,7 +38,7 @@ public class SodaJdbcDao extends JdbcDao<Soda> {
 
     @Override
     protected String getUpdateValues(Soda soda) {
-        String baseString = "Name='%s', Weight='%s', Price='%s', Flavour='%s', Sparkled=%b";
+        String baseString = "Name=%s', Weight=%s', Price=%s', Flavour=%s', Sparkled=%b";
 
         String result = String.format(
                 baseString,

@@ -99,16 +99,16 @@ public class Computer extends Product {
     @Override
     public String toString() {
         return "Computer{" +
-                "processorName='" + processorName + '\'' +
+                "processorName=" + processorName +
                 ", processorPower=" + processorPower +
-                ", graphicsName='" + graphicsName + '\'' +
+                ", graphicsName=" + graphicsName +
                 ", graphicsVolume=" + graphicsVolume +
                 ", integratedWifi=" + integratedWifi +
                 ", integratedBluetooth=" + integratedBluetooth +
-                ", name='" + name + '\'' +
+                ", name=" + name +
                 ", weight=" + weight +
                 ", price=" + price +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", id=" + id +
                 '}';
     }

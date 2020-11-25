@@ -59,9 +59,9 @@ public class ComputerJdbcDao extends JdbcDao<Computer> {
     @Override
     protected String getUpdateValues(Computer computer) {
         String baseString =
-                "NAME='%s', WEIGHT='%s', " +
-                        "PRICE='%s', ProcessorName='%s', " +
-                        "ProcessorPower=%d, GraphicsName='%s', GraphicsVolume=%d, " +
+                "NAME=%s', WEIGHT=%s', " +
+                        "PRICE=%s', ProcessorName=%s', " +
+                        "ProcessorPower=%d, GraphicsName=%s', GraphicsVolume=%d, " +
                         "IntegratedWifi=%b, IntegratedBluetooth=%b";
         String result = String.format(
                 baseString,

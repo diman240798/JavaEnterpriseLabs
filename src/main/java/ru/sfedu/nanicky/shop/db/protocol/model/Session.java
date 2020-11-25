@@ -62,7 +62,7 @@ public class Session extends IdEntity {
     @Override
     public String toString() {
         return "Session{" +
-                "session='" + session + '\'' +
+                "session=" + session +
                 ", date=" + date +
                 ", id=" + id +
                 '}';

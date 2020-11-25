@@ -61,7 +61,7 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             String queryCreate = String.format(QUERY_CREATE, getTableCreateQuery());
             statement.executeUpdate(queryCreate);
         } catch (Exception ex) {
-            LOG.info("Error creating jdbc statement for entity: {}", entity, ex);
+            LOG.info("Error creating table: {}", entity, ex);
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             Statement statement = conn.createStatement();
             return consumer.apply(statement);
         } catch (Exception ex) {
-            LOG.error("Error creating jdbc statement for entity: {}", entity, ex);
+            LOG.debug("Error creating jdbc statement for entity: {}", entity, ex);
             return null;
         }
     }

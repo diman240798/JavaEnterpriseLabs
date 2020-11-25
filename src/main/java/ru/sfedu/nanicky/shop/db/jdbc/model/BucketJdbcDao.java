@@ -29,7 +29,7 @@ public class BucketJdbcDao extends JdbcDao<Bucket> {
 
     @Override
     protected String getUpdateValues(Bucket bucket) {
-        return String.format("session='%s', products='%s'", bucket.getSession(), bucket.getProducts());
+        return String.format("session=%s', products=%s'", bucket.getSession(), bucket.getProducts());
     }
 
     @Override

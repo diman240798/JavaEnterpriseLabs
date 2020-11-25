@@ -28,7 +28,7 @@ public class ReceiptJdbcDao extends JdbcDao<Receipt> {
 
     @Override
     protected String getUpdateValues(Receipt receipt) {
-        return String.format("productsAndPrices='%s', totalPrice='%s'", receipt.getProductsAndPrices(), receipt.getTotalPrice());
+        return String.format("productsAndPrices=%s', totalPrice=%s'", receipt.getProductsAndPrices(), receipt.getTotalPrice());
     }
 
     @Override

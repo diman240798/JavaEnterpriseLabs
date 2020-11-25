@@ -10,6 +10,7 @@ import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CliManager {
@@ -171,7 +172,7 @@ public class CliManager {
                 });
 
                 LOG.info("Receipt data ready. Printing.");
-                long receiptId = new Random().nextLong();
+                long receiptId = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
                 BaseDao<Receipt> receiptDao = getReceiptDao(dataProvider, reposotiries);
                 Receipt receipt = new Receipt(receiptId, receiptTextSb.toString(), totalPrice.get());
                 receiptDao.insert(receipt);
@@ -230,7 +231,7 @@ public class CliManager {
 
     private void startSession(String dataProvider) {
         BaseDao<Session> sessionDao = getSessionDao(dataProvider);
-        long id = new Random().nextLong();
+        long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
         Session session = new Session(id);
         if (sessionDao.insert(session)) {
             LOG.info("Your session key:  {}", session.getSession());

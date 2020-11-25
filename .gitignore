@@ -71,3 +71,5 @@ lint/tmp/
 /fridge.xml
 /soda.xml
 /hibernate.db.mv.db
+/jdbc.db.mv.db
+/jdbc.db.trace.db

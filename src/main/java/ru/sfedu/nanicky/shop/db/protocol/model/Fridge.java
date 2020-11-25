@@ -78,13 +78,13 @@ public class Fridge extends Product {
     public String toString() {
         return "Fridge{" +
                 "volume=" + volume +
-                ", color='" + color + '\'' +
+                ", color=" + color +
                 ", power=" + power +
                 ", noFrost=" + noFrost +
-                ", name='" + name + '\'' +
+                ", name=" + name +
                 ", weight=" + weight +
                 ", price=" + price +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", id=" + id +
                 '}';
     }

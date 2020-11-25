@@ -42,7 +42,7 @@ public class FridgeJdbcDao extends JdbcDao<Fridge> {
 
     @Override
     protected String getUpdateValues(Fridge fridge) {
-        String baseString = "Name='%s', Weight='%s', Price='%s', Volume='%s', Color='%s', Power=%d, NoFrost=%b";
+        String baseString = "Name=%s', Weight=%s', Price=%s', Volume=%s', Color=%s', Power=%d, NoFrost=%b";
 
         String result = String.format(
                 baseString,
