@@ -219,7 +219,7 @@ public class CliManager {
         } else if (dataProvider.equals(Constants.CSV)) {
             bucketDao = reposotiries.bucketCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            bucketDao = reposotiries.bucketHibernateDao;
+            bucketDao = reposotiries.bucketJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             bucketDao = reposotiries.bucketHibernateDao;
         } else {
@@ -246,7 +246,7 @@ public class CliManager {
         } else if (dataProvider.equals(Constants.CSV)) {
             sessionDao = reposotiries.sessionCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            sessionDao = reposotiries.sessionHibernateDao;
+            sessionDao = reposotiries.sessionJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             sessionDao = reposotiries.sessionHibernateDao;
         } else {

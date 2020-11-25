@@ -21,7 +21,7 @@ public class SodaProcessor extends Processor<Soda> {
         } else if (dataProvider.equals(Constants.CSV)) {
             baseDao = reposotiries.sodaCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.sodaHibernateDao;
+            baseDao = reposotiries.sodaJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             baseDao = reposotiries.sodaHibernateDao;
         } else {

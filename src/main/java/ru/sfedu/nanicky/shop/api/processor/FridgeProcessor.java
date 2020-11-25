@@ -20,7 +20,7 @@ public class FridgeProcessor extends Processor<Fridge> {
         } else if (dataProvider.equals(Constants.CSV)) {
             baseDao = reposotiries.fridgeCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.fridgeHibernateDao;
+            baseDao = reposotiries.fridgeJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             baseDao = reposotiries.fridgeHibernateDao;
         } else {

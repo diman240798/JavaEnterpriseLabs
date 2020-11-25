@@ -27,6 +27,9 @@ public class Constants {
     public static final File RECEIPT_XML_FILE = new File("./receipt.xml");
     public static File RECEIPT_CSV_FILE = new File("./receipt.csv");
 
+    public static File JDBC_MV = new File("./jdbc.db.mv.db");
+    public static File JDBC_TRACE = new File("./jdbc.db.trace.db");
+
     public static final List<File> DB_FILES = Arrays.asList(
             CATEGORY_CSV_FILE, CATEGORY_XML_FILE,
             SODA_CSV_FILE, SODA_XML_FILE,
@@ -34,7 +37,8 @@ public class Constants {
             FRIDGE_CSV_FILE, FRIDGE_XML_FILE,
             BUCKET_CSV_FILE, BUCKET_XML_FILE,
             SESSION_CSV_FILE, SESSION_XML_FILE,
-            RECEIPT_CSV_FILE, RECEIPT_XML_FILE
+            RECEIPT_CSV_FILE, RECEIPT_XML_FILE,
+            JDBC_MV, JDBC_TRACE
     );
 
 

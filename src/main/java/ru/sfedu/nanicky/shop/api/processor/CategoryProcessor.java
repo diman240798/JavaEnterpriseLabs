@@ -21,7 +21,7 @@ public class CategoryProcessor extends Processor<Category> {
         } else if (dataProvider.equals(Constants.CSV)) {
             baseDao = reposotiries.categoryCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.categoryHibernateDao;
+            baseDao = reposotiries.categoryJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             baseDao = reposotiries.categoryHibernateDao;
         } else {

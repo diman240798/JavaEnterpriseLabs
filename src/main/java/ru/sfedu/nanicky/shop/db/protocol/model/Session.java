@@ -22,6 +22,11 @@ public class Session extends IdEntity {
         setId(id);
     }
 
+    public Session(long id, String session, long date) {
+        this(id, session);
+        setDate(date);
+    }
+
     public String getSession() {
         return session;
     }

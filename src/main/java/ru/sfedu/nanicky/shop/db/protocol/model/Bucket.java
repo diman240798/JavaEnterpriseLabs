@@ -21,6 +21,11 @@ public class Bucket extends IdEntity {
         this.session = session;
     }
 
+    public Bucket(long id, String session, String products) {
+        this(id, session);
+        this.products = products;
+    }
+
     public String getSession() {
         return session;
     }

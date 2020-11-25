@@ -21,7 +21,7 @@ public class ComputerProcessor extends Processor<Computer> {
         } else if (dataProvider.equals(Constants.CSV)) {
             baseDao = reposotiries.computerCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.computerHibernateDao;
+            baseDao = reposotiries.computerJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             baseDao = reposotiries.computerHibernateDao;
         } else {

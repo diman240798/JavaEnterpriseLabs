@@ -21,7 +21,7 @@ public class ReceiptProcessor extends Processor<Receipt> {
         } else if (dataProvider.equals(Constants.CSV)) {
             baseDao = reposotiries.receiptCsvDao;
         } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.receiptHibernateDao;
+            baseDao = reposotiries.receiptJdbcDao;
         } else if (dataProvider.equals(Constants.HIBERNATE)) {
             baseDao = reposotiries.receiptHibernateDao;
         } else {

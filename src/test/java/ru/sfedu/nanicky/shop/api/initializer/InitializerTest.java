@@ -1,5 +1,6 @@
 package ru.sfedu.nanicky.shop.api.initializer;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,15 @@ public class InitializerTest {
 
     @Before
     public void beforeEach() {
+        clear();
+    }
+
+    @AfterClass
+    public static void afterAll() {
+        clear();
+    }
+
+    private static void clear() {
         Constants.DB_FILES.forEach(File::delete);
     }
 
@@ -48,7 +58,17 @@ public class InitializerTest {
 
     @Test
     public void initForJDBC() {
+        Reposotiries repositories = new Reposotiries();
+        Initializer.initFor(Constants.JDBC, repositories);
 
+        assertJdbc(repositories);
+    }
+
+    private void assertJdbc(Reposotiries repositories) {
+        Assert.assertTrue(Objects.deepEquals(repositories.categoryJdbcDao.getAll(), Initializer.CATEGORIES));
+        Assert.assertTrue(Objects.deepEquals(repositories.computerJdbcDao.getAll(), Initializer.COMPUTERS));
+        Assert.assertTrue(Objects.deepEquals(repositories.sodaJdbcDao.getAll(), Initializer.SODA));
+        Assert.assertTrue(Objects.deepEquals(repositories.fridgeJdbcDao.getAll(), Initializer.FRIDGES));
     }
 
     @Test
@@ -63,5 +83,6 @@ public class InitializerTest {
 
         assertCsv(repositories);
         assertXml(repositories);
+        assertJdbc(repositories);
     }
 }
