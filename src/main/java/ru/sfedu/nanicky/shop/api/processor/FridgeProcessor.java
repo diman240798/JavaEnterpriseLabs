@@ -1,11 +1,17 @@
 package ru.sfedu.nanicky.shop.api.processor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Reposotiries;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
 
 public class FridgeProcessor extends Processor<Fridge> {
+
+    private static Logger LOG = LogManager.getLogger(Main.class);
+
     private Reposotiries reposotiries;
 
     public FridgeProcessor(Reposotiries reposotiries) {
@@ -14,6 +20,8 @@ public class FridgeProcessor extends Processor<Fridge> {
 
     @Override
     public BaseDao<Fridge> getDaoForDataProvider(String dataProvider) {
+        LOG.info("Getting dao for data provider");
+        LOG.debug("Getting dao for data provider {}", dataProvider);
         BaseDao<Fridge> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.fridgeXmlDao;
@@ -31,6 +39,8 @@ public class FridgeProcessor extends Processor<Fridge> {
 
     @Override
     protected Fridge getModel(String modelStr) {
+        LOG.info("Parsing string to model");
+        LOG.debug("Parsing string to model {}", modelStr);
         String[] split = modelStr.split("\\s");
         long id = Long.parseLong(split[0]);
         String name = split[1];

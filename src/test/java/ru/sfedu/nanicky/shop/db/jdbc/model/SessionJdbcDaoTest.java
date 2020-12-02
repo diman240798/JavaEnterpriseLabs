@@ -32,6 +32,7 @@ public class SessionJdbcDaoTest {
         Session model = new Session(0, "Indesit c30", 30);
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Session modelFromDb = dao.getAll().get(0);
 

@@ -14,7 +14,7 @@ public class SessionJdbcDao extends JdbcDao<Session> {
 
     @Override
     protected String getTableCreateQuery() {
-        return "id BIGINT not NULL, " +
+        return "id BIGINT not NULL PRIMARY KEY, " +
                 "session VARCHAR(255)," +
                 "date LONG";
     }
@@ -29,7 +29,7 @@ public class SessionJdbcDao extends JdbcDao<Session> {
 
     @Override
     protected String getUpdateValues(Session session) {
-        return String.format("session=%s', date=%d", session.getSession(), session.getDate());
+        return String.format("session='%s', date=%d", session.getSession(), session.getDate());
     }
 
     @Override

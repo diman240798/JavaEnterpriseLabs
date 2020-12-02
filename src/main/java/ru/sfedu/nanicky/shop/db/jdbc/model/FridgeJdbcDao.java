@@ -15,7 +15,7 @@ public class FridgeJdbcDao extends JdbcDao<Fridge> {
 
     @Override
     protected String getTableCreateQuery() {
-        return "id BIGINT not NULL, " +
+        return "id BIGINT not NULL PRIMARY KEY, " +
                 "name VARCHAR(255), " +
                 "weight DOUBLE, " +
                 "price DOUBLE, " +
@@ -42,7 +42,7 @@ public class FridgeJdbcDao extends JdbcDao<Fridge> {
 
     @Override
     protected String getUpdateValues(Fridge fridge) {
-        String baseString = "Name=%s', Weight=%s', Price=%s', Volume=%s', Color=%s', Power=%d, NoFrost=%b";
+        String baseString = "Name='%s', Weight='%s', Price='%s', Volume='%s', Color='%s', Power=%d, NoFrost=%b";
 
         String result = String.format(
                 baseString,

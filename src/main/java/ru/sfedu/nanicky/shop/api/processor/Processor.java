@@ -1,7 +1,7 @@
 package ru.sfedu.nanicky.shop.api.processor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
@@ -10,9 +10,12 @@ import java.util.List;
 
 public abstract class Processor<M extends IdEntity> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Processor.class);
+    private static final Logger LOG = LogManager.getLogger(Processor.class);
 
     public void processBaseApi(String[] args, List<String> actions) {
+        LOG.info("Start processing model operation");
+        LOG.debug("Start processing model operation with args{} : ", String.join(",", args) );
+
         String dataProvider = args[0];
         BaseDao<M> categoryDao = getDaoForDataProvider(dataProvider);
         String method = args[2];
@@ -54,6 +57,7 @@ public abstract class Processor<M extends IdEntity> {
             return true;
         }
         LOG.info("Action {} not supported", action);
+        LOG.debug("Action {} not supported", action);
         return false;
     }
 

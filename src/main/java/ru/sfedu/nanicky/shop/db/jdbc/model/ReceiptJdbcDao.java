@@ -13,7 +13,7 @@ public class ReceiptJdbcDao extends JdbcDao<Receipt> {
 
     @Override
     protected String getTableCreateQuery() {
-        return "id BIGINT not NULL, " +
+        return "id BIGINT not NULL PRIMARY KEY, " +
                 "productsAndPrices VARCHAR(255)," +
                 "totalPrice DOUBLE";
     }
@@ -28,7 +28,7 @@ public class ReceiptJdbcDao extends JdbcDao<Receipt> {
 
     @Override
     protected String getUpdateValues(Receipt receipt) {
-        return String.format("productsAndPrices=%s', totalPrice=%s'", receipt.getProductsAndPrices(), receipt.getTotalPrice());
+        return String.format("productsAndPrices='%s', totalPrice='%s'", receipt.getProductsAndPrices(), receipt.getTotalPrice());
     }
 
     @Override

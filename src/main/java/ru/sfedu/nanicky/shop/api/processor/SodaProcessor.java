@@ -1,11 +1,16 @@
 package ru.sfedu.nanicky.shop.api.processor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Reposotiries;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
 public class SodaProcessor extends Processor<Soda> {
+
+    private static Logger LOG = LogManager.getLogger(Main.class);
 
     private Reposotiries reposotiries;
 
@@ -15,6 +20,8 @@ public class SodaProcessor extends Processor<Soda> {
 
     @Override
     public BaseDao<Soda> getDaoForDataProvider(String dataProvider) {
+        LOG.info("Getting dao for data provider");
+        LOG.debug("Getting dao for data provider {}", dataProvider);
         BaseDao<Soda> baseDao;
         if (dataProvider.equals(Constants.XML)) {
             baseDao = reposotiries.sodaXmlDao;
@@ -32,6 +39,8 @@ public class SodaProcessor extends Processor<Soda> {
 
     @Override
     protected Soda getModel(String modelStr) {
+        LOG.info("Parsing string to model");
+        LOG.debug("Parsing string to model {}", modelStr);
         String[] split = modelStr.split("\\s");
         long id = Long.parseLong(split[0]);
         String name = split[1];

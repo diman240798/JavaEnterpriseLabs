@@ -32,6 +32,7 @@ public class CategoryJdbcDaoTest {
         Category model = new Category(1, "category");
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Category modelFromDb = dao.getAll().get(0);
 

@@ -1,7 +1,7 @@
 package ru.sfedu.nanicky.shop.db.jdbc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JdbcDao.class);
+    private static final Logger LOG = LogManager.getLogger(JdbcDao.class);
 
     private static final String JDBC_DRIVER = "org.h2.Driver";
 

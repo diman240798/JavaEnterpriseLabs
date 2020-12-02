@@ -1,7 +1,7 @@
 package ru.sfedu.nanicky.shop.api.cli;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.api.initializer.Initializer;
 import ru.sfedu.nanicky.shop.api.processor.*;
 import ru.sfedu.nanicky.shop.app.Constants;
@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CliManager {
 
 
-    private static final Logger LOG = LoggerFactory.getLogger(CliManager.class);
+    private static final Logger LOG = LogManager.getLogger(CliManager.class);
 
 
     private final Reposotiries reposotiries;
@@ -27,6 +27,8 @@ public class CliManager {
 
 
     public void workoutRequest(String[] args) {
+        LOG.info("Start parsing arguments");
+        LOG.debug("Start parsing arguments: " + String.join(",", args));
         String dataProvider = args[0];
 
         if (args[0].equals(Constants.INIT_ALL)) {
@@ -40,6 +42,8 @@ public class CliManager {
     }
 
     private void workoutModel(String dataProvider, String[] args) {
+        LOG.info("Start parsing model");
+        LOG.debug("Start parsing model for data provider: " + dataProvider);
         String model = args[1];
 
         if (model.equals(Constants.CATEGORY)) {

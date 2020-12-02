@@ -1,7 +1,7 @@
 package ru.sfedu.nanicky.shop.api.initializer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.api.processor.CategoryProcessor;
 import ru.sfedu.nanicky.shop.api.processor.ComputerProcessor;
 import ru.sfedu.nanicky.shop.api.processor.FridgeProcessor;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Initializer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Initializer.class);
+    private static final Logger LOG = LogManager.getLogger(Initializer.class);
 
 
     public final static List<Category> CATEGORIES = Arrays.asList(
@@ -54,6 +54,7 @@ public class Initializer {
 
     public static void initFor(String dataProvider, Reposotiries reposotiries) {
         LOG.info("Init for {}", dataProvider);
+        LOG.debug("Init for data provider {}", dataProvider);
         BaseDao<Category> categoryDao = new CategoryProcessor(reposotiries).getDaoForDataProvider(dataProvider);
         BaseDao<Fridge> fridgeDao = new FridgeProcessor(reposotiries).getDaoForDataProvider(dataProvider);
         BaseDao<Computer> computerDao = new ComputerProcessor(reposotiries).getDaoForDataProvider(dataProvider);
@@ -69,6 +70,8 @@ public class Initializer {
 
     public static void initAll(Reposotiries reposotiries) {
         LOG.info("Init all");
+        LOG.debug("Init all data providers");
+
         initFor(Constants.XML, reposotiries);
         initFor(Constants.CSV, reposotiries);
         initFor(Constants.JDBC, reposotiries);

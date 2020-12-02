@@ -13,7 +13,7 @@ public class CategoryJdbcDao extends JdbcDao<Category> {
 
     @Override
     protected String getTableCreateQuery() {
-        return "id BIGINT not NULL, " +
+        return "id BIGINT not NULL PRIMARY KEY, " +
                 "name VARCHAR(255)";
     }
 
@@ -26,7 +26,7 @@ public class CategoryJdbcDao extends JdbcDao<Category> {
 
     @Override
     protected String getUpdateValues(Category category) {
-        return String.format("name=%s'", category.getName());
+        return String.format("name='%s'", category.getName());
     }
 
     @Override

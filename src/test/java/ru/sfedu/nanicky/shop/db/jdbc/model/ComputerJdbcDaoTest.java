@@ -28,14 +28,15 @@ public class ComputerJdbcDaoTest {
 
     @Test
     public void testGetAll() {
-        ComputerJdbcDao computerJdbcDao = new ComputerJdbcDao();
-        Computer computer = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
+        ComputerJdbcDao dao = new ComputerJdbcDao();
+        Computer model = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        Assert.assertTrue(computerJdbcDao.insert(computer));
+        Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
-        Computer computerFromDb = computerJdbcDao.getAll().get(0);
+        Computer computerFromDb = dao.getAll().get(0);
 
-        Assert.assertEquals(computer, computerFromDb);
+        Assert.assertEquals(model, computerFromDb);
     }
 
     @Test

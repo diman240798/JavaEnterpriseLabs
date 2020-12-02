@@ -32,6 +32,7 @@ public class ReceiptJdbcDaoTest {
         Receipt model = new Receipt(0, "Indesit c30", 30);
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Receipt modelFromDb = dao.getAll().get(0);
 

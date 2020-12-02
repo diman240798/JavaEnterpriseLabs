@@ -32,6 +32,7 @@ public class SodaJdbcDaoTest {
         Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Soda modelFromDb = dao.getAll().get(0);
 

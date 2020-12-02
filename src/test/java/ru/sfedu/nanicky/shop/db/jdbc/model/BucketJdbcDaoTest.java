@@ -32,6 +32,7 @@ public class BucketJdbcDaoTest {
         Bucket model = new Bucket(1, "session", "fridge:1");
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Bucket modelFromDb = dao.getAll().get(0);
 

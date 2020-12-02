@@ -15,7 +15,7 @@ public class SodaJdbcDao extends JdbcDao<Soda> {
 
     @Override
     protected String getTableCreateQuery() {
-        return "id BIGINT not NULL, " +
+        return "id BIGINT not NULL PRIMARY KEY, " +
                 "name VARCHAR(255), " +
                 "weight DOUBLE, " +
                 "price DOUBLE, " +
@@ -38,7 +38,7 @@ public class SodaJdbcDao extends JdbcDao<Soda> {
 
     @Override
     protected String getUpdateValues(Soda soda) {
-        String baseString = "Name=%s', Weight=%s', Price=%s', Flavour=%s', Sparkled=%b";
+        String baseString = "Name='%s', Weight='%s', Price='%s', Flavour='%s', Sparkled=%b";
 
         String result = String.format(
                 baseString,

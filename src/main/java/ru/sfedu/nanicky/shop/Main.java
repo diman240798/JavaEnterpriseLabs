@@ -1,11 +1,8 @@
 package ru.sfedu.nanicky.shop;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.api.cli.CliManager;
-import ru.sfedu.nanicky.shop.app.ConfigurationUtil;
 import ru.sfedu.nanicky.shop.app.Reposotiries;
 
 public class Main {
@@ -13,13 +10,8 @@ public class Main {
     private static Logger LOG = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
-        Logger.getRootLogger().setLevel(Level.INFO);
-        LOG.debug("Init");
-
-        ConfigurationUtil configurationUtil = new ConfigurationUtil("/en/strings.properties");
-        String cat = configurationUtil.readConfig("cat");
-        LOG.info(cat);
+        LOG.info("Start Program");
+        LOG.debug("Start Program with args: {}", String.join(",", args));
 
         Reposotiries reposotiries = new Reposotiries();
         CliManager cliManager = new CliManager(reposotiries);

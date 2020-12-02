@@ -32,6 +32,7 @@ public class FridgeJdbcDaoTest {
         Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
         Assert.assertTrue(dao.insert(model));
+        Assert.assertFalse(dao.insert(model));
 
         Fridge modelFromDb = dao.getAll().get(0);
 
