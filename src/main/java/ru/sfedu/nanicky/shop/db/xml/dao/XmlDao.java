@@ -38,6 +38,7 @@ public class XmlDao<V extends IdEntity> extends TextDao<V> {
     private final File dbFile;
 
     public XmlDao(File dbFile) {
+        dbFile.getParentFile().mkdirs();
         this.dbFile = dbFile;
     }
 

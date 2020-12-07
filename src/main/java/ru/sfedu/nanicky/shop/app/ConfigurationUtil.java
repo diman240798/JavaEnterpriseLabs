@@ -1,8 +1,6 @@
 package ru.sfedu.nanicky.shop.app;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Properties;
 
 public class ConfigurationUtil {
@@ -34,8 +32,13 @@ public class ConfigurationUtil {
     private void loadConfiguration() {
         try (InputStream in = ConfigurationUtil.class.getResourceAsStream(defaultConfigPath)) {
             configuration.load(new InputStreamReader(in, "UTF-8"));
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+        } catch (Exception ex) {
+            try {
+                configuration.load(new FileReader(new File(defaultConfigPath)));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 

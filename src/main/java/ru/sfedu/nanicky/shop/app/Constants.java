@@ -6,40 +6,76 @@ import java.util.List;
 
 public class Constants {
 
-    public static final File CATEGORY_XML_FILE = new File("./category.xml");
-    public static File CATEGORY_CSV_FILE = new File("./category.csv");
-
-    public static final File SODA_XML_FILE = new File("./soda.xml");
-    public static File SODA_CSV_FILE = new File("./soda.csv");
-
-    public static final File COMPUTER_XML_FILE = new File("./computer.xml");
-    public static File COMPUTER_CSV_FILE = new File("./computer.csv");
-
-    public static final File FRIDGE_XML_FILE = new File("./fridge.xml");
-    public static File FRIDGE_CSV_FILE = new File("./fridge.csv");
-
-    public static final File BUCKET_XML_FILE = new File("./bucket.xml");
-    public static File BUCKET_CSV_FILE = new File("./bucket.csv");
-
-    public static final File SESSION_XML_FILE = new File("./session.xml");
-    public static File SESSION_CSV_FILE = new File("./session.csv");
-
-    public static final File RECEIPT_XML_FILE = new File("./receipt.xml");
-    public static File RECEIPT_CSV_FILE = new File("./receipt.csv");
 
     public static File JDBC_MV = new File("./jdbc.db.mv.db");
     public static File JDBC_TRACE = new File("./jdbc.db.trace.db");
 
-    public static final List<File> DB_FILES = Arrays.asList(
-            CATEGORY_CSV_FILE, CATEGORY_XML_FILE,
-            SODA_CSV_FILE, SODA_XML_FILE,
-            COMPUTER_CSV_FILE, COMPUTER_XML_FILE,
-            FRIDGE_CSV_FILE, FRIDGE_XML_FILE,
-            BUCKET_CSV_FILE, BUCKET_XML_FILE,
-            SESSION_CSV_FILE, SESSION_XML_FILE,
-            RECEIPT_CSV_FILE, RECEIPT_XML_FILE,
-            JDBC_MV, JDBC_TRACE
-    );
+
+    public static void init() {
+        String path;
+        if (System.getProperty("environment") != null) {
+            path = System.getProperty("environment");
+        } else {
+            path = "/strings.properties";
+        }
+        ConfigurationUtil configurationUtil = new ConfigurationUtil(path);
+
+        CATEGORY_XML_FILE = new File(configurationUtil.readConfig("category_xml"));
+        CATEGORY_CSV_FILE = new File(configurationUtil.readConfig("category_csv"));
+
+        SODA_XML_FILE = new File(configurationUtil.readConfig("soda_xml"));
+        SODA_CSV_FILE = new File(configurationUtil.readConfig("soda_csv"));
+
+        COMPUTER_XML_FILE = new File(configurationUtil.readConfig("computer_xml"));
+        COMPUTER_CSV_FILE = new File(configurationUtil.readConfig("computer_csv"));
+
+        FRIDGE_XML_FILE = new File(configurationUtil.readConfig("fridge_xml"));
+        FRIDGE_CSV_FILE = new File(configurationUtil.readConfig("fridge_csv"));
+
+        BUCKET_XML_FILE = new File(configurationUtil.readConfig("bucket_xml"));
+        BUCKET_CSV_FILE = new File(configurationUtil.readConfig("bucket_csv"));
+
+        SESSION_XML_FILE = new File(configurationUtil.readConfig("session_xml"));
+        SESSION_CSV_FILE = new File(configurationUtil.readConfig("session_csv"));
+
+        RECEIPT_XML_FILE = new File(configurationUtil.readConfig("receipt_xml"));
+        RECEIPT_CSV_FILE = new File(configurationUtil.readConfig("receipt_csv"));
+
+        DB_FILES = Arrays.asList(
+                CATEGORY_CSV_FILE, CATEGORY_XML_FILE,
+                SODA_CSV_FILE, SODA_XML_FILE,
+                COMPUTER_CSV_FILE, COMPUTER_XML_FILE,
+                FRIDGE_CSV_FILE, FRIDGE_XML_FILE,
+                BUCKET_CSV_FILE, BUCKET_XML_FILE,
+                SESSION_CSV_FILE, SESSION_XML_FILE,
+                RECEIPT_CSV_FILE, RECEIPT_XML_FILE,
+                JDBC_MV, JDBC_TRACE
+        );
+    }
+
+    public static File CATEGORY_XML_FILE;
+    public static File CATEGORY_CSV_FILE;
+
+    public static File SODA_XML_FILE;
+    public static File SODA_CSV_FILE;
+
+    public static File COMPUTER_XML_FILE;
+    public static File COMPUTER_CSV_FILE;
+
+    public static File FRIDGE_XML_FILE = new File("./xml/fridge.xml");
+    public static File FRIDGE_CSV_FILE = new File("./fridge.csv");
+
+    public static File BUCKET_XML_FILE = new File("./xml/bucket.xml");
+    public static File BUCKET_CSV_FILE = new File("./bucket.csv");
+
+    public static File SESSION_XML_FILE = new File("./xml/session.xml");
+    public static File SESSION_CSV_FILE = new File("./session.csv");
+
+    public static File RECEIPT_XML_FILE = new File("./xml/receipt.xml");
+    public static File RECEIPT_CSV_FILE = new File("./receipt.csv");
+
+
+    public static List<File> DB_FILES;
 
 
 

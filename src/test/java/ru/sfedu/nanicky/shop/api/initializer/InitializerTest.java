@@ -1,9 +1,6 @@
 package ru.sfedu.nanicky.shop.api.initializer;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Reposotiries;
 
@@ -11,6 +8,11 @@ import java.io.File;
 import java.util.Objects;
 
 public class InitializerTest {
+
+    @BeforeClass
+    public static void init() {
+        Constants.init();
+    }
 
     @Before
     public void beforeEach() {

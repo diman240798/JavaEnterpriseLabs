@@ -15,6 +15,7 @@ public class CsvDao<V extends IdEntity> extends TextDao<V> {
 
     public CsvDao(Class clazz, File dbFile) {
         this.clazz = clazz;
+        dbFile.getParentFile().mkdirs();
         this.dbFile = dbFile;
     }
 
