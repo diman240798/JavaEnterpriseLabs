@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.app;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
 public class RepositoriesUtil {
@@ -23,9 +23,9 @@ public class RepositoriesUtil {
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Receipt> baseDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.receiptXmlDao;
+            baseDao = repositories.receiptXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.receiptCsvDao;
+            baseDao = repositories.receiptCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.receiptJdbcDataProvider;
         } else {
@@ -47,9 +47,9 @@ public class RepositoriesUtil {
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Category> baseDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.categoryXmlDao;
+            baseDao = repositories.categoryXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.categoryCsvDao;
+            baseDao = repositories.categoryCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.categoryJdbcDataProvider;
         } else {
@@ -71,9 +71,9 @@ public class RepositoriesUtil {
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Computer> baseDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.computerXmlDao;
+            baseDao = repositories.computerXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.computerCsvDao;
+            baseDao = repositories.computerCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.computerJdbcDataProvider;
         } else {
@@ -95,9 +95,9 @@ public class RepositoriesUtil {
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Fridge> baseDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.fridgeXmlDao;
+            baseDao = repositories.fridgeXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.fridgeCsvDao;
+            baseDao = repositories.fridgeCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.fridgeJdbcDataProvider;
         } else {
@@ -119,9 +119,9 @@ public class RepositoriesUtil {
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Soda> baseDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.sodaXmlDao;
+            baseDao = repositories.sodaXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.sodaCsvDao;
+            baseDao = repositories.sodaCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.sodaJdbcDataProvider;
         } else {
@@ -141,9 +141,9 @@ public class RepositoriesUtil {
     public static BaseDao<Session> getSessionDataProvider(String dataProviderStr, Repositories repositories) {
         BaseDao<Session> sessionDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            sessionDao = repositories.sessionXmlDao;
+            sessionDao = repositories.sessionXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            sessionDao = repositories.sessionCsvDao;
+            sessionDao = repositories.sessionCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             sessionDao = repositories.sessionJdbcDataProvider;
         } else {
@@ -163,9 +163,9 @@ public class RepositoriesUtil {
     public static BaseDao<Bucket> getBucketDataProvider(String dataProviderStr, Repositories repositories) {
         BaseDao<Bucket> bucketDao;
         if (dataProviderStr.equals(Constants.XML)) {
-            bucketDao = repositories.bucketXmlDao;
+            bucketDao = repositories.bucketXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            bucketDao = repositories.bucketCsvDao;
+            bucketDao = repositories.bucketCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
             bucketDao = repositories.bucketJdbcDataProvider;
         } else {

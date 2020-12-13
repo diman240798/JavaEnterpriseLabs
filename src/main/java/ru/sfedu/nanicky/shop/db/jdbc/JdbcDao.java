@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.db.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.sql.Connection;

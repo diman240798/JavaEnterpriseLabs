@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Repositories;
 import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Category;
 
 public class CategoryCrudCliProcessor extends CrudCliProcessor<Category> {

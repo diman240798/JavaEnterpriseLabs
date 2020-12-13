@@ -1,38 +1,38 @@
 package ru.sfedu.nanicky.shop.app;
 
-import ru.sfedu.nanicky.shop.db.csv.dao.CsvDao;
+import ru.sfedu.nanicky.shop.db.csv.dao.CsvDataProvider;
 import ru.sfedu.nanicky.shop.db.jdbc.model.*;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
-import ru.sfedu.nanicky.shop.db.xml.dao.XmlDao;
+import ru.sfedu.nanicky.shop.db.xml.dao.XmlDataProvider;
 
 public class Repositories {
 
-    public final CsvDao<Category> categoryCsvDao = new CsvDao<>(Category.class, Constants.CATEGORY_CSV_FILE);
-    public final XmlDao<Category> categoryXmlDao = new XmlDao<>(Constants.CATEGORY_XML_FILE);
+    public final CsvDataProvider<Category> categoryCsvDataProvider = new CsvDataProvider<>(Category.class, Constants.CATEGORY_CSV_FILE);
+    public final XmlDataProvider<Category> categoryXmlDataProvider = new XmlDataProvider<>(Constants.CATEGORY_XML_FILE);
     public CategoryJdbcDataProvider categoryJdbcDataProvider = new CategoryJdbcDataProvider();
 
-    public final CsvDao<Soda> sodaCsvDao = new CsvDao<>(Soda.class, Constants.SODA_CSV_FILE);
-    public final XmlDao<Soda> sodaXmlDao = new XmlDao<>(Constants.SODA_XML_FILE);
+    public final CsvDataProvider<Soda> sodaCsvDataProvider = new CsvDataProvider<>(Soda.class, Constants.SODA_CSV_FILE);
+    public final XmlDataProvider<Soda> sodaXmlDataProvider = new XmlDataProvider<>(Constants.SODA_XML_FILE);
     public SodaJdbcDataProvider sodaJdbcDataProvider = new SodaJdbcDataProvider();
 
-    public final CsvDao<Computer> computerCsvDao = new CsvDao<>(Computer.class, Constants.COMPUTER_CSV_FILE);
-    public final XmlDao<Computer> computerXmlDao = new XmlDao<>(Constants.COMPUTER_XML_FILE);
+    public final CsvDataProvider<Computer> computerCsvDataProvider = new CsvDataProvider<>(Computer.class, Constants.COMPUTER_CSV_FILE);
+    public final XmlDataProvider<Computer> computerXmlDataProvider = new XmlDataProvider<>(Constants.COMPUTER_XML_FILE);
     public final ComputerJdbcDataProvider computerJdbcDataProvider = new ComputerJdbcDataProvider();
 
-    public final CsvDao<Fridge> fridgeCsvDao = new CsvDao<>(Fridge.class, Constants.FRIDGE_CSV_FILE);
-    public final XmlDao<Fridge> fridgeXmlDao = new XmlDao<>(Constants.FRIDGE_XML_FILE);
+    public final CsvDataProvider<Fridge> fridgeCsvDataProvider = new CsvDataProvider<>(Fridge.class, Constants.FRIDGE_CSV_FILE);
+    public final XmlDataProvider<Fridge> fridgeXmlDataProvider = new XmlDataProvider<>(Constants.FRIDGE_XML_FILE);
     public FridgeJdbcDataProvider fridgeJdbcDataProvider = new FridgeJdbcDataProvider();
 
-    public final CsvDao<Bucket> bucketCsvDao = new CsvDao<>(Bucket.class, Constants.BUCKET_CSV_FILE);
-    public final XmlDao<Bucket> bucketXmlDao = new XmlDao<>(Constants.BUCKET_XML_FILE);
+    public final CsvDataProvider<Bucket> bucketCsvDataProvider = new CsvDataProvider<>(Bucket.class, Constants.BUCKET_CSV_FILE);
+    public final XmlDataProvider<Bucket> bucketXmlDataProvider = new XmlDataProvider<>(Constants.BUCKET_XML_FILE);
     public BucketJdbcDataProvider bucketJdbcDataProvider = new BucketJdbcDataProvider();
 
-    public final CsvDao<Session> sessionCsvDao = new CsvDao<>(Session.class, Constants.SESSION_CSV_FILE);
-    public final XmlDao<Session> sessionXmlDao = new XmlDao<>(Constants.SESSION_XML_FILE);
+    public final CsvDataProvider<Session> sessionCsvDataProvider = new CsvDataProvider<>(Session.class, Constants.SESSION_CSV_FILE);
+    public final XmlDataProvider<Session> sessionXmlDataProvider = new XmlDataProvider<>(Constants.SESSION_XML_FILE);
     public SessionJdbcDataProvider sessionJdbcDataProvider = new SessionJdbcDataProvider();
 
-    public final CsvDao<Receipt> receiptCsvDao = new CsvDao<>(Receipt.class, Constants.RECEIPT_CSV_FILE);
-    public final XmlDao<Receipt> receiptXmlDao = new XmlDao<>(Constants.RECEIPT_XML_FILE);
+    public final CsvDataProvider<Receipt> receiptCsvDataProvider = new CsvDataProvider<>(Receipt.class, Constants.RECEIPT_CSV_FILE);
+    public final XmlDataProvider<Receipt> receiptXmlDataProvider = new XmlDataProvider<>(Constants.RECEIPT_XML_FILE);
     public ReceiptJdbcDataProvider receiptJdbcDataProvider = new ReceiptJdbcDataProvider();
 
 }

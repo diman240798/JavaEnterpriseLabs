@@ -1,4 +1,4 @@
-package ru.sfedu.nanicky.shop.db.xml.dao;
+package ru.sfedu.nanicky.shop.db.xml;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,17 +6,17 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import ru.sfedu.nanicky.shop.db.protocol.dao.TextDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.TextDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XmlDao<V extends IdEntity> extends TextDao<V> {
+public class XmlDataProvider<V extends IdEntity> extends TextDao<V> {
 
 
-    private static Logger LOG = LogManager.getLogger(XmlDao.class);
+    private static Logger LOG = LogManager.getLogger(XmlDataProvider.class);
 
     @Root
     public static class EntityList<V> {
@@ -42,7 +42,7 @@ public class XmlDao<V extends IdEntity> extends TextDao<V> {
 
     private final File dbFile;
 
-    public XmlDao(File dbFile) {
+    public XmlDataProvider(File dbFile) {
         dbFile.getParentFile().mkdirs();
         this.dbFile = dbFile;
     }

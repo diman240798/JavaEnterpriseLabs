@@ -39,10 +39,10 @@ public class InitializerTest {
 
 
     private void assertCsv(Repositories repositories) {
-        Assert.assertTrue(Objects.deepEquals(repositories.categoryCsvDao.getAll(), Initializer.CATEGORIES));
-        Assert.assertTrue(Objects.deepEquals(repositories.computerCsvDao.getAll(), Initializer.COMPUTERS));
-        Assert.assertTrue(Objects.deepEquals(repositories.sodaCsvDao.getAll(), Initializer.SODA));
-        Assert.assertTrue(Objects.deepEquals(repositories.fridgeCsvDao.getAll(), Initializer.FRIDGES));
+        Assert.assertTrue(Objects.deepEquals(repositories.categoryCsvDataProvider.getAll(), Initializer.CATEGORIES));
+        Assert.assertTrue(Objects.deepEquals(repositories.computerCsvDataProvider.getAll(), Initializer.COMPUTERS));
+        Assert.assertTrue(Objects.deepEquals(repositories.sodaCsvDataProvider.getAll(), Initializer.SODA));
+        Assert.assertTrue(Objects.deepEquals(repositories.fridgeCsvDataProvider.getAll(), Initializer.FRIDGES));
     }
 
 
@@ -55,14 +55,14 @@ public class InitializerTest {
     }
 
     private void assertCsvBad(Repositories repositories) {
-        Assert.assertFalse(Objects.deepEquals(repositories.categoryCsvDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.categoryCsvDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.computerCsvDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.computerCsvDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.sodaCsvDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.sodaCsvDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.fridgeCsvDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.fridgeCsvDao.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.categoryCsvDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.categoryCsvDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.computerCsvDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.computerCsvDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.sodaCsvDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.sodaCsvDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.fridgeCsvDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.fridgeCsvDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
     }
 
     @Test
@@ -74,10 +74,10 @@ public class InitializerTest {
     }
 
     private void assertXml(Repositories repositories) {
-        Assert.assertTrue(Objects.deepEquals(repositories.categoryXmlDao.getAll(), Initializer.CATEGORIES));
-        Assert.assertTrue(Objects.deepEquals(repositories.computerXmlDao.getAll(), Initializer.COMPUTERS));
-        Assert.assertTrue(Objects.deepEquals(repositories.sodaXmlDao.getAll(), Initializer.SODA));
-        Assert.assertTrue(Objects.deepEquals(repositories.fridgeXmlDao.getAll(), Initializer.FRIDGES));
+        Assert.assertTrue(Objects.deepEquals(repositories.categoryXmlDataProvider.getAll(), Initializer.CATEGORIES));
+        Assert.assertTrue(Objects.deepEquals(repositories.computerXmlDataProvider.getAll(), Initializer.COMPUTERS));
+        Assert.assertTrue(Objects.deepEquals(repositories.sodaXmlDataProvider.getAll(), Initializer.SODA));
+        Assert.assertTrue(Objects.deepEquals(repositories.fridgeXmlDataProvider.getAll(), Initializer.FRIDGES));
     }
 
     @Test
@@ -89,14 +89,14 @@ public class InitializerTest {
     }
 
     private void assertXmlBad(Repositories repositories) {
-        Assert.assertFalse(Objects.deepEquals(repositories.categoryXmlDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.categoryXmlDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.computerXmlDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.computerXmlDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.sodaXmlDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.sodaXmlDao.getAll(), Arrays.asList(null, null, null, null, null)));
-        Assert.assertFalse(Objects.deepEquals(repositories.fridgeXmlDao.getAll(), Arrays.asList()));
-        Assert.assertFalse(Objects.deepEquals(repositories.fridgeXmlDao.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.categoryXmlDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.categoryXmlDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.computerXmlDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.computerXmlDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.sodaXmlDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.sodaXmlDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
+        Assert.assertFalse(Objects.deepEquals(repositories.fridgeXmlDataProvider.getAll(), Arrays.asList()));
+        Assert.assertFalse(Objects.deepEquals(repositories.fridgeXmlDataProvider.getAll(), Arrays.asList(null, null, null, null, null)));
     }
 
     @Test

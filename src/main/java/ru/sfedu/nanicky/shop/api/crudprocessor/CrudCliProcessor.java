@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
-import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.util.List;

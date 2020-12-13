@@ -1,4 +1,4 @@
-package ru.sfedu.nanicky.shop.db.protocol.dao;
+package ru.sfedu.nanicky.shop.db.protocol.dataprovider;
 
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 

@@ -10,11 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class XmlDaoTest_Category {
+public class XmlDataProviderTest_Category {
 
     private static final File TEST_FILES_FOLDER = new File("tmpTests");
     private static final File DB_FILE = new File(TEST_FILES_FOLDER, "test.xml");
-    private XmlDao<Category> dao;
+    private XmlDataProvider<Category> dao;
 
     @Before
     public void beforeEach() throws IOException {
@@ -32,7 +32,7 @@ public class XmlDaoTest_Category {
         }
         DB_FILE.createNewFile();
 
-        dao = new XmlDao<Category>(DB_FILE);
+        dao = new XmlDataProvider<Category>(DB_FILE);
 
     }
 

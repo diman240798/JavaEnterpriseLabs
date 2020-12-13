@@ -1,24 +1,24 @@
-package ru.sfedu.nanicky.shop.db.csv.dao;
+package ru.sfedu.nanicky.shop.db.csv;
 
 import com.opencsv.bean.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.db.protocol.dao.TextDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.TextDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvDao<V extends IdEntity> extends TextDao<V> {
+public class CsvDataProvider<V extends IdEntity> extends TextDao<V> {
 
 
-    private static Logger LOG = LogManager.getLogger(CsvDao.class);
+    private static Logger LOG = LogManager.getLogger(CsvDataProvider.class);
 
     private final Class clazz;
     private final File dbFile;
 
-    public CsvDao(Class clazz, File dbFile) {
+    public CsvDataProvider(Class clazz, File dbFile) {
         this.clazz = clazz;
         dbFile.getParentFile().mkdirs();
         this.dbFile = dbFile;

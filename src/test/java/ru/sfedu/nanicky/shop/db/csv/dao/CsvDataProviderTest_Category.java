@@ -10,11 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class CsvDaoTest_Category {
+public class CsvDataProviderTest_Category {
 
     private static final File TEST_FILES_FOLDER = new File("tmpTests");
     private static final File DB_FILE = new File(TEST_FILES_FOLDER, "test.csv");
-    private CsvDao<Category> dao;
+    private CsvDataProvider<Category> dao;
 
     @Before
     public void beforeEach() throws IOException {
@@ -32,7 +32,7 @@ public class CsvDaoTest_Category {
         }
         DB_FILE.createNewFile();
 
-        dao = new CsvDao<>(Category.class, DB_FILE);
+        dao = new CsvDataProvider<>(Category.class, DB_FILE);
 
     }
 
