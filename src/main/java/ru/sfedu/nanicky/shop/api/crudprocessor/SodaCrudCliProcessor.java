@@ -6,7 +6,7 @@ import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
 import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
 public class SodaCrudCliProcessor extends CrudCliProcessor<Soda> {
@@ -24,7 +24,7 @@ public class SodaCrudCliProcessor extends CrudCliProcessor<Soda> {
      * @return BaseDao
      */
     @Override
-    public BaseDao<Soda> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Soda> getDaoForDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
     }
 

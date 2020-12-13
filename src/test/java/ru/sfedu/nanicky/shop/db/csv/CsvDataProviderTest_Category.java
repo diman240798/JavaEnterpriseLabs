@@ -1,4 +1,4 @@
-package ru.sfedu.nanicky.shop.db.csv.dao;
+package ru.sfedu.nanicky.shop.db.csv;
 
 import org.junit.Assert;
 import org.junit.Before;

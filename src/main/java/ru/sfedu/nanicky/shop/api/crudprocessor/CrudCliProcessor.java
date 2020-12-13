@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
         LOG.info("Start processing model operation");
         LOG.debug("Start processing model data provider {} operation {}", dataProviderStr, method);
 
-        BaseDao<M> dataProviderImpl = getDaoForDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<M> dataProviderImpl = getDaoForDataProvider(dataProviderStr, repositories);
 
         if (method.equals(Constants.GET)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
@@ -107,7 +107,7 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
      * @param repositories - класс содержащий все репозитории используемые в проекте
      * @return BaseDao
      */
-    public abstract BaseDao<M> getDaoForDataProvider(String dataProvider, Repositories repositories);
+    public abstract BaseDataProvider<M> getDaoForDataProvider(String dataProvider, Repositories repositories);
 
     /**
      * Выдача распарсенной модели

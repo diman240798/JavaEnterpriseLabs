@@ -1,12 +1,12 @@
 package ru.sfedu.nanicky.shop.db.jdbc.model;
 
 
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Bucket;
 
 import java.sql.ResultSet;
 
-public class BucketJdbcDataProvider extends JdbcDao<Bucket> {
+public class BucketJdbcDataProvider extends JdbcDataProvider<Bucket> {
 
     public BucketJdbcDataProvider() {
         super("bucket");

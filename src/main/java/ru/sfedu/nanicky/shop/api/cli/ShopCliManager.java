@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
 import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
 import java.util.Comparator;
@@ -49,7 +49,7 @@ public class ShopCliManager {
      * @return void
      */
     private void startSession(String dataProviderStr) {
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
         Session session = new Session(id);
         if (sessionDao.insert(session)) {
@@ -67,13 +67,13 @@ public class ShopCliManager {
      */
     private void finishSession(String dataProviderStr, String userSession) {
         LOG.info("Getting session entity");
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         Optional<Session> sessionOption = sessionDao.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
         if (sessionOption.isPresent()) {
             LOG.info("Found session");
-            BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
+            BaseDataProvider<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
             LOG.info("Getting bucket entity");
             Optional<Bucket> bucketOption = bucketDao.getAll().stream()
                     .filter(it -> it.getSession().equals(userSession))
@@ -92,7 +92,7 @@ public class ShopCliManager {
                     String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
                     String category = split[0];
                     long productId = Long.parseLong(split[1]);
-                    BaseDao<Product> prodDao =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
+                    BaseDataProvider<Product> prodDao =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
                     Product product = prodDao.getById(productId).get();
 
                     receiptTextSb.append(product.toString()).append("\n");
@@ -101,7 +101,7 @@ public class ShopCliManager {
 
                 LOG.info("Receipt data ready. Printing.");
                 long receiptId = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
-                BaseDao<Receipt> receiptDao = RepositoriesUtil.getReceiptsDataProvider(dataProviderStr, repositories);
+                BaseDataProvider<Receipt> receiptDao = RepositoriesUtil.getReceiptsDataProvider(dataProviderStr, repositories);
                 Receipt receipt = new Receipt(receiptId, receiptTextSb.toString(), totalPrice.get());
                 receiptDao.insert(receipt);
                 LOG.info("Your receipt is: \n{}", receipt);
@@ -128,9 +128,9 @@ public class ShopCliManager {
      */
     private void addProduct(String[] args) {
         String dataProviderStr = args[0];
-        BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
         String userSession = args[2];
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         Optional<Session> sessionOption = sessionDao.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
@@ -139,15 +139,15 @@ public class ShopCliManager {
             long productId = Long.parseLong(args[3]);
             String userCategory = args[4];
 
-            BaseDao<Category> categoryBaseDao = RepositoriesUtil.getCategoryDataProvider(dataProviderStr, repositories);
-            Optional<Category> categoryOption = categoryBaseDao.getAll().stream().filter(it -> it.getName().equals(userCategory)).findFirst();
+            BaseDataProvider<Category> categoryBaseDataProvider = RepositoriesUtil.getCategoryDataProvider(dataProviderStr, repositories);
+            Optional<Category> categoryOption = categoryBaseDataProvider.getAll().stream().filter(it -> it.getName().equals(userCategory)).findFirst();
             if (!categoryOption.isPresent()) {
                 LOG.info("No such category: {}", userCategory);
                 return;
             }
             Category category = categoryOption.get();
 
-            BaseDao productDao = RepositoriesUtil.getProductDataProvider(userCategory, dataProviderStr, repositories);
+            BaseDataProvider productDao = RepositoriesUtil.getProductDataProvider(userCategory, dataProviderStr, repositories);
 
             if (productDao == null) {
                 LOG.info("Cant get product data manager!");

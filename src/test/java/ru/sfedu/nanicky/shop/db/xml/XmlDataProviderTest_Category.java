@@ -1,4 +1,4 @@
-package ru.sfedu.nanicky.shop.db.xml.dao;
+package ru.sfedu.nanicky.shop.db.xml;
 
 import org.junit.Assert;
 import org.junit.Before;

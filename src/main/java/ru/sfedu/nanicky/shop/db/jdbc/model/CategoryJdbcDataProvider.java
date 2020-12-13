@@ -1,11 +1,11 @@
 package ru.sfedu.nanicky.shop.db.jdbc.model;
 
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Category;
 
 import java.sql.ResultSet;
 
-public class CategoryJdbcDataProvider extends JdbcDao<Category> {
+public class CategoryJdbcDataProvider extends JdbcDataProvider<Category> {
 
     public CategoryJdbcDataProvider() {
         super("category");

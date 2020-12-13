@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
 import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Category;
 import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
 import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
@@ -59,10 +59,10 @@ public class Initializer {
     public static void initFor(String dataProvider, Repositories repositories) {
         LOG.info("Init for {}", dataProvider);
         LOG.debug("Init for data provider {}", dataProvider);
-        BaseDao<Category> categoryDao = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
-        BaseDao<Fridge> fridgeDao = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
-        BaseDao<Computer> computerDao = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
-        BaseDao<Soda> sodaDao = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
+        BaseDataProvider<Category> categoryDao = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
+        BaseDataProvider<Fridge> fridgeDao = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
+        BaseDataProvider<Computer> computerDao = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
+        BaseDataProvider<Soda> sodaDao = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
 
         categoryDao.insertAll(CATEGORIES);
         fridgeDao.insertAll(FRIDGES);

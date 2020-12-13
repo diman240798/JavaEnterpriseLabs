@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.app;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
 
 public class RepositoriesUtil {
@@ -18,20 +18,20 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Receipt
      */
-    public static BaseDao<Receipt> getReceiptsDataProvider(String dataProviderStr, Repositories repositories) {
+    public static BaseDataProvider<Receipt> getReceiptsDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
-        BaseDao<Receipt> baseDao;
+        BaseDataProvider<Receipt> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.receiptXmlDataProvider;
+            baseDataProvider = repositories.receiptXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.receiptCsvDataProvider;
+            baseDataProvider = repositories.receiptCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            baseDao = repositories.receiptJdbcDataProvider;
+            baseDataProvider = repositories.receiptJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return baseDao;
+        return baseDataProvider;
     }
 
     /**
@@ -42,20 +42,20 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Receipt
      */
-    public static BaseDao<Category> getCategoryDataProvider(String dataProviderStr, Repositories repositories) {
+    public static BaseDataProvider<Category> getCategoryDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
-        BaseDao<Category> baseDao;
+        BaseDataProvider<Category> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.categoryXmlDataProvider;
+            baseDataProvider = repositories.categoryXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.categoryCsvDataProvider;
+            baseDataProvider = repositories.categoryCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            baseDao = repositories.categoryJdbcDataProvider;
+            baseDataProvider = repositories.categoryJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return baseDao;
+        return baseDataProvider;
     }
 
     /**
@@ -66,20 +66,20 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Computer
      */
-    public static BaseDao<Computer> getComputerDataProvider(String dataProviderStr, Repositories repositories) {
+    public static BaseDataProvider<Computer> getComputerDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
-        BaseDao<Computer> baseDao;
+        BaseDataProvider<Computer> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.computerXmlDataProvider;
+            baseDataProvider = repositories.computerXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.computerCsvDataProvider;
+            baseDataProvider = repositories.computerCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            baseDao = repositories.computerJdbcDataProvider;
+            baseDataProvider = repositories.computerJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return baseDao;
+        return baseDataProvider;
     }
 
     /**
@@ -90,20 +90,20 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Fridge
      */
-    public static BaseDao<Fridge> getFridgeDataProvider(String dataProviderStr, Repositories repositories) {
+    public static BaseDataProvider<Fridge> getFridgeDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
-        BaseDao<Fridge> baseDao;
+        BaseDataProvider<Fridge> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.fridgeXmlDataProvider;
+            baseDataProvider = repositories.fridgeXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.fridgeCsvDataProvider;
+            baseDataProvider = repositories.fridgeCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            baseDao = repositories.fridgeJdbcDataProvider;
+            baseDataProvider = repositories.fridgeJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return baseDao;
+        return baseDataProvider;
     }
 
     /**
@@ -114,20 +114,20 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Soda
      */
-    public static BaseDao<Soda> getSodaDataProvider(String dataProviderStr, Repositories repositories) {
+    public static BaseDataProvider<Soda> getSodaDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
-        BaseDao<Soda> baseDao;
+        BaseDataProvider<Soda> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            baseDao = repositories.sodaXmlDataProvider;
+            baseDataProvider = repositories.sodaXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            baseDao = repositories.sodaCsvDataProvider;
+            baseDataProvider = repositories.sodaCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            baseDao = repositories.sodaJdbcDataProvider;
+            baseDataProvider = repositories.sodaJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return baseDao;
+        return baseDataProvider;
     }
 
     /**
@@ -138,8 +138,8 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Session
      */
-    public static BaseDao<Session> getSessionDataProvider(String dataProviderStr, Repositories repositories) {
-        BaseDao<Session> sessionDao;
+    public static BaseDataProvider<Session> getSessionDataProvider(String dataProviderStr, Repositories repositories) {
+        BaseDataProvider<Session> sessionDao;
         if (dataProviderStr.equals(Constants.XML)) {
             sessionDao = repositories.sessionXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
@@ -160,8 +160,8 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Bucket
      */
-    public static BaseDao<Bucket> getBucketDataProvider(String dataProviderStr, Repositories repositories) {
-        BaseDao<Bucket> bucketDao;
+    public static BaseDataProvider<Bucket> getBucketDataProvider(String dataProviderStr, Repositories repositories) {
+        BaseDataProvider<Bucket> bucketDao;
         if (dataProviderStr.equals(Constants.XML)) {
             bucketDao = repositories.bucketXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
@@ -183,8 +183,8 @@ public class RepositoriesUtil {
      * @see Repositories
      * @see Soda
      */
-    public static BaseDao<Product> getProductDataProvider(String userCategory, String dataProviderStr, Repositories repositories) {
-        BaseDao productDao;
+    public static BaseDataProvider<Product> getProductDataProvider(String userCategory, String dataProviderStr, Repositories repositories) {
+        BaseDataProvider productDao;
         if (userCategory.equals(Constants.CATEGORY_SODA)) {
             productDao = RepositoriesUtil.getSodaDataProvider(dataProviderStr, repositories);
         } else if (userCategory.equals(Constants.CATEGORY_FRIDGE)) {

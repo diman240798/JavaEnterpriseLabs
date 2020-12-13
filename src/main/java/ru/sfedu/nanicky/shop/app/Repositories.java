@@ -1,9 +1,9 @@
 package ru.sfedu.nanicky.shop.app;
 
-import ru.sfedu.nanicky.shop.db.csv.dao.CsvDataProvider;
+import ru.sfedu.nanicky.shop.db.csv.CsvDataProvider;
 import ru.sfedu.nanicky.shop.db.jdbc.model.*;
 import ru.sfedu.nanicky.shop.db.protocol.model.*;
-import ru.sfedu.nanicky.shop.db.xml.dao.XmlDataProvider;
+import ru.sfedu.nanicky.shop.db.xml.XmlDataProvider;
 
 public class Repositories {
 

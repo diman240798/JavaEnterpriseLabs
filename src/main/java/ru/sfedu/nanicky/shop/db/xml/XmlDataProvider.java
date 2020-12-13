@@ -6,14 +6,14 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.TextDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.TextDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XmlDataProvider<V extends IdEntity> extends TextDao<V> {
+public class XmlDataProvider<V extends IdEntity> extends TextDataProvider<V> {
 
 
     private static Logger LOG = LogManager.getLogger(XmlDataProvider.class);

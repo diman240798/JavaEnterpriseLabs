@@ -5,7 +5,7 @@ import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseDao<V extends IdEntity> {
+public interface BaseDataProvider<V extends IdEntity> {
     List<V> getAll();
     Optional<V> getById(long id);
     boolean delete(V v);

@@ -1,12 +1,12 @@
 package ru.sfedu.nanicky.shop.db.jdbc.model;
 
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
 
 import java.sql.ResultSet;
 
-public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
+public class ComputerJdbcDataProvider extends JdbcDataProvider<Computer> {
 
     public ComputerJdbcDataProvider() {
         super("computer");

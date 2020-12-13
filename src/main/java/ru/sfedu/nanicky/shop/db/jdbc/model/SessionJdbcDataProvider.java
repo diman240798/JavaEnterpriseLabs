@@ -1,12 +1,12 @@
 package ru.sfedu.nanicky.shop.db.jdbc.model;
 
 
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Session;
 
 import java.sql.ResultSet;
 
-public class SessionJdbcDataProvider extends JdbcDao<Session> {
+public class SessionJdbcDataProvider extends JdbcDataProvider<Session> {
 
     public SessionJdbcDataProvider() {
         super("session");

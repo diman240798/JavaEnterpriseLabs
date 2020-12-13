@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.db.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDao;
+import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
 
 import java.sql.Connection;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
+public abstract class JdbcDataProvider<V extends IdEntity> implements BaseDataProvider<V> {
 
-    private static final Logger LOG = LogManager.getLogger(JdbcDao.class);
+    private static final Logger LOG = LogManager.getLogger(JdbcDataProvider.class);
 
     private static final String JDBC_DRIVER = "org.h2.Driver";
 
@@ -42,7 +42,7 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
     private String QUERY_UPDATE;
     private String QUERY_INSERT;
 
-    public JdbcDao(String entity) {
+    public JdbcDataProvider(String entity) {
         this.entity = entity;
         QUERY_CREATE = "CREATE TABLE IF NOT EXISTS " + this.entity + " (%s)";
         QUERY_GET_ALL = "SELECT * FROM " + this.entity;

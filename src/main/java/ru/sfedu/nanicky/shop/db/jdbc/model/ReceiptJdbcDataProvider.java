@@ -1,11 +1,11 @@
 package ru.sfedu.nanicky.shop.db.jdbc.model;
 
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Receipt;
 
 import java.sql.ResultSet;
 
-public class ReceiptJdbcDataProvider extends JdbcDao<Receipt> {
+public class ReceiptJdbcDataProvider extends JdbcDataProvider<Receipt> {
 
     public ReceiptJdbcDataProvider() {
         super("receipt");

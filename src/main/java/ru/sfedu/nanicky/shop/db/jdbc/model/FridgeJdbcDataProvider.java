@@ -2,12 +2,12 @@ package ru.sfedu.nanicky.shop.db.jdbc.model;
 
 
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.jdbc.JdbcDao;
+import ru.sfedu.nanicky.shop.db.jdbc.JdbcDataProvider;
 import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
 
 import java.sql.ResultSet;
 
-public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
+public class FridgeJdbcDataProvider extends JdbcDataProvider<Fridge> {
 
     public FridgeJdbcDataProvider() {
         super("fridge");

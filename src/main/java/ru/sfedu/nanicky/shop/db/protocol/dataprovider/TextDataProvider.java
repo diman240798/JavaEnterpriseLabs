@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
+public abstract class TextDataProvider<V extends IdEntity> implements BaseDataProvider<V> {
     public Optional<V> getById(long id) {
         return getAll().stream()
                 .filter(it -> it.getId() == id)
