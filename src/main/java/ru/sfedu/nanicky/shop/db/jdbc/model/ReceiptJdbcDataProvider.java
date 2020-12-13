@@ -5,9 +5,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Receipt;
 
 import java.sql.ResultSet;
 
-public class ReceiptJdbcDao extends JdbcDao<Receipt> {
+public class ReceiptJdbcDataProvider extends JdbcDao<Receipt> {
 
-    public ReceiptJdbcDao() {
+    public ReceiptJdbcDataProvider() {
         super("receipt");
     }
 

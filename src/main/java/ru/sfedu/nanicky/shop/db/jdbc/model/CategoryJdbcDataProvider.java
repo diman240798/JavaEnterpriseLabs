@@ -5,9 +5,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Category;
 
 import java.sql.ResultSet;
 
-public class CategoryJdbcDao extends JdbcDao<Category> {
+public class CategoryJdbcDataProvider extends JdbcDao<Category> {
 
-    public CategoryJdbcDao() {
+    public CategoryJdbcDataProvider() {
         super("category");
     }
 

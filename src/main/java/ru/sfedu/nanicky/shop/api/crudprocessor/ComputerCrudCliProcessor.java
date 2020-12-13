@@ -1,40 +1,25 @@
-package ru.sfedu.nanicky.shop.api.processor;
+package ru.sfedu.nanicky.shop.api.crudprocessor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.app.Reposotiries;
+import ru.sfedu.nanicky.shop.app.Repositories;
+import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
 
-public class ComputerProcessor extends Processor<Computer> {
+public class ComputerCrudCliProcessor extends CrudCliProcessor<Computer> {
 
     private static Logger LOG = LogManager.getLogger(Main.class);
 
-    private Reposotiries reposotiries;
-
-    public ComputerProcessor(Reposotiries reposotiries) {
-        this.reposotiries = reposotiries;
+    public ComputerCrudCliProcessor(Repositories repositories) {
+        super(repositories);
     }
 
     @Override
-    public BaseDao<Computer> getDaoForDataProvider(String dataProvider) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProvider);
-        BaseDao<Computer> baseDao;
-        if (dataProvider.equals(Constants.XML)) {
-            baseDao = reposotiries.computerXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
-            baseDao = reposotiries.computerCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.computerJdbcDao;
-        } else if (dataProvider.equals(Constants.HIBERNATE)) {
-            baseDao = reposotiries.computerHibernateDao;
-        } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
-        }
-        return baseDao;
+    public BaseDao<Computer> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+        return RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
     }
 
     @Override

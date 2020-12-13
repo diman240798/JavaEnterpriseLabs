@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.protocol.model.Category;
+import ru.sfedu.nanicky.shop.db.protocol.model.Session;
 
 import java.util.Optional;
 
-public class CategoryJdbcDaoTest {
+public class SessionJdbcDataProviderTest {
 
     @Before
     public void beforeEach() {
@@ -28,25 +28,25 @@ public class CategoryJdbcDaoTest {
 
     @Test
     public void testGetAll() {
-        CategoryJdbcDao dao = new CategoryJdbcDao();
-        Category model = new Category(1, "category");
+        SessionJdbcDataProvider dao = new SessionJdbcDataProvider();
+        Session model = new Session(0, "Indesit c30", 30);
 
         Assert.assertTrue(dao.insert(model));
         Assert.assertFalse(dao.insert(model));
 
-        Category modelFromDb = dao.getAll().get(0);
+        Session modelFromDb = dao.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        CategoryJdbcDao dao = new CategoryJdbcDao();
-        Category model = new Category(1, "category");
+        SessionJdbcDataProvider dao = new SessionJdbcDataProvider();
+        Session model = new Session(0, "Indesit c30", 30);
 
         Assert.assertTrue(dao.insert(model));
 
-        Optional<Category> modelFromDb = dao.getById(model.getId());
+        Optional<Session> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,14 +54,14 @@ public class CategoryJdbcDaoTest {
 
     @Test
     public void testUpdate() {
-        CategoryJdbcDao dao = new CategoryJdbcDao();
-        Category model = new Category(1, "category");
-        Category modelUpdate = new Category(1, "category_new");
+        SessionJdbcDataProvider dao = new SessionJdbcDataProvider();
+        Session model = new Session(0, "Indesit c30", 30);
+        Session modelUpdate = new Session(0, "Toshiba m20", 50);
 
         Assert.assertTrue(dao.insert(model));
         Assert.assertTrue(dao.update(modelUpdate));
 
-        Optional<Category> modelFromDb = dao.getById(model.getId());
+        Optional<Session> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());

@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
+import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
 import java.util.Optional;
 
-public class FridgeJdbcDaoTest {
+public class SodaJdbcDataProviderTest {
 
     @Before
     public void beforeEach() {
@@ -28,25 +28,25 @@ public class FridgeJdbcDaoTest {
 
     @Test
     public void testGetAll() {
-        FridgeJdbcDao dao = new FridgeJdbcDao();
-        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
+        SodaJdbcDataProvider dao = new SodaJdbcDataProvider();
+        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
 
         Assert.assertTrue(dao.insert(model));
         Assert.assertFalse(dao.insert(model));
 
-        Fridge modelFromDb = dao.getAll().get(0);
+        Soda modelFromDb = dao.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        FridgeJdbcDao dao = new FridgeJdbcDao();
-        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
+        SodaJdbcDataProvider dao = new SodaJdbcDataProvider();
+        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
 
         Assert.assertTrue(dao.insert(model));
 
-        Optional<Fridge> modelFromDb = dao.getById(model.getId());
+        Optional<Soda> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,14 +54,14 @@ public class FridgeJdbcDaoTest {
 
     @Test
     public void testUpdate() {
-        FridgeJdbcDao dao = new FridgeJdbcDao();
-        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
-        Fridge modelUpdate = new Fridge(0, "Toshiba a52", 50, 60650, Constants.CATEGORY_FRIDGE, 100, "gray", 600, true);
+        SodaJdbcDataProvider dao = new SodaJdbcDataProvider();
+        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
+        Soda modelUpdate = new Soda(0, "fanta", 20, 10, "soda", "lemon");
 
         Assert.assertTrue(dao.insert(model));
         Assert.assertTrue(dao.update(modelUpdate));
 
-        Optional<Fridge> modelFromDb = dao.getById(model.getId());
+        Optional<Soda> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());

@@ -93,7 +93,6 @@ public class Constants {
     public static final String XML = "xml";
     public static final String CSV = "csv";
     public static final String JDBC = "jdbc";
-    public static final String HIBERNATE = "hibernate";
 
     public static final List<String> ALL_ACTIONS = Arrays.asList(Constants.INSERT, Constants.GET_ALL, Constants.GET, Constants.UPDATE, Constants.DELETE);
     public static final List<String> GET_DELETE_ACTIONS = Arrays.asList(Constants.GET_ALL, Constants.GET, Constants.DELETE);

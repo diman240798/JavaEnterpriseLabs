@@ -6,9 +6,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Bucket;
 
 import java.sql.ResultSet;
 
-public class BucketJdbcDao extends JdbcDao<Bucket> {
+public class BucketJdbcDataProvider extends JdbcDao<Bucket> {
 
-    public BucketJdbcDao() {
+    public BucketJdbcDataProvider() {
         super("bucket");
     }
 

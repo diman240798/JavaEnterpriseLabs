@@ -38,55 +38,96 @@ public class CsvDaoTest_Category {
 
     @Test
     public void getAll() throws IOException {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
-        Category pyke = new Category(1, Constants.CATEGORY_SODA);
+        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Category second = new Category(1, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
-        dao.insert(pyke);
+        dao.insert(first);
+        dao.insert(second);
         List<Category> all = dao.getAll();
 
         Assert.assertEquals(2, all.size());
-        Assert.assertEquals(mike, all.get(0));
+        Assert.assertEquals(first, all.get(0));
+    }
+
+    @Test
+    public void getAllBad() throws IOException {
+        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Category second = new Category(1, Constants.CATEGORY_SODA);
+
+        dao.insert(first);
+        dao.insert(second);
+        List<Category> all = dao.getAll();
+
+        Assert.assertNotEquals(1, all.size());
+        Assert.assertNotEquals(second, all.get(0));
     }
 
     @Test
     public void getById() {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
+        Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dao.insert(first);
 
-        Category fromDb = dao.getById(mike.getId()).get();
+        Category fromDb = dao.getById(first.getId()).get();
 
-        Assert.assertEquals(mike, fromDb);
+        Assert.assertEquals(first, fromDb);
+    }
+
+    @Test
+    public void getByIdBad() {
+        Category first = new Category(0, Constants.CATEGORY_SODA);
+
+        dao.insert(first);
+
+        Category fromDb = dao.getById(first.getId()).get();
+
+        Assert.assertNotEquals(first.getName() + "not equals", fromDb.getName());
     }
 
     @Test
     public void delete() {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
+        Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dao.insert(first);
 
         List<Category> fromDb = dao.getAll();
 
         Assert.assertEquals(1, fromDb.size());
-        Assert.assertEquals(mike, fromDb.get(0));
+        Assert.assertEquals(first, fromDb.get(0));
 
-        dao.delete(mike);
+        dao.delete(first);
 
         List<Category> fromDbEmpty = dao.getAll();
         Assert.assertTrue(fromDbEmpty.isEmpty());
     }
 
     @Test
-    public void update() {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
+    public void deleteBad() {
+        Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dao.insert(first);
 
         List<Category> fromDb = dao.getAll();
 
         Assert.assertEquals(1, fromDb.size());
-        Assert.assertEquals(mike, fromDb.get(0));
+        Assert.assertEquals(first, fromDb.get(0));
+
+        dao.delete(null);
+
+        List<Category> fromDbEmpty = dao.getAll();
+        Assert.assertFalse(fromDbEmpty.isEmpty());
+    }
+
+    @Test
+    public void update() {
+        Category first = new Category(0, Constants.CATEGORY_SODA);
+
+        dao.insert(first);
+
+        List<Category> fromDb = dao.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
 
         Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
 
@@ -95,8 +136,31 @@ public class CsvDaoTest_Category {
         List<Category> fromDbNew = dao.getAll();
 
         Assert.assertEquals(1, fromDbNew.size());
-        Assert.assertNotEquals(mike, fromDbNew.get(0));
+        Assert.assertNotEquals(first, fromDbNew.get(0));
         Assert.assertEquals(newMike, fromDbNew.get(0));
+    }
+
+
+    @Test
+    public void updateBad() {
+        Category first = new Category(0, Constants.CATEGORY_SODA);
+
+        dao.insert(first);
+
+        List<Category> fromDb = dao.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
+
+        Category update = new Category(0, Constants.CATEGORY_COMPUTER);
+
+        dao.update(null);
+
+        List<Category> fromDbNew = dao.getAll();
+
+        Assert.assertNotEquals(2, fromDbNew.size());
+        Assert.assertEquals(first, fromDbNew.get(0));
+        Assert.assertNotEquals(update, fromDbNew.get(0));
     }
 
     @Test
@@ -112,24 +176,10 @@ public class CsvDaoTest_Category {
     }
 
     @Test
-    public void upsert() {
+    public void insertBad() throws IOException {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.upsert(mike);
-
-        List<Category> fromDb = dao.getAll();
-
-        Assert.assertEquals(1, fromDb.size());
-        Assert.assertEquals(mike, fromDb.get(0));
-
-        Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
-
-        dao.upsert(newMike);
-
-        List<Category> fromDbNew = dao.getAll();
-
-        Assert.assertEquals(1, fromDbNew.size());
-        Assert.assertNotEquals(mike, fromDbNew.get(0));
-        Assert.assertEquals(newMike, fromDbNew.get(0));
+        dao.insert(null);
+        Assert.assertFalse(dao.getById(mike.getId()).isPresent());
     }
 }

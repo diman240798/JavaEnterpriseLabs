@@ -9,7 +9,7 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
 
 import java.util.Optional;
 
-public class ComputerJdbcDaoTest {
+public class ComputerJdbcDataProviderTest {
 
     @Before
     public void beforeEach() {
@@ -28,7 +28,7 @@ public class ComputerJdbcDaoTest {
 
     @Test
     public void testGetAll() {
-        ComputerJdbcDao dao = new ComputerJdbcDao();
+        ComputerJdbcDataProvider dao = new ComputerJdbcDataProvider();
         Computer model = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
         Assert.assertTrue(dao.insert(model));
@@ -41,12 +41,12 @@ public class ComputerJdbcDaoTest {
 
     @Test
     public void testGetById() {
-        ComputerJdbcDao computerJdbcDao = new ComputerJdbcDao();
+        ComputerJdbcDataProvider computerJdbcDataProvider = new ComputerJdbcDataProvider();
         Computer computer = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        Assert.assertTrue(computerJdbcDao.insert(computer));
+        Assert.assertTrue(computerJdbcDataProvider.insert(computer));
 
-        Optional<Computer> computerFromDb = computerJdbcDao.getById(computer.getId());
+        Optional<Computer> computerFromDb = computerJdbcDataProvider.getById(computer.getId());
 
         Assert.assertTrue(computerFromDb.isPresent());
         Assert.assertEquals(computer, computerFromDb.get());
@@ -54,14 +54,14 @@ public class ComputerJdbcDaoTest {
 
     @Test
     public void testUpdate() {
-        ComputerJdbcDao computerJdbcDao = new ComputerJdbcDao();
+        ComputerJdbcDataProvider computerJdbcDataProvider = new ComputerJdbcDataProvider();
         Computer computer = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
         Computer computerUpdate = new Computer(15, "Hp pavillion MH 5", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        Assert.assertTrue(computerJdbcDao.insert(computer));
-        Assert.assertTrue(computerJdbcDao.update(computerUpdate));
+        Assert.assertTrue(computerJdbcDataProvider.insert(computer));
+        Assert.assertTrue(computerJdbcDataProvider.update(computerUpdate));
 
-        Optional<Computer> computerFromDb = computerJdbcDao.getById(computer.getId());
+        Optional<Computer> computerFromDb = computerJdbcDataProvider.getById(computer.getId());
 
         Assert.assertTrue(computerFromDb.isPresent());
         Assert.assertEquals(computerUpdate, computerFromDb.get());

@@ -6,9 +6,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Session;
 
 import java.sql.ResultSet;
 
-public class SessionJdbcDao extends JdbcDao<Session> {
+public class SessionJdbcDataProvider extends JdbcDao<Session> {
 
-    public SessionJdbcDao() {
+    public SessionJdbcDataProvider() {
         super("session");
     }
 

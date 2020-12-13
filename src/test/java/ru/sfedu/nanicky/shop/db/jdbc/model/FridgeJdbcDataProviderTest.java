@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.protocol.model.Bucket;
+import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
 
 import java.util.Optional;
 
-public class BucketJdbcDaoTest {
+public class FridgeJdbcDataProviderTest {
 
     @Before
     public void beforeEach() {
@@ -28,25 +28,25 @@ public class BucketJdbcDaoTest {
 
     @Test
     public void testGetAll() {
-        BucketJdbcDao dao = new BucketJdbcDao();
-        Bucket model = new Bucket(1, "session", "fridge:1");
+        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
         Assert.assertTrue(dao.insert(model));
         Assert.assertFalse(dao.insert(model));
 
-        Bucket modelFromDb = dao.getAll().get(0);
+        Fridge modelFromDb = dao.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        BucketJdbcDao dao = new BucketJdbcDao();
-        Bucket model = new Bucket(1, "session", "fridge:1");
+        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
         Assert.assertTrue(dao.insert(model));
 
-        Optional<Bucket> modelFromDb = dao.getById(model.getId());
+        Optional<Fridge> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,13 +54,14 @@ public class BucketJdbcDaoTest {
 
     @Test
     public void testUpdate() {
-        BucketJdbcDao dao = new BucketJdbcDao();
-        Bucket model = new Bucket(1, "session", "fridge:1");
-        Bucket modelUpdate = new Bucket(1, "session", "fridge:1");
+        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
+        Fridge modelUpdate = new Fridge(0, "Toshiba a52", 50, 60650, Constants.CATEGORY_FRIDGE, 100, "gray", 600, true);
+
         Assert.assertTrue(dao.insert(model));
         Assert.assertTrue(dao.update(modelUpdate));
 
-        Optional<Bucket> modelFromDb = dao.getById(model.getId());
+        Optional<Fridge> modelFromDb = dao.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());

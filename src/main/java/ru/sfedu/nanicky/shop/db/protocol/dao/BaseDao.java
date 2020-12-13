@@ -13,12 +13,4 @@ public interface BaseDao<V extends IdEntity> {
     boolean update(V v);
     boolean insert(V v);
     boolean insertAll(List<V> items);
-    default boolean upsert(V v) {
-        Optional<V> itemOption = getById(v.getId());
-        if (itemOption.isPresent()) {
-            return update(v);
-        } else {
-            return insert(v);
-        }
-    }
 }

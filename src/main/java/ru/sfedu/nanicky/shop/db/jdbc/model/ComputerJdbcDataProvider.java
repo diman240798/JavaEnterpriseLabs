@@ -6,9 +6,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
 
 import java.sql.ResultSet;
 
-public class ComputerJdbcDao extends JdbcDao<Computer> {
+public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
 
-    public ComputerJdbcDao() {
+    public ComputerJdbcDataProvider() {
         super("computer");
     }
 

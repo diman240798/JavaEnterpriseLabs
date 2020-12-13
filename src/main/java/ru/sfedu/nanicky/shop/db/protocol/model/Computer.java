@@ -1,11 +1,7 @@
 package ru.sfedu.nanicky.shop.db.protocol.model;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Objects;
 
-@Entity
-@PrimaryKeyJoinColumn(name = "id")
 public class Computer extends Product {
     private String processorName;
     private int processorPower;

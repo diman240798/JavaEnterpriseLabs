@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.api.cli.CliManager;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.app.Reposotiries;
+import ru.sfedu.nanicky.shop.app.Repositories;
 
 public class Main {
 
@@ -16,8 +16,8 @@ public class Main {
 
         Constants.init();
 
-        Reposotiries reposotiries = new Reposotiries();
-        CliManager cliManager = new CliManager(reposotiries);
+        Repositories repositories = new Repositories();
+        CliManager cliManager = new CliManager(repositories);
         cliManager.workoutRequest(args);
 
     }

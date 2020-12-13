@@ -110,26 +110,4 @@ public class XmlDaoTest_Category {
         Assert.assertFalse(dao.insert(mike));
         Assert.assertEquals(1, dao.getAll().size());
     }
-
-    @Test
-    public void upsert() {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
-
-        dao.upsert(mike);
-
-        List<Category> fromDb = dao.getAll();
-
-        Assert.assertEquals(1, fromDb.size());
-        Assert.assertEquals(mike, fromDb.get(0));
-
-        Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
-
-        dao.upsert(newMike);
-
-        List<Category> fromDbNew = dao.getAll();
-
-        Assert.assertEquals(1, fromDbNew.size());
-        Assert.assertNotEquals(mike, fromDbNew.get(0));
-        Assert.assertEquals(newMike, fromDbNew.get(0));
-    }
 }

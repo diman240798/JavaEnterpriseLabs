@@ -7,9 +7,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
 
 import java.sql.ResultSet;
 
-public class FridgeJdbcDao extends JdbcDao<Fridge> {
+public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
 
-    public FridgeJdbcDao() {
+    public FridgeJdbcDataProvider() {
         super("fridge");
     }
 

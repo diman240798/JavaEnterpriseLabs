@@ -1,40 +1,25 @@
-package ru.sfedu.nanicky.shop.api.processor;
+package ru.sfedu.nanicky.shop.api.crudprocessor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.Main;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.app.Reposotiries;
+import ru.sfedu.nanicky.shop.app.Repositories;
+import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Fridge;
 
-public class FridgeProcessor extends Processor<Fridge> {
+public class FridgeCrudCliProcessor extends CrudCliProcessor<Fridge> {
 
     private static Logger LOG = LogManager.getLogger(Main.class);
 
-    private Reposotiries reposotiries;
-
-    public FridgeProcessor(Reposotiries reposotiries) {
-        this.reposotiries = reposotiries;
+    public FridgeCrudCliProcessor(Repositories repositories) {
+        super(repositories);
     }
 
     @Override
-    public BaseDao<Fridge> getDaoForDataProvider(String dataProvider) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProvider);
-        BaseDao<Fridge> baseDao;
-        if (dataProvider.equals(Constants.XML)) {
-            baseDao = reposotiries.fridgeXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
-            baseDao = reposotiries.fridgeCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
-            baseDao = reposotiries.fridgeJdbcDao;
-        } else if (dataProvider.equals(Constants.HIBERNATE)) {
-            baseDao = reposotiries.fridgeHibernateDao;
-        } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
-        }
-        return baseDao;
+    public BaseDao<Fridge> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+        return RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
     }
 
     @Override

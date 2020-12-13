@@ -1,12 +1,8 @@
 package ru.sfedu.nanicky.shop.db.protocol.model;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@PrimaryKeyJoinColumn(name = "id")
 public class Session extends IdEntity {
     private String session = UUID.randomUUID().toString();
     private long date = System.currentTimeMillis();

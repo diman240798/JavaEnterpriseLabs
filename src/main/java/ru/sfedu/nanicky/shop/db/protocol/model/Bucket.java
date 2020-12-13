@@ -2,14 +2,10 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import ru.sfedu.nanicky.shop.app.Constants;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@PrimaryKeyJoinColumn(name = "id")
 public class Bucket extends IdEntity {
     private String session;
     private String products = "";

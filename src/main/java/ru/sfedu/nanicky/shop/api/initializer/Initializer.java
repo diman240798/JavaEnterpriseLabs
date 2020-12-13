@@ -2,12 +2,9 @@ package ru.sfedu.nanicky.shop.api.initializer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.nanicky.shop.api.processor.CategoryProcessor;
-import ru.sfedu.nanicky.shop.api.processor.ComputerProcessor;
-import ru.sfedu.nanicky.shop.api.processor.FridgeProcessor;
-import ru.sfedu.nanicky.shop.api.processor.SodaProcessor;
 import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.app.Reposotiries;
+import ru.sfedu.nanicky.shop.app.Repositories;
+import ru.sfedu.nanicky.shop.app.RepositoriesUtil;
 import ru.sfedu.nanicky.shop.db.protocol.dao.BaseDao;
 import ru.sfedu.nanicky.shop.db.protocol.model.Category;
 import ru.sfedu.nanicky.shop.db.protocol.model.Computer;
@@ -52,30 +49,26 @@ public class Initializer {
             new Soda(4, "Mirinda Blue", 2.2, 52500, Constants.CATEGORY_SODA, "blueberry-lemon", true)
     );
 
-    public static void initFor(String dataProvider, Reposotiries reposotiries) {
+    public static void initFor(String dataProvider, Repositories repositories) {
         LOG.info("Init for {}", dataProvider);
         LOG.debug("Init for data provider {}", dataProvider);
-        BaseDao<Category> categoryDao = new CategoryProcessor(reposotiries).getDaoForDataProvider(dataProvider);
-        BaseDao<Fridge> fridgeDao = new FridgeProcessor(reposotiries).getDaoForDataProvider(dataProvider);
-        BaseDao<Computer> computerDao = new ComputerProcessor(reposotiries).getDaoForDataProvider(dataProvider);
-        BaseDao<Soda> sodaDao = new SodaProcessor(reposotiries).getDaoForDataProvider(dataProvider);
+        BaseDao<Category> categoryDao = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
+        BaseDao<Fridge> fridgeDao = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
+        BaseDao<Computer> computerDao = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
+        BaseDao<Soda> sodaDao = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
 
         categoryDao.insertAll(CATEGORIES);
         fridgeDao.insertAll(FRIDGES);
         computerDao.insertAll(COMPUTERS);
         sodaDao.insertAll(SODA);
-
-
     }
 
-    public static void initAll(Reposotiries reposotiries) {
+    public static void initAll(Repositories repositories) {
         LOG.info("Init all");
         LOG.debug("Init all data providers");
 
-        initFor(Constants.XML, reposotiries);
-        initFor(Constants.CSV, reposotiries);
-        initFor(Constants.JDBC, reposotiries);
-//        initFor(Constants.HIBERNATE, reposotiries);
-
+        initFor(Constants.XML, repositories);
+        initFor(Constants.CSV, repositories);
+        initFor(Constants.JDBC, repositories);
     }
 }

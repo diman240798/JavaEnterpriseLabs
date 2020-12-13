@@ -7,9 +7,9 @@ import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
 import java.sql.ResultSet;
 
-public class SodaJdbcDao extends JdbcDao<Soda> {
+public class SodaJdbcDataProvider extends JdbcDao<Soda> {
 
-    public SodaJdbcDao() {
+    public SodaJdbcDataProvider() {
         super("soda");
     }
 
