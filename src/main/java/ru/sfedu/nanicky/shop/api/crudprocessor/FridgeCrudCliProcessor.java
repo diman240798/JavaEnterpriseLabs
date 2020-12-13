@@ -21,10 +21,10 @@ public class FridgeCrudCliProcessor extends CrudCliProcessor<Fridge> {
      * Реализация выдачи дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
     @Override
-    public BaseDataProvider<Fridge> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Fridge> getDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
     }
 

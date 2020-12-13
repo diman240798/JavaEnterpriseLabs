@@ -28,13 +28,13 @@ public class ComputerJdbcDataProviderTest {
 
     @Test
     public void testGetAll() {
-        ComputerJdbcDataProvider dao = new ComputerJdbcDataProvider();
+        ComputerJdbcDataProvider dataProvider = new ComputerJdbcDataProvider();
         Computer model = new Computer(15, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertFalse(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertFalse(dataProvider.insert(model));
 
-        Computer computerFromDb = dao.getAll().get(0);
+        Computer computerFromDb = dataProvider.getAll().get(0);
 
         Assert.assertEquals(model, computerFromDb);
     }

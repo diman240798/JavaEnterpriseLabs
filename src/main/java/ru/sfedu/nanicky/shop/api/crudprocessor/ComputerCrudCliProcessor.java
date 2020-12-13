@@ -21,10 +21,10 @@ public class ComputerCrudCliProcessor extends CrudCliProcessor<Computer> {
      * Реализация выдачи дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
     @Override
-    public BaseDataProvider<Computer> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Computer> getDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
     }
 

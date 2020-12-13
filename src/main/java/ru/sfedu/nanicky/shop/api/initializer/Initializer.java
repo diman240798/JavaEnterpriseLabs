@@ -59,15 +59,15 @@ public class Initializer {
     public static void initFor(String dataProvider, Repositories repositories) {
         LOG.info("Init for {}", dataProvider);
         LOG.debug("Init for data provider {}", dataProvider);
-        BaseDataProvider<Category> categoryDao = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
-        BaseDataProvider<Fridge> fridgeDao = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
-        BaseDataProvider<Computer> computerDao = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
-        BaseDataProvider<Soda> sodaDao = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
+        BaseDataProvider<Category> categoryDataProvider = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
+        BaseDataProvider<Fridge> fridgeDataProvider = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
+        BaseDataProvider<Computer> computerDataProvider = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
+        BaseDataProvider<Soda> sodaDataProvider = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
 
-        categoryDao.insertAll(CATEGORIES);
-        fridgeDao.insertAll(FRIDGES);
-        computerDao.insertAll(COMPUTERS);
-        sodaDao.insertAll(SODA);
+        categoryDataProvider.insertAll(CATEGORIES);
+        fridgeDataProvider.insertAll(FRIDGES);
+        computerDataProvider.insertAll(COMPUTERS);
+        sodaDataProvider.insertAll(SODA);
     }
 
     /**

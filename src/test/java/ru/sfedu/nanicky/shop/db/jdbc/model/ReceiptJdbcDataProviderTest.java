@@ -28,25 +28,25 @@ public class ReceiptJdbcDataProviderTest {
 
     @Test
     public void testGetAll() {
-        ReceiptJdbcDataProvider dao = new ReceiptJdbcDataProvider();
+        ReceiptJdbcDataProvider dataProvider = new ReceiptJdbcDataProvider();
         Receipt model = new Receipt(0, "Indesit c30", 30);
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertFalse(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertFalse(dataProvider.insert(model));
 
-        Receipt modelFromDb = dao.getAll().get(0);
+        Receipt modelFromDb = dataProvider.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        ReceiptJdbcDataProvider dao = new ReceiptJdbcDataProvider();
+        ReceiptJdbcDataProvider dataProvider = new ReceiptJdbcDataProvider();
         Receipt model = new Receipt(0, "Indesit c30", 30);
 
-        Assert.assertTrue(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
 
-        Optional<Receipt> modelFromDb = dao.getById(model.getId());
+        Optional<Receipt> modelFromDb = dataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,14 +54,14 @@ public class ReceiptJdbcDataProviderTest {
 
     @Test
     public void testUpdate() {
-        ReceiptJdbcDataProvider dao = new ReceiptJdbcDataProvider();
+        ReceiptJdbcDataProvider dataProvider = new ReceiptJdbcDataProvider();
         Receipt model = new Receipt(0, "Indesit c30", 30);
         Receipt modelUpdate = new Receipt(0, "Toshiba m20", 50);
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertTrue(dao.update(modelUpdate));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertTrue(dataProvider.update(modelUpdate));
 
-        Optional<Receipt> modelFromDb = dao.getById(model.getId());
+        Optional<Receipt> modelFromDb = dataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());

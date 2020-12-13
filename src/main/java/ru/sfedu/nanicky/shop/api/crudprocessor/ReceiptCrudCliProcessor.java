@@ -20,10 +20,10 @@ public class ReceiptCrudCliProcessor extends CrudCliProcessor<Receipt> {
      * Реализация выдачи дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
     @Override
-    public BaseDataProvider<Receipt> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Receipt> getDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getReceiptsDataProvider(dataProvider, repositories);
     }
 

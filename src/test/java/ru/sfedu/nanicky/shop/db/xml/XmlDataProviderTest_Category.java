@@ -14,7 +14,7 @@ public class XmlDataProviderTest_Category {
 
     private static final File TEST_FILES_FOLDER = new File("tmpTests");
     private static final File DB_FILE = new File(TEST_FILES_FOLDER, "test.xml");
-    private XmlDataProvider<Category> dao;
+    private XmlDataProvider<Category> dataProvider;
 
     @Before
     public void beforeEach() throws IOException {
@@ -32,7 +32,7 @@ public class XmlDataProviderTest_Category {
         }
         DB_FILE.createNewFile();
 
-        dao = new XmlDataProvider<Category>(DB_FILE);
+        dataProvider = new XmlDataProvider<Category>(DB_FILE);
 
     }
 
@@ -41,9 +41,9 @@ public class XmlDataProviderTest_Category {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
         Category pyke = new Category(1, Constants.CATEGORY_SODA);
 
-        Assert.assertTrue(dao.insert(mike));
-        Assert.assertTrue(dao.insert(pyke));
-        List<Category> all = dao.getAll();
+        Assert.assertTrue(dataProvider.insert(mike));
+        Assert.assertTrue(dataProvider.insert(pyke));
+        List<Category> all = dataProvider.getAll();
 
         Assert.assertEquals(2, all.size());
         Assert.assertEquals(mike, all.get(0));
@@ -53,9 +53,9 @@ public class XmlDataProviderTest_Category {
     public void getById() {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dataProvider.insert(mike);
 
-        Category fromDb = dao.getById(mike.getId()).get();
+        Category fromDb = dataProvider.getById(mike.getId()).get();
 
         Assert.assertEquals(mike, fromDb);
     }
@@ -64,16 +64,16 @@ public class XmlDataProviderTest_Category {
     public void delete() {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dataProvider.insert(mike);
 
-        List<Category> fromDb = dao.getAll();
+        List<Category> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(mike, fromDb.get(0));
 
-        dao.delete(mike);
+        dataProvider.delete(mike);
 
-        List<Category> fromDbEmpty = dao.getAll();
+        List<Category> fromDbEmpty = dataProvider.getAll();
         Assert.assertTrue(fromDbEmpty.isEmpty());
     }
 
@@ -81,18 +81,18 @@ public class XmlDataProviderTest_Category {
     public void update() {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
+        dataProvider.insert(mike);
 
-        List<Category> fromDb = dao.getAll();
+        List<Category> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(mike, fromDb.get(0));
 
         Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
 
-        dao.update(newMike);
+        dataProvider.update(newMike);
 
-        List<Category> fromDbNew = dao.getAll();
+        List<Category> fromDbNew = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDbNew.size());
         Assert.assertNotEquals(mike, fromDbNew.get(0));
@@ -103,11 +103,11 @@ public class XmlDataProviderTest_Category {
     public void insert() throws IOException {
         Category mike = new Category(0, Constants.CATEGORY_SODA);
 
-        dao.insert(mike);
-        Category fromDb = dao.getById(mike.getId()).get();
+        dataProvider.insert(mike);
+        Category fromDb = dataProvider.getById(mike.getId()).get();
         Assert.assertEquals(mike, fromDb);
 
-        Assert.assertFalse(dao.insert(mike));
-        Assert.assertEquals(1, dao.getAll().size());
+        Assert.assertFalse(dataProvider.insert(mike));
+        Assert.assertEquals(1, dataProvider.getAll().size());
     }
 }

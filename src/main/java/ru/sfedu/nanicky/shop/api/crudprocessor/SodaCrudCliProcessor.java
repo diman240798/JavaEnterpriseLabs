@@ -21,10 +21,10 @@ public class SodaCrudCliProcessor extends CrudCliProcessor<Soda> {
      * Реализация выдачи дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
     @Override
-    public BaseDataProvider<Soda> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Soda> getDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
     }
 

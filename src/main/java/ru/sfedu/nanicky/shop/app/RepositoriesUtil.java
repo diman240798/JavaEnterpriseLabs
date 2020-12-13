@@ -19,8 +19,8 @@ public class RepositoriesUtil {
      * @see Receipt
      */
     public static BaseDataProvider<Receipt> getReceiptsDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProviderStr);
+        LOG.info("Getting dataProvider for data provider");
+        LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Receipt> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
             baseDataProvider = repositories.receiptXmlDataProvider;
@@ -43,8 +43,8 @@ public class RepositoriesUtil {
      * @see Receipt
      */
     public static BaseDataProvider<Category> getCategoryDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProviderStr);
+        LOG.info("Getting dataProvider for data provider");
+        LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Category> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
             baseDataProvider = repositories.categoryXmlDataProvider;
@@ -67,8 +67,8 @@ public class RepositoriesUtil {
      * @see Computer
      */
     public static BaseDataProvider<Computer> getComputerDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProviderStr);
+        LOG.info("Getting dataProvider for data provider");
+        LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Computer> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
             baseDataProvider = repositories.computerXmlDataProvider;
@@ -91,8 +91,8 @@ public class RepositoriesUtil {
      * @see Fridge
      */
     public static BaseDataProvider<Fridge> getFridgeDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProviderStr);
+        LOG.info("Getting dataProvider for data provider");
+        LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Fridge> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
             baseDataProvider = repositories.fridgeXmlDataProvider;
@@ -115,8 +115,8 @@ public class RepositoriesUtil {
      * @see Soda
      */
     public static BaseDataProvider<Soda> getSodaDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProviderStr);
+        LOG.info("Getting dataProvider for data provider");
+        LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Soda> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
             baseDataProvider = repositories.sodaXmlDataProvider;
@@ -139,17 +139,17 @@ public class RepositoriesUtil {
      * @see Session
      */
     public static BaseDataProvider<Session> getSessionDataProvider(String dataProviderStr, Repositories repositories) {
-        BaseDataProvider<Session> sessionDao;
+        BaseDataProvider<Session> sessionBaseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            sessionDao = repositories.sessionXmlDataProvider;
+            sessionBaseDataProvider = repositories.sessionXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            sessionDao = repositories.sessionCsvDataProvider;
+            sessionBaseDataProvider = repositories.sessionCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            sessionDao = repositories.sessionJdbcDataProvider;
+            sessionBaseDataProvider = repositories.sessionJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return sessionDao;
+        return sessionBaseDataProvider;
     }
 
     /**
@@ -161,17 +161,17 @@ public class RepositoriesUtil {
      * @see Bucket
      */
     public static BaseDataProvider<Bucket> getBucketDataProvider(String dataProviderStr, Repositories repositories) {
-        BaseDataProvider<Bucket> bucketDao;
+        BaseDataProvider<Bucket> bucketBaseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
-            bucketDao = repositories.bucketXmlDataProvider;
+            bucketBaseDataProvider = repositories.bucketXmlDataProvider;
         } else if (dataProviderStr.equals(Constants.CSV)) {
-            bucketDao = repositories.bucketCsvDataProvider;
+            bucketBaseDataProvider = repositories.bucketCsvDataProvider;
         } else if (dataProviderStr.equals(Constants.JDBC)) {
-            bucketDao = repositories.bucketJdbcDataProvider;
+            bucketBaseDataProvider = repositories.bucketJdbcDataProvider;
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return bucketDao;
+        return bucketBaseDataProvider;
     }
 
     /**
@@ -184,16 +184,16 @@ public class RepositoriesUtil {
      * @see Soda
      */
     public static BaseDataProvider<Product> getProductDataProvider(String userCategory, String dataProviderStr, Repositories repositories) {
-        BaseDataProvider productDao;
+        BaseDataProvider productDataProvider;
         if (userCategory.equals(Constants.CATEGORY_SODA)) {
-            productDao = RepositoriesUtil.getSodaDataProvider(dataProviderStr, repositories);
+            productDataProvider = RepositoriesUtil.getSodaDataProvider(dataProviderStr, repositories);
         } else if (userCategory.equals(Constants.CATEGORY_FRIDGE)) {
-            productDao = RepositoriesUtil.getFridgeDataProvider(dataProviderStr, repositories);
+            productDataProvider = RepositoriesUtil.getFridgeDataProvider(dataProviderStr, repositories);
         } else if (userCategory.equals(Constants.COMPUTER)) {
-            productDao = RepositoriesUtil.getComputerDataProvider(dataProviderStr, repositories);
+            productDataProvider = RepositoriesUtil.getComputerDataProvider(dataProviderStr, repositories);
         } else {
             throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
-        return productDao;
+        return productDataProvider;
     }
 }

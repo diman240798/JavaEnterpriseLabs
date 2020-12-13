@@ -39,7 +39,7 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
         LOG.info("Start processing model operation");
         LOG.debug("Start processing model data provider {} operation {}", dataProviderStr, method);
 
-        BaseDataProvider<M> dataProviderImpl = getDaoForDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<M> dataProviderImpl = getDataProvider(dataProviderStr, repositories);
 
         if (method.equals(Constants.GET)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
@@ -105,9 +105,9 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
      * Выдача дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
-    public abstract BaseDataProvider<M> getDaoForDataProvider(String dataProvider, Repositories repositories);
+    public abstract BaseDataProvider<M> getDataProvider(String dataProvider, Repositories repositories);
 
     /**
      * Выдача распарсенной модели

@@ -21,10 +21,10 @@ public class CategoryCrudCliProcessor extends CrudCliProcessor<Category> {
      * Реализация выдачи дата провадера для соответствующей модели
      * @param dataProvider - тип датапровайдера в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDao
+     * @return BaseDataProvider
      */
     @Override
-    public BaseDataProvider<Category> getDaoForDataProvider(String dataProvider, Repositories repositories) {
+    public BaseDataProvider<Category> getDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
     }
 

@@ -28,25 +28,25 @@ public class FridgeJdbcDataProviderTest {
 
     @Test
     public void testGetAll() {
-        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        FridgeJdbcDataProvider dataProvider = new FridgeJdbcDataProvider();
         Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertFalse(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertFalse(dataProvider.insert(model));
 
-        Fridge modelFromDb = dao.getAll().get(0);
+        Fridge modelFromDb = dataProvider.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        FridgeJdbcDataProvider dataProvider = new FridgeJdbcDataProvider();
         Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
-        Assert.assertTrue(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
 
-        Optional<Fridge> modelFromDb = dao.getById(model.getId());
+        Optional<Fridge> modelFromDb = dataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,14 +54,14 @@ public class FridgeJdbcDataProviderTest {
 
     @Test
     public void testUpdate() {
-        FridgeJdbcDataProvider dao = new FridgeJdbcDataProvider();
+        FridgeJdbcDataProvider dataProvider = new FridgeJdbcDataProvider();
         Fridge model = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
         Fridge modelUpdate = new Fridge(0, "Toshiba a52", 50, 60650, Constants.CATEGORY_FRIDGE, 100, "gray", 600, true);
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertTrue(dao.update(modelUpdate));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertTrue(dataProvider.update(modelUpdate));
 
-        Optional<Fridge> modelFromDb = dao.getById(model.getId());
+        Optional<Fridge> modelFromDb = dataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());

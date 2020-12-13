@@ -49,10 +49,10 @@ public class ShopCliManager {
      * @return void
      */
     private void startSession(String dataProviderStr) {
-        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
         Session session = new Session(id);
-        if (sessionDao.insert(session)) {
+        if (sessionDataProvider.insert(session)) {
             LOG.info("Your session key:  {}", session.getSession());
         } else {
             LOG.info("Error creating session!");
@@ -67,15 +67,15 @@ public class ShopCliManager {
      */
     private void finishSession(String dataProviderStr, String userSession) {
         LOG.info("Getting session entity");
-        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
-        Optional<Session> sessionOption = sessionDao.getAll().stream()
+        BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        Optional<Session> sessionOption = sessionDataProvider.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
         if (sessionOption.isPresent()) {
             LOG.info("Found session");
-            BaseDataProvider<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
+            BaseDataProvider<Bucket> bucketDataProvider = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
             LOG.info("Getting bucket entity");
-            Optional<Bucket> bucketOption = bucketDao.getAll().stream()
+            Optional<Bucket> bucketOption = bucketDataProvider.getAll().stream()
                     .filter(it -> it.getSession().equals(userSession))
                     .findFirst();
             if (bucketOption.isPresent()) {
@@ -92,8 +92,8 @@ public class ShopCliManager {
                     String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
                     String category = split[0];
                     long productId = Long.parseLong(split[1]);
-                    BaseDataProvider<Product> prodDao =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
-                    Product product = prodDao.getById(productId).get();
+                    BaseDataProvider<Product> prodDataProvider =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
+                    Product product = prodDataProvider.getById(productId).get();
 
                     receiptTextSb.append(product.toString()).append("\n");
                     totalPrice.updateAndGet(v -> v + product.getPrice());
@@ -101,18 +101,18 @@ public class ShopCliManager {
 
                 LOG.info("Receipt data ready. Printing.");
                 long receiptId = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
-                BaseDataProvider<Receipt> receiptDao = RepositoriesUtil.getReceiptsDataProvider(dataProviderStr, repositories);
+                BaseDataProvider<Receipt> receiptsDataProvider = RepositoriesUtil.getReceiptsDataProvider(dataProviderStr, repositories);
                 Receipt receipt = new Receipt(receiptId, receiptTextSb.toString(), totalPrice.get());
-                receiptDao.insert(receipt);
+                receiptsDataProvider.insert(receipt);
                 LOG.info("Your receipt is: \n{}", receipt);
 
-                bucketDao.delete(bucket);
-                sessionDao.delete(sessionOption.get());
+                bucketDataProvider.delete(bucket);
+                sessionDataProvider.delete(sessionOption.get());
 
             }
             else {
                 LOG.info("You have not added single product to bucket. No check will be printed.");
-                sessionDao.delete(sessionOption.get());
+                sessionDataProvider.delete(sessionOption.get());
                 LOG.info("Session closed");
             }
         } else {
@@ -128,10 +128,10 @@ public class ShopCliManager {
      */
     private void addProduct(String[] args) {
         String dataProviderStr = args[0];
-        BaseDataProvider<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Bucket> bucketDataProvider = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
         String userSession = args[2];
-        BaseDataProvider<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
-        Optional<Session> sessionOption = sessionDao.getAll().stream()
+        BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        Optional<Session> sessionOption = sessionDataProvider.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
         if (sessionOption.isPresent()) {
@@ -147,19 +147,19 @@ public class ShopCliManager {
             }
             Category category = categoryOption.get();
 
-            BaseDataProvider productDao = RepositoriesUtil.getProductDataProvider(userCategory, dataProviderStr, repositories);
+            BaseDataProvider productDataProvider = RepositoriesUtil.getProductDataProvider(userCategory, dataProviderStr, repositories);
 
-            if (productDao == null) {
+            if (productDataProvider == null) {
                 LOG.info("Cant get product data manager!");
                 return;
             }
 
-            Optional productOptional = productDao.getById(productId);
+            Optional productOptional = productDataProvider.getById(productId);
 
             if (productOptional.isPresent()) {
                 Object product = productOptional.get();
                 LOG.info("Found product: {}", product);
-                List<Bucket> buckets = bucketDao.getAll();
+                List<Bucket> buckets = bucketDataProvider.getAll();
                 Optional<Bucket> bucketOption = buckets.stream()
                         .filter(it -> it.getSession().equals(userSession))
                         .findFirst();
@@ -169,8 +169,8 @@ public class ShopCliManager {
                 });
 
                 bucket.addProduct(productId, category);
-                bucketDao.delete(bucket);
-                bucketDao.insert(bucket);
+                bucketDataProvider.delete(bucket);
+                bucketDataProvider.insert(bucket);
                 LOG.info("Product added succesfully");
 
             } else {

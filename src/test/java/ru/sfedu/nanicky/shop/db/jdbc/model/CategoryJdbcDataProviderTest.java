@@ -28,25 +28,25 @@ public class CategoryJdbcDataProviderTest {
 
     @Test
     public void testGetAll() {
-        CategoryJdbcDataProvider dao = new CategoryJdbcDataProvider();
+        CategoryJdbcDataProvider dataProvider = new CategoryJdbcDataProvider();
         Category model = new Category(1, "category");
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertFalse(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
+        Assert.assertFalse(dataProvider.insert(model));
 
-        Category modelFromDb = dao.getAll().get(0);
+        Category modelFromDb = dataProvider.getAll().get(0);
 
         Assert.assertEquals(model, modelFromDb);
     }
 
     @Test
     public void testGetById() {
-        CategoryJdbcDataProvider dao = new CategoryJdbcDataProvider();
+        CategoryJdbcDataProvider dataProvider = new CategoryJdbcDataProvider();
         Category model = new Category(1, "category");
 
-        Assert.assertTrue(dao.insert(model));
+        Assert.assertTrue(dataProvider.insert(model));
 
-        Optional<Category> modelFromDb = dao.getById(model.getId());
+        Optional<Category> modelFromDb = dataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(model, modelFromDb.get());
@@ -54,14 +54,14 @@ public class CategoryJdbcDataProviderTest {
 
     @Test
     public void testUpdate() {
-        CategoryJdbcDataProvider dao = new CategoryJdbcDataProvider();
+        CategoryJdbcDataProvider jdbcDataProvider = new CategoryJdbcDataProvider();
         Category model = new Category(1, "category");
         Category modelUpdate = new Category(1, "category_new");
 
-        Assert.assertTrue(dao.insert(model));
-        Assert.assertTrue(dao.update(modelUpdate));
+        Assert.assertTrue(jdbcDataProvider.insert(model));
+        Assert.assertTrue(jdbcDataProvider.update(modelUpdate));
 
-        Optional<Category> modelFromDb = dao.getById(model.getId());
+        Optional<Category> modelFromDb = jdbcDataProvider.getById(model.getId());
 
         Assert.assertTrue(modelFromDb.isPresent());
         Assert.assertEquals(modelUpdate, modelFromDb.get());
