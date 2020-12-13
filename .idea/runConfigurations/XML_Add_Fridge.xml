@@ -2,7 +2,8 @@
   <configuration default="false" name="XML Add Fridge" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
     <module name="Javaarchitechurestudy" />
-    <option name="PROGRAM_PARAMETERS" value="xml add_product 6234e2e0-fe90-4005-8c66-21963a084c38 1 fridge" />
+    <option name="PROGRAM_PARAMETERS" value="xml add_product 16ed3bdd-452f-4fb8-9699-0e4f744a9c04 1 fridge" />
+    <option name="VM_PARAMETERS" value="-Denvironment=./strings.properties" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

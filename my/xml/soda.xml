@@ -1,0 +1,47 @@
+<entityList>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Soda">
+      <id>0</id>
+      <name>Fanta</name>
+      <weight>2.0</weight>
+      <price>200.0</price>
+      <category>soda</category>
+      <flavour>orange</flavour>
+      <sparkled>true</sparkled>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Soda">
+      <id>1</id>
+      <name>Kind Juice</name>
+      <weight>1.0</weight>
+      <price>70.0</price>
+      <category>soda</category>
+      <flavour>apple</flavour>
+      <sparkled>false</sparkled>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Soda">
+      <id>2</id>
+      <name>Rich Juice</name>
+      <weight>1.0</weight>
+      <price>110.0</price>
+      <category>soda</category>
+      <flavour>strawberry</flavour>
+      <sparkled>false</sparkled>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Soda">
+      <id>3</id>
+      <name>Limonella</name>
+      <weight>2.2</weight>
+      <price>52500.0</price>
+      <category>soda</category>
+      <flavour>lemon</flavour>
+      <sparkled>true</sparkled>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Soda">
+      <id>4</id>
+      <name>Mirinda Blue</name>
+      <weight>2.2</weight>
+      <price>52500.0</price>
+      <category>soda</category>
+      <flavour>blueberry-lemon</flavour>
+      <sparkled>true</sparkled>
+   </data>
+</entityList>

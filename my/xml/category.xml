@@ -1,0 +1,14 @@
+<entityList>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Category">
+      <id>0</id>
+      <name>soda</name>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Category">
+      <id>1</id>
+      <name>computer</name>
+   </data>
+   <data class="ru.sfedu.nanicky.shop.db.protocol.model.Category">
+      <id>2</id>
+      <name>fridge</name>
+   </data>
+</entityList>

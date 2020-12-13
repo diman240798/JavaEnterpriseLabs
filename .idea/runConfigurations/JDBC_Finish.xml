@@ -2,7 +2,7 @@
   <configuration default="false" name="JDBC Finish" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ru.sfedu.nanicky.shop.Main" />
     <module name="Javaarchitechurestudy" />
-    <option name="PROGRAM_PARAMETERS" value="jdbc finish d55b88b7-cc9c-43d5-9b1f-6d58869c9380" />
+    <option name="PROGRAM_PARAMETERS" value="jdbc finish 82e32d8e-6d18-4ea3-a2b3-0943924fdd45" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

@@ -147,7 +147,7 @@ public class ShopCliManager {
             }
             Category category = categoryOption.get();
 
-            BaseDao productDao = RepositoriesUtil.getProductDataProvider(dataProviderStr, userCategory, repositories);
+            BaseDao productDao = RepositoriesUtil.getProductDataProvider(userCategory, dataProviderStr, repositories);
 
             if (productDao == null) {
                 LOG.info("Cant get product data manager!");
