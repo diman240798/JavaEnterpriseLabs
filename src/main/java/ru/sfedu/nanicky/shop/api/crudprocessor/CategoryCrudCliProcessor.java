@@ -17,11 +17,22 @@ public class CategoryCrudCliProcessor extends CrudCliProcessor<Category> {
         super(repositories);
     }
 
+    /**
+     * Реализация выдачи дата провадера для соответствующей модели
+     * @param dataProvider - тип датапровайдера в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return BaseDao
+     */
     @Override
     public BaseDao<Category> getDaoForDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
     }
 
+    /**
+     * Реализация выдачи распарсенной модели
+     * @param modelStr - данные модели в виде строки
+     * @return Category
+     */
     @Override
     protected Category getModel(String modelStr) {
         LOG.info("Parsing string to model");

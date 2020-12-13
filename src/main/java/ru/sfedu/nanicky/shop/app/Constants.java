@@ -11,6 +11,10 @@ public class Constants {
     public static File JDBC_TRACE = new File("./jdbc.db.trace.db");
 
 
+    /**
+     * Инициализации констант из файла конфигурации
+     * @return void
+     */
     public static void init() {
         String path;
         if (System.getProperty("environment") != null) {

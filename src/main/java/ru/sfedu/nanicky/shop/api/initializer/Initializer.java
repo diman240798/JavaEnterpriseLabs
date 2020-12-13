@@ -49,6 +49,13 @@ public class Initializer {
             new Soda(4, "Mirinda Blue", 2.2, 52500, Constants.CATEGORY_SODA, "blueberry-lemon", true)
     );
 
+
+    /**
+     * Инициализации базовых данных для заданного типа датапровайдера
+     * @param dataProvider - датапровайдер в виде строки
+     * @param repositories - список всех репозиториев в проекте
+     * @return void
+     */
     public static void initFor(String dataProvider, Repositories repositories) {
         LOG.info("Init for {}", dataProvider);
         LOG.debug("Init for data provider {}", dataProvider);
@@ -63,6 +70,11 @@ public class Initializer {
         sodaDao.insertAll(SODA);
     }
 
+    /**
+     * Инициализации базовых данных для всех типов датапровайдеров
+     * @param repositories - список всех репозиториев в проекте
+     * @return void
+     */
     public static void initAll(Repositories repositories) {
         LOG.info("Init all");
         LOG.debug("Init all data providers");

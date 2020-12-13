@@ -1,5 +1,7 @@
 package ru.sfedu.nanicky.shop.db.xml.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XmlDao<V extends IdEntity> extends TextDao<V> {
+
+
+    private static Logger LOG = LogManager.getLogger(XmlDao.class);
 
     @Root
     public static class EntityList<V> {
@@ -42,6 +47,9 @@ public class XmlDao<V extends IdEntity> extends TextDao<V> {
         this.dbFile = dbFile;
     }
 
+    /**
+     * Метод получния списка xml
+     */
     @Override
     public List<V> getAll() {
         Serializer serializer = new Persister();
@@ -50,11 +58,13 @@ public class XmlDao<V extends IdEntity> extends TextDao<V> {
             EntityList entityList = serializer.read(EntityList.class, dbFile);
             return entityList.getData();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("CSV getAll error", e);
             return new ArrayList<>();
         }
     }
-
+    /**
+     * Метод вставки списка xml
+     */
     public boolean insertAll(List<V> items) {
         if (items.isEmpty()) return dbFile.delete();
         Serializer serializer = new Persister();
@@ -63,7 +73,7 @@ public class XmlDao<V extends IdEntity> extends TextDao<V> {
             serializer.write(entityList, dbFile);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("CSV insert error", e);
             return false;
         }
     }

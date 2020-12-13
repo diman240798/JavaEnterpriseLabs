@@ -23,23 +23,114 @@ public class ShopCliManager {
         this.repositories = repositories;
     }
 
-    public void processRequest(String method, String dataProviderStr, String[] args) {
+
+    /**
+     * Обработка параметров на осуществление покупок в магазине
+     * @param args - входные аргументы программы
+     * @return void
+     */
+    public void processRequest(String[] args) {
+        String dataProviderStr = args[0];
+        String method = args[1];
         if (method.equals(Constants.START)) {
             startSession(dataProviderStr);
         } else if (method.equals(Constants.FINISH)) {
             finishSession(dataProviderStr, args[2]);
         } else if (method.equals(Constants.ADD_PRODUCT_TO_BUCKET)) {
-            addProduct(dataProviderStr, args);
+            addProduct(args);
         } else {
             throw new RuntimeException("Incorrect method: " + method);
         }
     }
 
+    /**
+     * Создание сессии покупок в магазине
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @return void
+     */
+    private void startSession(String dataProviderStr) {
+        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
+        Session session = new Session(id);
+        if (sessionDao.insert(session)) {
+            LOG.info("Your session key:  {}", session.getSession());
+        } else {
+            LOG.info("Error creating session!");
+        }
+    }
 
-    private void addProduct(String dataProvider, String[] args) {
-        BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProvider, repositories);
+    /**
+     * Завершение покупок в магазине
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param userSession - сессия юзера
+     * @return void
+     */
+    private void finishSession(String dataProviderStr, String userSession) {
+        LOG.info("Getting session entity");
+        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
+        Optional<Session> sessionOption = sessionDao.getAll().stream()
+                .filter(it -> it.getSession().equals(userSession))
+                .findFirst();
+        if (sessionOption.isPresent()) {
+            LOG.info("Found session");
+            BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
+            LOG.info("Getting bucket entity");
+            Optional<Bucket> bucketOption = bucketDao.getAll().stream()
+                    .filter(it -> it.getSession().equals(userSession))
+                    .findFirst();
+            if (bucketOption.isPresent()) {
+                LOG.info("Found bucket");
+                Bucket bucket = bucketOption.get();
+                List<String> products = bucket.getProductsList();
+
+                LOG.info("Got bucket products. Counting receipt.");
+
+                StringBuilder receiptTextSb = new StringBuilder();
+                AtomicReference<Double> totalPrice = new AtomicReference<>(0.0);
+
+                products.forEach(productStr -> {
+                    String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
+                    String category = split[0];
+                    long productId = Long.parseLong(split[1]);
+                    BaseDao<Product> prodDao =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
+                    Product product = prodDao.getById(productId).get();
+
+                    receiptTextSb.append(product.toString()).append("\n");
+                    totalPrice.updateAndGet(v -> v + product.getPrice());
+                });
+
+                LOG.info("Receipt data ready. Printing.");
+                long receiptId = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
+                BaseDao<Receipt> receiptDao = RepositoriesUtil.getReceiptsDataProvider(dataProviderStr, repositories);
+                Receipt receipt = new Receipt(receiptId, receiptTextSb.toString(), totalPrice.get());
+                receiptDao.insert(receipt);
+                LOG.info("Your receipt is: \n{}", receipt);
+
+                bucketDao.delete(bucket);
+                sessionDao.delete(sessionOption.get());
+
+            }
+            else {
+                LOG.info("You have not added single product to bucket. No check will be printed.");
+                sessionDao.delete(sessionOption.get());
+                LOG.info("Session closed");
+            }
+        } else {
+            LOG.info("Could not find session with key: {}", userSession);
+        }
+
+    }
+
+    /**
+     * Добавление продукта в корзину
+     * @param args - входные аргументы программы
+     * @return void
+     */
+    private void addProduct(String[] args) {
+        String dataProviderStr = args[0];
+        BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
         String userSession = args[2];
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProvider, repositories);
+        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         Optional<Session> sessionOption = sessionDao.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
@@ -48,7 +139,7 @@ public class ShopCliManager {
             long productId = Long.parseLong(args[3]);
             String userCategory = args[4];
 
-            BaseDao<Category> categoryBaseDao = RepositoriesUtil.getCategoryDataProvider(dataProvider, repositories);
+            BaseDao<Category> categoryBaseDao = RepositoriesUtil.getCategoryDataProvider(dataProviderStr, repositories);
             Optional<Category> categoryOption = categoryBaseDao.getAll().stream().filter(it -> it.getName().equals(userCategory)).findFirst();
             if (!categoryOption.isPresent()) {
                 LOG.info("No such category: {}", userCategory);
@@ -56,7 +147,7 @@ public class ShopCliManager {
             }
             Category category = categoryOption.get();
 
-            BaseDao productDao = RepositoriesUtil.getProductDataProvider(dataProvider, userCategory, repositories);
+            BaseDao productDao = RepositoriesUtil.getProductDataProvider(dataProviderStr, userCategory, repositories);
 
             if (productDao == null) {
                 LOG.info("Cant get product data manager!");
@@ -88,73 +179,6 @@ public class ShopCliManager {
 
         } else {
             LOG.info("Could not find session with key: {}", userSession);
-        }
-    }
-
-    private void finishSession(String dataProvider, String userSession) {
-        LOG.info("Getting session entity");
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProvider, repositories);
-        Optional<Session> sessionOption = sessionDao.getAll().stream()
-                .filter(it -> it.getSession().equals(userSession))
-                .findFirst();
-        if (sessionOption.isPresent()) {
-            LOG.info("Found session");
-            BaseDao<Bucket> bucketDao = RepositoriesUtil.getBucketDataProvider(dataProvider, repositories);
-            LOG.info("Getting bucket entity");
-            Optional<Bucket> bucketOption = bucketDao.getAll().stream()
-                    .filter(it -> it.getSession().equals(userSession))
-                    .findFirst();
-            if (bucketOption.isPresent()) {
-                LOG.info("Found bucket");
-                Bucket bucket = bucketOption.get();
-                List<String> products = bucket.getProductsList();
-
-                LOG.info("Got bucket products. Counting receipt.");
-
-                StringBuilder receiptTextSb = new StringBuilder();
-                AtomicReference<Double> totalPrice = new AtomicReference<>(0.0);
-
-                products.forEach(productStr -> {
-                    String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
-                    String category = split[0];
-                    long productId = Long.parseLong(split[1]);
-                    BaseDao<Product> prodDao =  RepositoriesUtil.getProductDataProvider(category, dataProvider, repositories);
-                    Product product = prodDao.getById(productId).get();
-
-                    receiptTextSb.append(product.toString()).append("\n");
-                    totalPrice.updateAndGet(v -> v + product.getPrice());
-                });
-
-                LOG.info("Receipt data ready. Printing.");
-                long receiptId = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
-                BaseDao<Receipt> receiptDao = RepositoriesUtil.getReceiptsDataProvider(dataProvider, repositories);
-                Receipt receipt = new Receipt(receiptId, receiptTextSb.toString(), totalPrice.get());
-                receiptDao.insert(receipt);
-                LOG.info("Your receipt is: \n{}", receipt);
-
-                bucketDao.delete(bucket);
-                sessionDao.delete(sessionOption.get());
-
-            }
-            else {
-                LOG.info("You have not added single product to bucket. No check will be printed.");
-                sessionDao.delete(sessionOption.get());
-                LOG.info("Session closed");
-            }
-        } else {
-            LOG.info("Could not find session with key: {}", userSession);
-        }
-
-    }
-
-    private void startSession(String dataProvider) {
-        BaseDao<Session> sessionDao = RepositoriesUtil.getSessionDataProvider(dataProvider, repositories);
-        long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
-        Session session = new Session(id);
-        if (sessionDao.insert(session)) {
-            LOG.info("Your session key:  {}", session.getSession());
-        } else {
-            LOG.info("Error creating session!");
         }
     }
 }

@@ -9,6 +9,15 @@ public class RepositoriesUtil {
 
     private static Logger LOG = LogManager.getLogger(RepositoriesUtil.class);
 
+
+    /**
+     * Получение датапровайдера для Чека
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Receipt
+     */
     public static BaseDao<Receipt> getReceiptsDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
@@ -25,6 +34,14 @@ public class RepositoriesUtil {
         return baseDao;
     }
 
+    /**
+     * Получение датапровайдера для Чека
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Receipt
+     */
     public static BaseDao<Category> getCategoryDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
         LOG.debug("Getting dao for data provider {}", dataProviderStr);
@@ -41,99 +58,141 @@ public class RepositoriesUtil {
         return baseDao;
     }
 
-    public static BaseDao<Computer> getComputerDataProvider(String dataProvider, Repositories repositories) {
+    /**
+     * Получение датапровайдера для Компьютера
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Computer
+     */
+    public static BaseDao<Computer> getComputerDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProvider);
+        LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Computer> baseDao;
-        if (dataProvider.equals(Constants.XML)) {
+        if (dataProviderStr.equals(Constants.XML)) {
             baseDao = repositories.computerXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
+        } else if (dataProviderStr.equals(Constants.CSV)) {
             baseDao = repositories.computerCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
+        } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.computerJdbcDataProvider;
         } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return baseDao;
     }
 
-    public static BaseDao<Fridge> getFridgeDataProvider(String dataProvider, Repositories repositories) {
+    /**
+     * Получение датапровайдера для Холодильника
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Fridge
+     */
+    public static BaseDao<Fridge> getFridgeDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProvider);
+        LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Fridge> baseDao;
-        if (dataProvider.equals(Constants.XML)) {
+        if (dataProviderStr.equals(Constants.XML)) {
             baseDao = repositories.fridgeXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
+        } else if (dataProviderStr.equals(Constants.CSV)) {
             baseDao = repositories.fridgeCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
+        } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.fridgeJdbcDataProvider;
         } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return baseDao;
     }
 
-    public static BaseDao<Soda> getSodaDataProvider(String dataProvider, Repositories repositories) {
+    /**
+     * Получение датапровайдера для Напитков
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Soda
+     */
+    public static BaseDao<Soda> getSodaDataProvider(String dataProviderStr, Repositories repositories) {
         LOG.info("Getting dao for data provider");
-        LOG.debug("Getting dao for data provider {}", dataProvider);
+        LOG.debug("Getting dao for data provider {}", dataProviderStr);
         BaseDao<Soda> baseDao;
-        if (dataProvider.equals(Constants.XML)) {
+        if (dataProviderStr.equals(Constants.XML)) {
             baseDao = repositories.sodaXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
+        } else if (dataProviderStr.equals(Constants.CSV)) {
             baseDao = repositories.sodaCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
+        } else if (dataProviderStr.equals(Constants.JDBC)) {
             baseDao = repositories.sodaJdbcDataProvider;
         } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return baseDao;
     }
 
-    public static BaseDao<Session> getSessionDataProvider(String dataProvider, Repositories repositories) {
+    /**
+     * Получение датапровайдера для Сессии
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Session
+     */
+    public static BaseDao<Session> getSessionDataProvider(String dataProviderStr, Repositories repositories) {
         BaseDao<Session> sessionDao;
-        if (dataProvider.equals(Constants.XML)) {
+        if (dataProviderStr.equals(Constants.XML)) {
             sessionDao = repositories.sessionXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
+        } else if (dataProviderStr.equals(Constants.CSV)) {
             sessionDao = repositories.sessionCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
+        } else if (dataProviderStr.equals(Constants.JDBC)) {
             sessionDao = repositories.sessionJdbcDataProvider;
         } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return sessionDao;
     }
 
     /**
      * Получение датапровайдера для Корзины
-     * @param dataProvider - датапровайдер в виде строки
+     * @param dataProviderStr - датапровайдер в виде строки
      * @param repositories - класс содержащий все репозитории используемые в проекте
      * @return возвращает неализацию датапровайдера в соответствии с входным параметром
      * @see Repositories
+     * @see Bucket
      */
-    public static BaseDao<Bucket> getBucketDataProvider(String dataProvider, Repositories repositories) {
+    public static BaseDao<Bucket> getBucketDataProvider(String dataProviderStr, Repositories repositories) {
         BaseDao<Bucket> bucketDao;
-        if (dataProvider.equals(Constants.XML)) {
+        if (dataProviderStr.equals(Constants.XML)) {
             bucketDao = repositories.bucketXmlDao;
-        } else if (dataProvider.equals(Constants.CSV)) {
+        } else if (dataProviderStr.equals(Constants.CSV)) {
             bucketDao = repositories.bucketCsvDao;
-        } else if (dataProvider.equals(Constants.JDBC)) {
+        } else if (dataProviderStr.equals(Constants.JDBC)) {
             bucketDao = repositories.bucketJdbcDataProvider;
         } else {
-            throw new RuntimeException("Cant parse data provider: " + dataProvider);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return bucketDao;
     }
 
-    public static BaseDao<Product> getProductDataProvider(String dataProvider, String userCategory, Repositories repositories) {
-        BaseDao productDao = null;
+    /**
+     * Получение датапровайдера для категории продуктов
+     * @param userCategory - категория продуктов в виде строки
+     * @param dataProviderStr - датапровайдер в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return возвращает неализацию датапровайдера в соответствии с входным параметром
+     * @see Repositories
+     * @see Soda
+     */
+    public static BaseDao<Product> getProductDataProvider(String userCategory, String dataProviderStr, Repositories repositories) {
+        BaseDao productDao;
         if (userCategory.equals(Constants.CATEGORY_SODA)) {
-            productDao = RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
+            productDao = RepositoriesUtil.getSodaDataProvider(dataProviderStr, repositories);
         } else if (userCategory.equals(Constants.CATEGORY_FRIDGE)) {
-            productDao = RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
+            productDao = RepositoriesUtil.getFridgeDataProvider(dataProviderStr, repositories);
         } else if (userCategory.equals(Constants.COMPUTER)) {
-            productDao = RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
+            productDao = RepositoriesUtil.getComputerDataProvider(dataProviderStr, repositories);
         } else {
-            LOG.info("Unknown category: {}", userCategory);
+            throw new RuntimeException("Cant parse data provider: " + dataProviderStr);
         }
         return productDao;
     }

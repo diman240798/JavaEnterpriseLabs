@@ -11,6 +11,9 @@ public class ReceiptJdbcDataProvider extends JdbcDao<Receipt> {
         super("receipt");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -18,6 +21,10 @@ public class ReceiptJdbcDataProvider extends JdbcDao<Receipt> {
                 "totalPrice DOUBLE";
     }
 
+
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Receipt getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -26,11 +33,18 @@ public class ReceiptJdbcDataProvider extends JdbcDao<Receipt> {
         return new Receipt(id, productsAndPrices, totalPrice);
     }
 
+
+    /**
+     * Полученить скрипт обновления записи
+     */
     @Override
     protected String getUpdateValues(Receipt receipt) {
         return String.format("productsAndPrices='%s', totalPrice='%s'", receipt.getProductsAndPrices(), receipt.getTotalPrice());
     }
 
+    /**
+     * Полученить скрипт вставки записи
+     */
     @Override
     public String getValues(Receipt receipt) {
         return String.format("%d, '%s', '%s'", receipt.getId(), receipt.getProductsAndPrices(), receipt.getTotalPrice());

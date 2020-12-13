@@ -13,6 +13,11 @@ public class SodaJdbcDataProvider extends JdbcDao<Soda> {
         super("soda");
     }
 
+
+
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -24,6 +29,10 @@ public class SodaJdbcDataProvider extends JdbcDao<Soda> {
                 "sparkled BIT";
     }
 
+
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Soda getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -36,6 +45,9 @@ public class SodaJdbcDataProvider extends JdbcDao<Soda> {
         return new Soda(id, name, weight, price, category, flavour, sparkled);
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getUpdateValues(Soda soda) {
         String baseString = "Name='%s', Weight='%s', Price='%s', Flavour='%s', Sparkled=%b";
@@ -51,6 +63,9 @@ public class SodaJdbcDataProvider extends JdbcDao<Soda> {
         return result;
     }
 
+    /**
+     * Полученить скрипт вставки записи
+     */
     @Override
     public String getValues(Soda soda) {
         String baseString = "%d, '%s', '%s', '%s', '%s'," +

@@ -11,12 +11,18 @@ public class CategoryJdbcDataProvider extends JdbcDao<Category> {
         super("category");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
                 "name VARCHAR(255)";
     }
 
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Category getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -24,6 +30,9 @@ public class CategoryJdbcDataProvider extends JdbcDao<Category> {
         return new Category(id, name);
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getUpdateValues(Category category) {
         return String.format("name='%s'", category.getName());

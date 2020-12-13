@@ -12,6 +12,9 @@ public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
         super("computer");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -27,6 +30,9 @@ public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
                 "integratedBluetooth BIT";
     }
 
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Computer getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -56,6 +62,9 @@ public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
         return computer;
     }
 
+    /**
+     * Полученить скрипт обновления записи
+     */
     @Override
     protected String getUpdateValues(Computer computer) {
         String baseString =
@@ -78,6 +87,9 @@ public class ComputerJdbcDataProvider extends JdbcDao<Computer> {
         return result;
     }
 
+    /**
+     * Полученить скрипт вставки записи
+     */
     @Override
     public String getValues(Computer computer) {
         String baseString =

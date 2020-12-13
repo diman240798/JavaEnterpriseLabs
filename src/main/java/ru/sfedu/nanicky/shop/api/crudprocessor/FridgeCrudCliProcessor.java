@@ -17,11 +17,23 @@ public class FridgeCrudCliProcessor extends CrudCliProcessor<Fridge> {
         super(repositories);
     }
 
+    /**
+     * Реализация выдачи дата провадера для соответствующей модели
+     * @param dataProvider - тип датапровайдера в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return BaseDao
+     */
     @Override
     public BaseDao<Fridge> getDaoForDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getFridgeDataProvider(dataProvider, repositories);
     }
 
+
+    /**
+     * Реализация выдачи распарсенной модели
+     * @param modelStr - данные модели в виде строки
+     * @return Fridge
+     */
     @Override
     protected Fridge getModel(String modelStr) {
         LOG.info("Parsing string to model");

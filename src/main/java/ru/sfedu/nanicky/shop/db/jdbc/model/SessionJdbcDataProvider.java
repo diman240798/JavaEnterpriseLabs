@@ -12,6 +12,9 @@ public class SessionJdbcDataProvider extends JdbcDao<Session> {
         super("session");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -19,6 +22,10 @@ public class SessionJdbcDataProvider extends JdbcDao<Session> {
                 "date LONG";
     }
 
+
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Session getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -27,11 +34,17 @@ public class SessionJdbcDataProvider extends JdbcDao<Session> {
         return new Session(id, session, date);
     }
 
+    /**
+     * Полученить скрипт обновления записи
+     */
     @Override
     protected String getUpdateValues(Session session) {
         return String.format("session='%s', date=%d", session.getSession(), session.getDate());
     }
 
+    /**
+     * Полученить скрипт вставки записи
+     */
     @Override
     public String getValues(Session session) {
         return String.format("%d, '%s', %d", session.getId(), session.getSession(), session.getDate());

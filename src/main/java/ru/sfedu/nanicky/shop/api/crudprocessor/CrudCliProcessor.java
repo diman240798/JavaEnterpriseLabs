@@ -20,16 +20,30 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
         this.repositories = repositories;
     }
 
-    public void processCrudApi(String dataProviderStr, String method, Optional<String> model, List<String> crudActionsSupportedList) {
+
+    /**
+     * Обработка crud операций для модели
+     * @param args - входные параметры
+     * @param crudActionsSupportedList - поддерживаемы для данной модели crud операции
+     * @return boolean
+     */
+    public void processCrudApi(String[] args, List<String> crudActionsSupportedList) {
+        String dataProviderStr = args[0];
+        String method = args[2];
+
+        Optional<String> modelData = Optional.empty();
+        if (args.length > 3) {
+            modelData = Optional.of(args[3]);
+        }
+
         LOG.info("Start processing model operation");
         LOG.debug("Start processing model data provider {} operation {}", dataProviderStr, method);
 
         BaseDao<M> dataProviderImpl = getDaoForDataProvider(dataProviderStr, repositories);
 
-
         if (method.equals(Constants.GET)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
-                long id = Long.parseLong(model.get());
+                long id = Long.parseLong(modelData.get());
                 M item = dataProviderImpl.getById(id).get();
                 LOG.info(item.toString());
             }
@@ -42,22 +56,28 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
             }
         } else if (method.equals(Constants.INSERT)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
-                M category = getModel(model.get());
+                M category = getModel(modelData.get());
                 logAction(method, dataProviderImpl.insert(category));
             }
         } else if (method.equals(Constants.UPDATE)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
-                M category = getModel(model.get());
+                M category = getModel(modelData.get());
                 logAction(method, dataProviderImpl.update(category));
             }
         } else if (method.equals(Constants.DELETE)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
-                long id = Long.parseLong(model.get());
+                long id = Long.parseLong(modelData.get());
                 logAction(method, dataProviderImpl.delete(id));
             }
         }
     }
 
+    /**
+     * Вспомогательный метод логирования результатов crud операций
+     * @param action - вид crud операции
+     * @param actions - список поддерживаемых операций
+     * @return boolean
+     */
     private boolean checkActionSupported(String action, List<String> actions) {
         if (actions.contains(action)) {
             return true;
@@ -67,6 +87,12 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
         return false;
     }
 
+    /**
+     * Вспомогательный метод логирования результатов crud операций
+     * @param action - вид crud операции
+     * @param actionResult - результат операции
+     * @return void
+     */
     private void logAction(String action, boolean actionResult) {
         if (actionResult) {
             LOG.info("Cli action: {} competed successfully!", action);
@@ -75,8 +101,18 @@ public abstract class CrudCliProcessor<M extends IdEntity> {
         }
     }
 
-
+    /**
+     * Выдача дата провадера для соответствующей модели
+     * @param dataProvider - тип датапровайдера в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return BaseDao
+     */
     public abstract BaseDao<M> getDaoForDataProvider(String dataProvider, Repositories repositories);
 
+    /**
+     * Выдача распарсенной модели
+     * @param modelStr - данные модели в виде строки
+     * @return M
+     */
     protected abstract M getModel(String modelStr);
 }

@@ -55,29 +55,40 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
 
 
 
+    /**
+     * Метод создания таблицы
+     */
     private void createTable() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
             Statement statement = conn.createStatement();
             String queryCreate = String.format(QUERY_CREATE, getTableCreateQuery());
             statement.executeUpdate(queryCreate);
         } catch (Exception ex) {
-            LOG.info("Error creating table: {}", entity, ex);
+            LOG.error("Error creating table: {}", entity, ex);
         }
     }
 
+    /**
+     * Метод получения скрипта создания таблицы
+     */
     protected abstract String getTableCreateQuery();
 
-
+    /**
+     * Метод выполнения выражений sql на jdbc
+     */
     public <M> M runOn(ExFunction<Statement, M> consumer) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
             Statement statement = conn.createStatement();
             return consumer.apply(statement);
         } catch (Exception ex) {
-            LOG.debug("Error creating jdbc statement for entity: {}", entity, ex);
+            LOG.error("Error creating jdbc statement for entity: {}", entity, ex);
             return null;
         }
     }
 
+    /**
+     * Метод получения списка из jdbc
+     */
     @Override
     public List<V> getAll() {
         List<V> result = new ArrayList<>();
@@ -92,11 +103,14 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             });
 
         } catch (Exception ex) {
-            LOG.info("Error getting entity {} from jdbc", entity, ex);
+            LOG.error("Error getting entity {} from jdbc", entity, ex);
         }
         return result;
     }
 
+    /**
+     * Метод получения модели из resultSet
+     */
     public abstract V getModel(ResultSet resultSet) throws Exception;
 
     @Override
@@ -110,26 +124,35 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             });
             return runOn == null ? Optional.empty() : runOn;
         } catch (Exception ex) {
-            LOG.info("Error getting entity {} from jdbc", entity, ex);
+            LOG.error("Error getting entity {} from jdbc", entity, ex);
             return Optional.empty();
         }
     }
 
+    /**
+     * Метод удаления записи
+     */
     @Override
     public boolean delete(V v) {
         return delete(v.getId());
     }
 
+    /**
+     * Метод создания таблицы по id
+     */
     @Override
     public boolean delete(long id) {
         try {
             return runOn(statemnt -> statemnt.execute(String.format(QUERY_DELETE_BY_ID, id)));
         } catch (Exception ex) {
-            LOG.info("Error deleting entity {} with id: {} from jdbc ", entity, id, ex);
+            LOG.error("Error deleting entity {} with id: {} from jdbc ", entity, id, ex);
             return false;
         }
     }
 
+    /**
+     * Метод обносления записи
+     */
     @Override
     public boolean update(V v) {
         try {
@@ -137,13 +160,19 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             String query = String.format(QUERY_UPDATE, values, v.getId());
             return runOn(statement -> statement.executeUpdate(query) != 0);
         } catch (Exception ex) {
-            LOG.info("Error updating entity {} from jdbc", entity, ex);
+            LOG.error("Error updating entity {} from jdbc", entity, ex);
             return false;
         }
     }
 
+    /**
+     * Метод получения скрипта обновления записи
+     */
     protected abstract String getUpdateValues(V v);
 
+    /**
+     * Метод вставки записи
+     */
     @Override
     public boolean insert(V v) {
         try {
@@ -151,13 +180,19 @@ public abstract class JdbcDao<V extends IdEntity> implements BaseDao<V> {
             String query = String.format(QUERY_INSERT, values);
             return runOn(statement -> statement.executeUpdate(query) != 0);
         } catch (Exception ex) {
-            LOG.info("Error inserting entity {} from jdbc", entity, ex);
+            LOG.error("Error inserting entity {} from jdbc", entity, ex);
             return false;
         }
     }
 
+    /**
+     * Метод получения скрипта вставки записи
+     */
     public abstract String getValues(V v);
 
+    /**
+     * Метод вставки списка записей
+     */
     @Override
     public boolean insertAll(List<V> items) {
         items.forEach(this::insert);

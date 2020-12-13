@@ -13,6 +13,9 @@ public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
         super("fridge");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -26,6 +29,10 @@ public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
                 "noFrost BIT";
     }
 
+
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Fridge getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -40,6 +47,9 @@ public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
         return new Fridge(id, name, weight, price, category, volume, color, power, noFrost);
     }
 
+    /**
+     * Полученить скрипт обновления записи
+     */
     @Override
     protected String getUpdateValues(Fridge fridge) {
         String baseString = "Name='%s', Weight='%s', Price='%s', Volume='%s', Color='%s', Power=%d, NoFrost=%b";
@@ -57,6 +67,9 @@ public class FridgeJdbcDataProvider extends JdbcDao<Fridge> {
         return result;
     }
 
+    /**
+     * Полученить скрипт вставки записи
+     */
     @Override
     public String getValues(Fridge fridge) {
         String baseString =

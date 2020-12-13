@@ -13,7 +13,9 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
                 .findFirst();
     }
 
-
+    /**
+     * Метод удаления записи
+     */
     public boolean delete(V v) {
         List<V> all = getAll();
         List<V> items = all.stream()
@@ -24,6 +26,11 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
         }
         return insertAll(items);
     }
+
+
+    /**
+     * Метод удаления записи по id
+     */
     public boolean delete(long id) {
         List<V> all = getAll();
         List<V> items = all.stream()
@@ -35,6 +42,10 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
         return insertAll(items);
     }
 
+
+    /**
+     * Метод обновления записи
+     */
     public boolean update(V v) {
         List<V> items = getAll().stream()
                 .filter(it -> it.getId() != v.getId())
@@ -43,6 +54,10 @@ public abstract class TextDao<V extends IdEntity> implements BaseDao<V>{
         return insertAll(items);
     }
 
+
+    /**
+     * Метод вставки записи
+     */
     @Override
     public boolean insert(V v) {
         List<V> items = getAll();

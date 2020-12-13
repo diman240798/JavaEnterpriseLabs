@@ -6,6 +6,7 @@ import ru.sfedu.nanicky.shop.db.protocol.model.*;
 import ru.sfedu.nanicky.shop.db.xml.dao.XmlDao;
 
 public class Repositories {
+
     public final CsvDao<Category> categoryCsvDao = new CsvDao<>(Category.class, Constants.CATEGORY_CSV_FILE);
     public final XmlDao<Category> categoryXmlDao = new XmlDao<>(Constants.CATEGORY_XML_FILE);
     public CategoryJdbcDataProvider categoryJdbcDataProvider = new CategoryJdbcDataProvider();

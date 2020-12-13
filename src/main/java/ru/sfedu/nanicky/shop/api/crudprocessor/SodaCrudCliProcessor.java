@@ -17,11 +17,22 @@ public class SodaCrudCliProcessor extends CrudCliProcessor<Soda> {
         super(repositories);
     }
 
+    /**
+     * Реализация выдачи дата провадера для соответствующей модели
+     * @param dataProvider - тип датапровайдера в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return BaseDao
+     */
     @Override
     public BaseDao<Soda> getDaoForDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
     }
 
+    /**
+     * Реализация выдачи распарсенной модели
+     * @param modelStr - данные модели в виде строки
+     * @return Soda
+     */
     @Override
     protected Soda getModel(String modelStr) {
         LOG.info("Parsing string to model");

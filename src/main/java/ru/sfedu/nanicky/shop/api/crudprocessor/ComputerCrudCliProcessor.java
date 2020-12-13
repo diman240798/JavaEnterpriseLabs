@@ -17,11 +17,22 @@ public class ComputerCrudCliProcessor extends CrudCliProcessor<Computer> {
         super(repositories);
     }
 
+    /**
+     * Реализация выдачи дата провадера для соответствующей модели
+     * @param dataProvider - тип датапровайдера в виде строки
+     * @param repositories - класс содержащий все репозитории используемые в проекте
+     * @return BaseDao
+     */
     @Override
     public BaseDao<Computer> getDaoForDataProvider(String dataProvider, Repositories repositories) {
         return RepositoriesUtil.getComputerDataProvider(dataProvider, repositories);
     }
 
+    /**
+     * Реализация выдачи распарсенной модели
+     * @param modelStr - данные модели в виде строки
+     * @return Computer
+     */
     @Override
     protected Computer getModel(String modelStr) {
         LOG.info("Parsing string to model");

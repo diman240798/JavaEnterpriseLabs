@@ -12,6 +12,9 @@ public class BucketJdbcDataProvider extends JdbcDao<Bucket> {
         super("bucket");
     }
 
+    /**
+     * Полученить скрипт создания таблицы
+     */
     @Override
     protected String getTableCreateQuery() {
         return "id BIGINT not NULL PRIMARY KEY, " +
@@ -19,6 +22,9 @@ public class BucketJdbcDataProvider extends JdbcDao<Bucket> {
                 "products VARCHAR(255)";
     }
 
+    /**
+     * Получение модель из result set
+     */
     @Override
     public Bucket getModel(ResultSet resultSet) throws Exception {
         long id = resultSet.getLong("id");
@@ -27,6 +33,9 @@ public class BucketJdbcDataProvider extends JdbcDao<Bucket> {
         return new Bucket(id, session, products);
     }
 
+    /**
+     * Полученить скрипт обновления записи
+     */
     @Override
     protected String getUpdateValues(Bucket bucket) {
         return String.format("session='%s', products='%s'", bucket.getSession(), bucket.getProducts());
