@@ -1,6 +1,0 @@
-"CATEGORY","GRAPHICSNAME","GRAPHICSVOLUME","ID","INTEGRATEDBLUETOOTH","INTEGRATEDWIFI","NAME","PRICE","PROCESSORNAME","PROCESSORPOWER","WEIGHT"
-"computer","integrated","100","0","false","false","Dell compact RT 3","52500.0","intel i3","500","2.2"
-"computer","geforge gtx 2050ti","100","1","true","true","Dell gaming MT 5","73400.0","amd ryzen x9","1000","2.9"
-"computer","geforge gtx 1060","100","2","false","false","HP spectre x360","85700.0","intel i5","700","1.3"
-"computer","geforge gtx 1050","100","3","true","true","HP pavillion x3","92000.0","intel i7","900","2.7"
-"computer","integrated","100","4","false","false","Dexp laptop sereies","31000.0","amd ryzen x1","300","2.5"
