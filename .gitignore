@@ -73,3 +73,5 @@ lint/tmp/
 /hibernate.db.mv.db
 /jdbc.db.mv.db
 /jdbc.db.trace.db
+/csv
+/xml
