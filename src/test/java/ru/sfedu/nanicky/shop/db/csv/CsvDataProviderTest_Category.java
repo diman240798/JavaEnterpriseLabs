@@ -165,13 +165,13 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void insert() throws IOException {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
+        Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dataProvider.insert(mike);
-        Category fromDb = dataProvider.getById(mike.getId()).get();
-        Assert.assertEquals(mike, fromDb);
+        dataProvider.insert(first);
+        Category fromDb = dataProvider.getById(first.getId()).get();
+        Assert.assertEquals(first, fromDb);
 
-        Assert.assertFalse(dataProvider.insert(mike));
+        Assert.assertFalse(dataProvider.insert(first));
         Assert.assertEquals(1, dataProvider.getAll().size());
     }
 

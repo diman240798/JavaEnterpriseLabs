@@ -39,7 +39,6 @@ public class Soda extends Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Soda)) return false;
-        if (!super.equals(o)) return false;
         Soda soda = (Soda) o;
         return isSparkled() == soda.isSparkled() &&
                 Objects.equals(getFlavour(), soda.getFlavour());

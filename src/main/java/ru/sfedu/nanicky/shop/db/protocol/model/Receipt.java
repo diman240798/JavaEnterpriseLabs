@@ -2,7 +2,8 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Receipt extends IdEntity {
+public class Receipt implements Id {
+    private long id;
     private String productsAndPrices;
     private double totalPrice;
 
@@ -12,6 +13,15 @@ public class Receipt extends IdEntity {
         setId(id);
         this.productsAndPrices = productsAndPrices;
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getProductsAndPrices() {
@@ -34,7 +44,6 @@ public class Receipt extends IdEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Receipt)) return false;
-        if (!super.equals(o)) return false;
         Receipt receipt = (Receipt) o;
         return Double.compare(receipt.getTotalPrice(), getTotalPrice()) == 0 &&
                 Objects.equals(getProductsAndPrices(), receipt.getProductsAndPrices());

@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Bucket extends IdEntity {
+public class Bucket implements Id {
+    private long id;
     private String session;
     private String products = "";
 
@@ -32,6 +33,16 @@ public class Bucket extends IdEntity {
 
     public String getProducts() {
         return products;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
     public void addProduct(long productId, Category category) {
@@ -65,4 +76,5 @@ public class Bucket extends IdEntity {
                 ", id=" + id +
                 '}';
     }
+
 }

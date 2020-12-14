@@ -1,11 +1,11 @@
 package ru.sfedu.nanicky.shop.db.protocol.dataprovider;
 
-import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
+import ru.sfedu.nanicky.shop.db.protocol.model.Id;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseDataProvider<V extends IdEntity> {
+public interface BaseDataProvider<V extends Id> {
     List<V> getAll();
     Optional<V> getById(long id);
     boolean delete(V v);

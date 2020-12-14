@@ -2,7 +2,8 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Product extends IdEntity {
+public class Product implements Id {
+    protected long id;
     protected String name;
     protected double weight;
     protected double price;
@@ -45,10 +46,27 @@ public class Product extends IdEntity {
 
 
     @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
-        if (!super.equals(o)) return false;
         Product product = (Product) o;
         return Double.compare(product.getWeight(), getWeight()) == 0 &&
                 Double.compare(product.getPrice(), getPrice()) == 0 &&

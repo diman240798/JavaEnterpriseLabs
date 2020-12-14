@@ -4,13 +4,13 @@ import com.opencsv.bean.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.db.protocol.dataprovider.TextDataProvider;
-import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
+import ru.sfedu.nanicky.shop.db.protocol.model.Id;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvDataProvider<V extends IdEntity> extends TextDataProvider<V> {
+public class CsvDataProvider<V extends Id> extends TextDataProvider<V> {
 
 
     private static Logger LOG = LogManager.getLogger(CsvDataProvider.class);

@@ -26,6 +26,7 @@ public class ShopCliManager {
 
     /**
      * Обработка параметров на осуществление покупок в магазине
+     *
      * @param args - входные аргументы программы
      * @return void
      */
@@ -45,6 +46,7 @@ public class ShopCliManager {
 
     /**
      * Создание сессии покупок в магазине
+     *
      * @param dataProviderStr - датапровайдер в виде строки
      * @return void
      */
@@ -61,8 +63,9 @@ public class ShopCliManager {
 
     /**
      * Завершение покупок в магазине
+     *
      * @param dataProviderStr - датапровайдер в виде строки
-     * @param userSession - сессия юзера
+     * @param userSession     - сессия юзера
      * @return void
      */
     private void finishSession(String dataProviderStr, String userSession) {
@@ -92,7 +95,7 @@ public class ShopCliManager {
                     String[] split = productStr.split(Constants.PRODUCT_CATEGORY_SEPARATOR);
                     String category = split[0];
                     long productId = Long.parseLong(split[1]);
-                    BaseDataProvider<Product> prodDataProvider =  RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
+                    BaseDataProvider<Product> prodDataProvider = RepositoriesUtil.getProductDataProvider(category, dataProviderStr, repositories);
                     Product product = prodDataProvider.getById(productId).get();
 
                     receiptTextSb.append(product.toString()).append("\n");
@@ -109,8 +112,7 @@ public class ShopCliManager {
                 bucketDataProvider.delete(bucket);
                 sessionDataProvider.delete(sessionOption.get());
 
-            }
-            else {
+            } else {
                 LOG.info("You have not added single product to bucket. No check will be printed.");
                 sessionDataProvider.delete(sessionOption.get());
                 LOG.info("Session closed");
@@ -123,6 +125,7 @@ public class ShopCliManager {
 
     /**
      * Добавление продукта в корзину
+     *
      * @param args - входные аргументы программы
      * @return void
      */
@@ -164,7 +167,7 @@ public class ShopCliManager {
                         .filter(it -> it.getSession().equals(userSession))
                         .findFirst();
                 Bucket bucket = bucketOption.orElseGet(() -> {
-                    long bucketId = buckets.stream().sorted(Comparator.comparingLong(IdEntity::getId)).map(IdEntity::getId).findFirst().orElse(-1L) + 1L;
+                    long bucketId = buckets.stream().sorted(Comparator.comparingLong(Bucket::getId)).map(Bucket::getId).findFirst().orElse(-1L) + 1L;
                     return new Bucket(bucketId, userSession);
                 });
 

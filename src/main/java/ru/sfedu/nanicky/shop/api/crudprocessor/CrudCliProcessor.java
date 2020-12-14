@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
 import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
-import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
+import ru.sfedu.nanicky.shop.db.protocol.model.Id;
 
 import java.util.List;
 import java.util.Optional;
 
-public abstract class CrudCliProcessor<M extends IdEntity> {
+public abstract class CrudCliProcessor<M extends Id> {
 
     private static final Logger LOG = LogManager.getLogger(CrudCliProcessor.class);
 

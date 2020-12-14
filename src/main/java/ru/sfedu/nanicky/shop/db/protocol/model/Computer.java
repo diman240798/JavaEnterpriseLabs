@@ -77,7 +77,6 @@ public class Computer extends Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Computer)) return false;
-        if (!super.equals(o)) return false;
         Computer computer = (Computer) o;
         return getProcessorPower() == computer.getProcessorPower() &&
                 getGraphicsVolume() == computer.getGraphicsVolume() &&

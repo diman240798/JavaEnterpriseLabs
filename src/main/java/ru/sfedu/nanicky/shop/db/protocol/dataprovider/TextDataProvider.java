@@ -1,12 +1,12 @@
 package ru.sfedu.nanicky.shop.db.protocol.dataprovider;
 
-import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
+import ru.sfedu.nanicky.shop.db.protocol.model.Id;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class TextDataProvider<V extends IdEntity> implements BaseDataProvider<V> {
+public abstract class TextDataProvider<V extends Id> implements BaseDataProvider<V> {
     public Optional<V> getById(long id) {
         return getAll().stream()
                 .filter(it -> it.getId() == id)

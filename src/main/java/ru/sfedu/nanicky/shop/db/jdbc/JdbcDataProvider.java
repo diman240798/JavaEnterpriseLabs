@@ -3,7 +3,7 @@ package ru.sfedu.nanicky.shop.db.jdbc;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.nanicky.shop.db.protocol.dataprovider.BaseDataProvider;
-import ru.sfedu.nanicky.shop.db.protocol.model.IdEntity;
+import ru.sfedu.nanicky.shop.db.protocol.model.Id;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class JdbcDataProvider<V extends IdEntity> implements BaseDataProvider<V> {
+public abstract class JdbcDataProvider<V extends Id> implements BaseDataProvider<V> {
 
     private static final Logger LOG = LogManager.getLogger(JdbcDataProvider.class);
 

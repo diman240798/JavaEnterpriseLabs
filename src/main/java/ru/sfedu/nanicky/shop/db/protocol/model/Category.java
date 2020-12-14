@@ -2,7 +2,8 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Category extends IdEntity {
+public class Category implements Id {
+    private long id;
     private String name;
 
     public Category() {}
@@ -18,6 +19,15 @@ public class Category extends IdEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

@@ -3,7 +3,8 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Session extends IdEntity {
+public class Session implements Id {
+    private long id;
     private String session = UUID.randomUUID().toString();
     private long date = System.currentTimeMillis();
 
@@ -21,6 +22,15 @@ public class Session extends IdEntity {
     public Session(long id, String session, long date) {
         this(id, session);
         setDate(date);
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getSession() {
@@ -44,7 +54,6 @@ public class Session extends IdEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Session)) return false;
-        if (!super.equals(o)) return false;
         Session session1 = (Session) o;
         return getDate() == session1.getDate() &&
                 Objects.equals(getSession(), session1.getSession());

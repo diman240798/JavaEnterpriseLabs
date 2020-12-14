@@ -6,7 +6,6 @@ import ru.sfedu.nanicky.shop.api.crudprocessor.*;
 import ru.sfedu.nanicky.shop.api.initializer.Initializer;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.app.Repositories;
-import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
 import java.util.Arrays;
 
