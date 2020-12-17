@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Receipt implements Id {
+public class Receipt {
     private long id;
     private String productsAndPrices;
     private double totalPrice;
@@ -15,7 +15,6 @@ public class Receipt implements Id {
         this.totalPrice = totalPrice;
     }
 
-    @Override
     public long getId() {
         return id;
     }

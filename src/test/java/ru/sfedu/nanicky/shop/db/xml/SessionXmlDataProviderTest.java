@@ -1,20 +1,20 @@
-package ru.sfedu.nanicky.shop.db.csv;
+package ru.sfedu.nanicky.shop.db.xml;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ru.sfedu.nanicky.shop.app.Constants;
-import ru.sfedu.nanicky.shop.db.protocol.model.Category;
+import ru.sfedu.nanicky.shop.db.csv.SessionCsvDataProvider;
+import ru.sfedu.nanicky.shop.db.protocol.model.Session;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
-public class CsvDataProviderTest_Category {
-
+public class SessionXmlDataProviderTest {
     private static final File TEST_FILES_FOLDER = new File("tmpTests");
-    private static final File DB_FILE = new File(TEST_FILES_FOLDER, "test.csv");
-    private CsvDataProvider<Category> dataProvider;
+    private static final File DB_FILE = new File(TEST_FILES_FOLDER, "session.xml");
+    private SessionXmlDataProvider dataProvider;
 
     @Before
     public void beforeEach() throws IOException {
@@ -32,18 +32,18 @@ public class CsvDataProviderTest_Category {
         }
         DB_FILE.createNewFile();
 
-        dataProvider = new CsvDataProvider<>(Category.class, DB_FILE);
+        dataProvider = new SessionXmlDataProvider(DB_FILE);
 
     }
 
     @Test
     public void getAll() throws IOException {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
-        Category second = new Category(1, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
+        Session second = new Session(1, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
         dataProvider.insert(second);
-        List<Category> all = dataProvider.getAll();
+        List<Session> all = dataProvider.getAll();
 
         Assert.assertEquals(2, all.size());
         Assert.assertEquals(first, all.get(0));
@@ -51,12 +51,12 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void getAllBad() throws IOException {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
-        Category second = new Category(1, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
+        Session second = new Session(1, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
         dataProvider.insert(second);
-        List<Category> all = dataProvider.getAll();
+        List<Session> all = dataProvider.getAll();
 
         Assert.assertNotEquals(1, all.size());
         Assert.assertNotEquals(second, all.get(0));
@@ -64,76 +64,76 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void getById() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        Category fromDb = dataProvider.getById(first.getId()).get();
+        Session fromDb = dataProvider.getById(first.getId()).get();
 
         Assert.assertEquals(first, fromDb);
     }
 
     @Test
     public void getByIdBad() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        Category fromDb = dataProvider.getById(first.getId()).get();
+        Session fromDb = dataProvider.getById(first.getId()).get();
 
-        Assert.assertNotEquals(first.getName() + "not equals", fromDb.getName());
+        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
     }
 
     @Test
     public void delete() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        List<Category> fromDb = dataProvider.getAll();
+        List<Session> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(first, fromDb.get(0));
 
         dataProvider.delete(first);
 
-        List<Category> fromDbEmpty = dataProvider.getAll();
+        List<Session> fromDbEmpty = dataProvider.getAll();
         Assert.assertTrue(fromDbEmpty.isEmpty());
     }
 
     @Test
     public void deleteBad() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        List<Category> fromDb = dataProvider.getAll();
+        List<Session> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(first, fromDb.get(0));
 
         dataProvider.delete(null);
 
-        List<Category> fromDbEmpty = dataProvider.getAll();
+        List<Session> fromDbEmpty = dataProvider.getAll();
         Assert.assertFalse(fromDbEmpty.isEmpty());
     }
 
     @Test
     public void update() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        List<Category> fromDb = dataProvider.getAll();
+        List<Session> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(first, fromDb.get(0));
 
-        Category newMike = new Category(0, Constants.CATEGORY_COMPUTER);
+        Session newMike = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.update(newMike);
 
-        List<Category> fromDbNew = dataProvider.getAll();
+        List<Session> fromDbNew = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDbNew.size());
         Assert.assertNotEquals(first, fromDbNew.get(0));
@@ -143,20 +143,20 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void updateBad() {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
 
-        List<Category> fromDb = dataProvider.getAll();
+        List<Session> fromDb = dataProvider.getAll();
 
         Assert.assertEquals(1, fromDb.size());
         Assert.assertEquals(first, fromDb.get(0));
 
-        Category update = new Category(0, Constants.CATEGORY_COMPUTER);
+        Session update = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.update(null);
 
-        List<Category> fromDbNew = dataProvider.getAll();
+        List<Session> fromDbNew = dataProvider.getAll();
 
         Assert.assertNotEquals(2, fromDbNew.size());
         Assert.assertEquals(first, fromDbNew.get(0));
@@ -165,10 +165,10 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void insert() throws IOException {
-        Category first = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(first);
-        Category fromDb = dataProvider.getById(first.getId()).get();
+        Session fromDb = dataProvider.getById(first.getId()).get();
         Assert.assertEquals(first, fromDb);
 
         Assert.assertFalse(dataProvider.insert(first));
@@ -177,9 +177,9 @@ public class CsvDataProviderTest_Category {
 
     @Test
     public void insertBad() throws IOException {
-        Category mike = new Category(0, Constants.CATEGORY_SODA);
+        Session first = new Session(0, UUID.randomUUID().toString());
 
         dataProvider.insert(null);
-        Assert.assertFalse(dataProvider.getById(mike.getId()).isPresent());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 }

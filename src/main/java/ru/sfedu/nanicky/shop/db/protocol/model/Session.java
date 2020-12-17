@@ -3,7 +3,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Session implements Id {
+public class Session {
     private long id;
     private String session = UUID.randomUUID().toString();
     private long date = System.currentTimeMillis();
@@ -24,7 +24,6 @@ public class Session implements Id {
         setDate(date);
     }
 
-    @Override
     public long getId() {
         return id;
     }

@@ -9,7 +9,6 @@ public class RepositoriesUtil {
 
     private static Logger LOG = LogManager.getLogger(RepositoriesUtil.class);
 
-
     /**
      * Получение датапровайдера для Чека
      * @param dataProviderStr - датапровайдер в виде строки

@@ -20,6 +20,7 @@ public class CliManager {
 
     /**
      * Проверка параметров на методы INIT, и передача далее на обработку
+     *
      * @param args - входные аргументы программы
      * @return void
      */
@@ -40,6 +41,7 @@ public class CliManager {
 
     /**
      * Проверка параметров на CRUD операции по моделям, и передача далее на обработку покупок
+     *
      * @param args - входные аргументы программы
      * @return void
      */
@@ -49,19 +51,19 @@ public class CliManager {
         String modelStr = args[1];
 
         if (modelStr.equals(Constants.CATEGORY)) {
-            CrudCliProcessor crudCliProcessor = new CategoryCrudCliProcessor(repositories);
+            CategoryCrudCliProcessor crudCliProcessor = new CategoryCrudCliProcessor(repositories);
             crudCliProcessor.processCrudApi(args, Arrays.asList(Constants.GET_ALL));
         } else if (modelStr.equals(Constants.FRIDGE)) {
-            CrudCliProcessor crudCliProcessor = new FridgeCrudCliProcessor(repositories);
+            FridgeCrudCliProcessor crudCliProcessor = new FridgeCrudCliProcessor(repositories);
             crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.COMPUTER)) {
-            CrudCliProcessor crudCliProcessor = new ComputerCrudCliProcessor(repositories);
+            ComputerCrudCliProcessor crudCliProcessor = new ComputerCrudCliProcessor(repositories);
             crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.SODA)) {
-            CrudCliProcessor crudCliProcessor = new SodaCrudCliProcessor(repositories);
+            SodaCrudCliProcessor crudCliProcessor = new SodaCrudCliProcessor(repositories);
             crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.RECEIPT)) {
-            CrudCliProcessor crudCliProcessor = new ReceiptCrudCliProcessor(repositories);
+            ReceiptCrudCliProcessor crudCliProcessor = new ReceiptCrudCliProcessor(repositories);
             crudCliProcessor.processCrudApi(args, Constants.GET_DELETE_ACTIONS);
         } else {
             ShopCliManager shopCliManager = new ShopCliManager(repositories);

@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Product implements Id {
+public class Product {
     protected long id;
     protected String name;
     protected double weight;
@@ -45,7 +45,6 @@ public class Product implements Id {
     }
 
 
-    @Override
     public long getId() {
         return id;
     }

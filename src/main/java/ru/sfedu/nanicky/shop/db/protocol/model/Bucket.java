@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Bucket implements Id {
+public class Bucket {
     private long id;
     private String session;
     private String products = "";
@@ -40,7 +40,6 @@ public class Bucket implements Id {
         this.id = id;
     }
 
-    @Override
     public long getId() {
         return id;
     }

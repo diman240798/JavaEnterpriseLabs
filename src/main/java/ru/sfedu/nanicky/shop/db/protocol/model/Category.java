@@ -2,7 +2,7 @@ package ru.sfedu.nanicky.shop.db.protocol.model;
 
 import java.util.Objects;
 
-public class Category implements Id {
+public class Category {
     private long id;
     private String name;
 
@@ -21,7 +21,6 @@ public class Category implements Id {
         this.name = name;
     }
 
-    @Override
     public long getId() {
         return id;
     }
