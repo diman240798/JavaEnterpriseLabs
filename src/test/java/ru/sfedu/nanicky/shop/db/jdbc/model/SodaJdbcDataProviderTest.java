@@ -7,13 +7,18 @@ import org.junit.Test;
 import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.db.protocol.model.Soda;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.List;
 
 public class SodaJdbcDataProviderTest {
+
+
+    SodaJdbcDataProvider dataProvider;
 
     @Before
     public void beforeEach() {
         clear();
+        dataProvider = new SodaJdbcDataProvider();
     }
 
     @AfterClass
@@ -26,46 +31,149 @@ public class SodaJdbcDataProviderTest {
         Constants.JDBC_TRACE.delete();
     }
 
+
     @Test
-    public void testGetAll() {
-        SodaJdbcDataProvider dataProvider = new SodaJdbcDataProvider();
-        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
+    public void getAll() throws IOException {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+        Soda second = new Soda(1, "Kind Juice", 1, 70, Constants.CATEGORY_SODA, "apple");
 
-        Assert.assertTrue(dataProvider.insert(model));
-        Assert.assertFalse(dataProvider.insert(model));
+        dataProvider.insert(first);
+        dataProvider.insert(second);
+        List<Soda> all = dataProvider.getAll();
 
-        Soda modelFromDb = dataProvider.getAll().get(0);
-
-        Assert.assertEquals(model, modelFromDb);
+        Assert.assertEquals(2, all.size());
+        Assert.assertEquals(first, all.get(0));
     }
 
     @Test
-    public void testGetById() {
-        SodaJdbcDataProvider dataProvider = new SodaJdbcDataProvider();
-        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
+    public void getAllBad() throws IOException {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+        Soda second = new Soda(1, "Kind Juice", 1, 70, Constants.CATEGORY_SODA, "apple");
 
-        Assert.assertTrue(dataProvider.insert(model));
+        dataProvider.insert(first);
+        dataProvider.insert(second);
+        List<Soda> all = dataProvider.getAll();
 
-        Optional<Soda> modelFromDb = dataProvider.getById(model.getId());
-
-        Assert.assertTrue(modelFromDb.isPresent());
-        Assert.assertEquals(model, modelFromDb.get());
+        Assert.assertNotEquals(1, all.size());
+        Assert.assertNotEquals(second, all.get(0));
     }
 
     @Test
-    public void testUpdate() {
-        SodaJdbcDataProvider dataProvider = new SodaJdbcDataProvider();
-        Soda model = new Soda(0, "Indesit c30", 30, 1, "soda", "apple", true);
-        Soda modelUpdate = new Soda(0, "fanta", 20, 10, "soda", "lemon");
+    public void getById() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
 
-        Assert.assertTrue(dataProvider.insert(model));
-        Assert.assertTrue(dataProvider.update(modelUpdate));
+        dataProvider.insert(first);
 
-        Optional<Soda> modelFromDb = dataProvider.getById(model.getId());
+        Soda fromDb = dataProvider.getById(first.getId()).get();
 
-        Assert.assertTrue(modelFromDb.isPresent());
-        Assert.assertEquals(modelUpdate, modelFromDb.get());
+        Assert.assertEquals(first, fromDb);
+    }
+
+    @Test
+    public void getByIdBad() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(null);
+
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
+    }
+
+    @Test
+    public void delete() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(first);
+
+        List<Soda> fromDb = dataProvider.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
+
+        dataProvider.delete(first);
+
+        List<Soda> fromDbEmpty = dataProvider.getAll();
+        Assert.assertTrue(fromDbEmpty.isEmpty());
+    }
+
+    @Test
+    public void deleteBad() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(first);
+
+        List<Soda> fromDb = dataProvider.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
+
+        dataProvider.delete(null);
+
+        List<Soda> fromDbEmpty = dataProvider.getAll();
+        Assert.assertFalse(fromDbEmpty.isEmpty());
+    }
+
+    @Test
+    public void update() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(first);
+
+        List<Soda> fromDb = dataProvider.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
+
+        Soda newMike = new Soda(0, "Kind Juice", 1, 70, Constants.CATEGORY_SODA, "apple");
+
+        dataProvider.update(newMike);
+
+        List<Soda> fromDbNew = dataProvider.getAll();
+
+        Assert.assertEquals(1, fromDbNew.size());
+        Assert.assertNotEquals(first, fromDbNew.get(0));
+        Assert.assertEquals(newMike, fromDbNew.get(0));
+    }
 
 
+    @Test
+    public void updateBad() {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(first);
+
+        List<Soda> fromDb = dataProvider.getAll();
+
+        Assert.assertEquals(1, fromDb.size());
+        Assert.assertEquals(first, fromDb.get(0));
+
+        Soda update = new Soda(0, "Kind Juice", 1, 70, Constants.CATEGORY_SODA, "apple");
+
+        dataProvider.update(null);
+
+        List<Soda> fromDbNew = dataProvider.getAll();
+
+        Assert.assertNotEquals(2, fromDbNew.size());
+        Assert.assertEquals(first, fromDbNew.get(0));
+        Assert.assertNotEquals(update, fromDbNew.get(0));
+    }
+
+    @Test
+    public void insert() throws IOException {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(first);
+        Soda fromDb = dataProvider.getById(first.getId()).get();
+        Assert.assertEquals(first, fromDb);
+
+        Assert.assertFalse(dataProvider.insert(first));
+        Assert.assertEquals(1, dataProvider.getAll().size());
+    }
+
+    @Test
+    public void insertBad() throws IOException {
+        Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
+
+        dataProvider.insert(null);
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 }
