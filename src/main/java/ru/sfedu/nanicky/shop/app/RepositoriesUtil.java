@@ -18,7 +18,7 @@ public class RepositoriesUtil {
      * @see Receipt
      */
     public static BaseDataProvider<Receipt> getReceiptsDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dataProvider for data provider");
+        LOG.info("Getting dataProvider");
         LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Receipt> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
@@ -42,7 +42,7 @@ public class RepositoriesUtil {
      * @see Receipt
      */
     public static BaseDataProvider<Category> getCategoryDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dataProvider for data provider");
+        LOG.info("Getting dataProvider");
         LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Category> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
@@ -66,7 +66,7 @@ public class RepositoriesUtil {
      * @see Computer
      */
     public static BaseDataProvider<Computer> getComputerDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dataProvider for data provider");
+        LOG.info("Getting dataProvider");
         LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Computer> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
@@ -90,7 +90,7 @@ public class RepositoriesUtil {
      * @see Fridge
      */
     public static BaseDataProvider<Fridge> getFridgeDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dataProvider for data provider");
+        LOG.info("Getting dataProvider");
         LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Fridge> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
@@ -114,7 +114,7 @@ public class RepositoriesUtil {
      * @see Soda
      */
     public static BaseDataProvider<Soda> getSodaDataProvider(String dataProviderStr, Repositories repositories) {
-        LOG.info("Getting dataProvider for data provider");
+        LOG.info("Getting dataProvider");
         LOG.debug("Getting dataProvider for data provider {}", dataProviderStr);
         BaseDataProvider<Soda> baseDataProvider;
         if (dataProviderStr.equals(Constants.XML)) {
