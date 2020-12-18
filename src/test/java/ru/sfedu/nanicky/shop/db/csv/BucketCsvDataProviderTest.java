@@ -3,7 +3,6 @@ package ru.sfedu.nanicky.shop.db.csv;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ru.sfedu.nanicky.shop.app.Constants;
 import ru.sfedu.nanicky.shop.db.protocol.model.Bucket;
 
 import java.io.File;
@@ -78,11 +77,9 @@ public class BucketCsvDataProviderTest {
     public void getByIdBad() {
         Bucket first = new Bucket(0, UUID.randomUUID().toString());
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Bucket fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getSession() + "not equals", fromDb.getSession());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

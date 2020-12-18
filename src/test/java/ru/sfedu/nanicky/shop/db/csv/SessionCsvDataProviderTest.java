@@ -77,11 +77,9 @@ public class SessionCsvDataProviderTest {
     public void getByIdBad() {
         Session first = new Session(0, UUID.randomUUID().toString());
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Session fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

@@ -77,11 +77,9 @@ public class SodaXmlDataProviderTest {
     public void getByIdBad() {
         Soda first = new Soda(0, "Fanta", 2, 200, Constants.CATEGORY_SODA, "orange", true);
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Soda fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

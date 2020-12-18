@@ -66,11 +66,10 @@ public class CategoryXmlDataProviderTest {
     public void getById() {
         Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dataProvider.insert(first);
 
-        Category fromDb = dataProvider.getById(first.getId()).get();
+        dataProvider.insert(null);
 
-        Assert.assertEquals(first, fromDb);
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

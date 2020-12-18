@@ -76,11 +76,9 @@ public class ComputerXmlDataProviderTest {
     public void getByIdBad() {
         Computer first = new Computer(0, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Computer fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

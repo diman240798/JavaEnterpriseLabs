@@ -76,11 +76,10 @@ public class ReceiptCsvDataProviderTest {
     public void getByIdBad() {
         Receipt first = new Receipt(0, "1 fridge", 5400);
 
-        dataProvider.insert(first);
 
-        Receipt fromDb = dataProvider.getById(first.getId()).get();
+        dataProvider.insert(null);
 
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

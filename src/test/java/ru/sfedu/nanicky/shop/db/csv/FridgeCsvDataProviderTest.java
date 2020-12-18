@@ -77,11 +77,10 @@ public class FridgeCsvDataProviderTest {
     public void getByIdBad() {
         Fridge first = new Fridge(0, "Indesit c30", 30, 31000, Constants.CATEGORY_FRIDGE, 50, "white", 300);
 
-        dataProvider.insert(first);
 
-        Fridge fromDb = dataProvider.getById(first.getId()).get();
+        dataProvider.insert(null);
 
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

@@ -76,12 +76,9 @@ public class SessionXmlDataProviderTest {
     @Test
     public void getByIdBad() {
         Session first = new Session(0, UUID.randomUUID().toString());
+        dataProvider.insert(null);
 
-        dataProvider.insert(first);
-
-        Session fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

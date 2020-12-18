@@ -78,11 +78,10 @@ public class ComputerCsvDataProviderTest {
     public void getByIdBad() {
         Computer first = new Computer(0, "Dell compact RT 3", 2.2, 52500, Constants.CATEGORY_COMPUTER, "intel i3", 500, "integrated", 100);
 
-        dataProvider.insert(first);
 
-        Computer fromDb = dataProvider.getById(first.getId()).get();
+        dataProvider.insert(null);
 
-        Assert.assertNotEquals(first.getId() + "not equals", fromDb.getId());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

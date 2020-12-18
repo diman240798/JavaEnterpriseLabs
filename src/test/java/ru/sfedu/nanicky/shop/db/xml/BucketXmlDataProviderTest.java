@@ -79,11 +79,9 @@ public class BucketXmlDataProviderTest {
     public void getByIdBad() {
         Bucket first = new Bucket(0, UUID.randomUUID().toString());
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Bucket fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getSession() + "not equals", fromDb.getSession());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test

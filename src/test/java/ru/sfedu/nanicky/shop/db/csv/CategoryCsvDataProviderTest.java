@@ -78,11 +78,9 @@ public class CategoryCsvDataProviderTest {
     public void getByIdBad() {
         Category first = new Category(0, Constants.CATEGORY_SODA);
 
-        dataProvider.insert(first);
+        dataProvider.insert(null);
 
-        Category fromDb = dataProvider.getById(first.getId()).get();
-
-        Assert.assertNotEquals(first.getName() + "not equals", fromDb.getName());
+        Assert.assertFalse(dataProvider.getById(first.getId()).isPresent());
     }
 
     @Test
