@@ -52,19 +52,19 @@ public class CliManager {
 
         if (modelStr.equals(Constants.CATEGORY)) {
             CategoryCrudCliProcessor crudCliProcessor = new CategoryCrudCliProcessor(repositories);
-            crudCliProcessor.processCrudApi(args, Arrays.asList(Constants.GET_ALL));
+                crudCliProcessor.processCategoryCrudApi(args, Arrays.asList(Constants.GET_ALL));
         } else if (modelStr.equals(Constants.FRIDGE)) {
             FridgeCrudCliProcessor crudCliProcessor = new FridgeCrudCliProcessor(repositories);
-            crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
+            crudCliProcessor.processFridgeCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.COMPUTER)) {
             ComputerCrudCliProcessor crudCliProcessor = new ComputerCrudCliProcessor(repositories);
-            crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
+            crudCliProcessor.processComputerCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.SODA)) {
             SodaCrudCliProcessor crudCliProcessor = new SodaCrudCliProcessor(repositories);
-            crudCliProcessor.processCrudApi(args, Constants.ALL_ACTIONS);
+            crudCliProcessor.processSodaCrudApi(args, Constants.ALL_ACTIONS);
         } else if (modelStr.equals(Constants.RECEIPT)) {
             ReceiptCrudCliProcessor crudCliProcessor = new ReceiptCrudCliProcessor(repositories);
-            crudCliProcessor.processCrudApi(args, Constants.GET_DELETE_ACTIONS);
+            crudCliProcessor.processReceiptCrudApi(args, Constants.GET_DELETE_ACTIONS);
         } else {
             ShopCliManager shopCliManager = new ShopCliManager(repositories);
             shopCliManager.processRequest(args);

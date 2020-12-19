@@ -42,7 +42,7 @@ public class ReceiptCrudCliProcessor {
      * @param crudActionsSupportedList - поддерживаемы для данной модели crud операции
      * @return boolean
      */
-    public void processCrudApi(String[] args, List<String> crudActionsSupportedList) {
+    public void processReceiptCrudApi(String[] args, List<String> crudActionsSupportedList) {
         String dataProviderStr = args[0];
         String method = args[2];
 

@@ -23,17 +23,6 @@ public class SodaCrudCliProcessor {
         this.repositories = repositories;
     }
 
-
-    /**
-     * Реализация выдачи дата провадера для соответствующей модели
-     * @param dataProvider - тип датапровайдера в виде строки
-     * @param repositories - класс содержащий все репозитории используемые в проекте
-     * @return BaseDataProvider
-     */
-    public BaseDataProvider<Soda> getDataProvider(String dataProvider, Repositories repositories) {
-        return RepositoriesUtil.getSodaDataProvider(dataProvider, repositories);
-    }
-
     /**
      * Реализация выдачи распарсенной модели
      * @param modelStr - данные модели в виде строки
@@ -63,7 +52,7 @@ public class SodaCrudCliProcessor {
      * @param crudActionsSupportedList - поддерживаемы для данной модели crud операции
      * @return boolean
      */
-    public void processCrudApi(String[] args, List<String> crudActionsSupportedList) {
+    public void processSodaCrudApi(String[] args, List<String> crudActionsSupportedList) {
         String dataProviderStr = args[0];
         String method = args[2];
 
@@ -75,7 +64,7 @@ public class SodaCrudCliProcessor {
         LOG.info("Start processing model operation");
         LOG.debug("Start processing model data provider {} operation {}", dataProviderStr, method);
 
-        BaseDataProvider<Soda> dataProviderImpl = getDataProvider(dataProviderStr, repositories);
+        BaseDataProvider<Soda> dataProviderImpl = RepositoriesUtil.getSodaDataProvider(dataProviderStr, repositories);
 
         if (method.equals(Constants.GET)) {
             if (checkActionSupported(method, crudActionsSupportedList)) {
