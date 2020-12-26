@@ -20,7 +20,7 @@ public class Constants {
         if (System.getProperty("environment") != null) {
             path = System.getProperty("environment");
         } else {
-            path = "/strings.properties";
+            path = "/environment.properties";
         }
         ConfigurationUtil configurationUtil = new ConfigurationUtil(path);
 

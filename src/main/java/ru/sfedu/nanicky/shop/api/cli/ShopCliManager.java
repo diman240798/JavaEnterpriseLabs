@@ -51,13 +51,15 @@ public class ShopCliManager {
      * @return void
      */
     private void startSession(String dataProviderStr) {
+        LOG.info("Start session");
+        LOG.debug("Start session for dataProvider {}", dataProviderStr);
         BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         long id = ThreadLocalRandom.current().nextLong(Long.MAX_VALUE);
         Session session = new Session(id);
         if (sessionDataProvider.insert(session)) {
             LOG.info("Your session key:  {}", session.getSession());
         } else {
-            LOG.info("Error creating session!");
+            LOG.error("Error creating session!");
         }
     }
 
@@ -69,6 +71,8 @@ public class ShopCliManager {
      * @return void
      */
     private void finishSession(String dataProviderStr, String userSession) {
+        LOG.info("Finish session");
+        LOG.debug("Finish session for dataProvider {} and userSession {}", dataProviderStr, userSession);
         LOG.info("Getting session entity");
         BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         Optional<Session> sessionOption = sessionDataProvider.getAll().stream()
@@ -131,13 +135,13 @@ public class ShopCliManager {
      */
     private void addProduct(String[] args) {
         String dataProviderStr = args[0];
-        BaseDataProvider<Bucket> bucketDataProvider = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
         String userSession = args[2];
         BaseDataProvider<Session> sessionDataProvider = RepositoriesUtil.getSessionDataProvider(dataProviderStr, repositories);
         Optional<Session> sessionOption = sessionDataProvider.getAll().stream()
                 .filter(it -> it.getSession().equals(userSession))
                 .findFirst();
         if (sessionOption.isPresent()) {
+            BaseDataProvider<Bucket> bucketDataProvider = RepositoriesUtil.getBucketDataProvider(dataProviderStr, repositories);
             LOG.info("Found session");
             long productId = Long.parseLong(args[3]);
             String userCategory = args[4];

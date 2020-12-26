@@ -42,6 +42,7 @@ public class CliManager {
     /**
      * Проверка параметров на CRUD операции по моделям, и передача далее на обработку покупок
      *
+     * @param dataProviderStr - вид дата провайдера
      * @param args - входные аргументы программы
      * @return void
      */
